@@ -882,6 +882,8 @@ MonoBehaviour:
   target: {fileID: 439501721}
   offset: {x: 0, y: 50, z: 0}
   SmoothTime: 0.3
+  upperLimit: {x: 34.7, y: -32.6}
+  lowerLimit: {x: -34.66, y: 33.17}
 --- !u!81 &188119139
 AudioListener:
   m_ObjectHideFlags: 0
@@ -941,7 +943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188119137}
   m_LocalRotation: {x: -0.0000010592659, y: -0.7071068, z: 0.7071068, w: -0.0000010592659}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalPosition: {x: 6.79, y: 50, z: 11.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

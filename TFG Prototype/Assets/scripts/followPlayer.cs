@@ -20,10 +20,17 @@ public class followPlayer : MonoBehaviour
     void Update()
     {
         Vector3 targetPosition = target.position + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
-        Vector3 pos;
-        if (upperLimit.x < transform.position.x)
-            transform.position 
+        Vector3 newPos = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
+        if (newPos.x > upperLimit.x)
+            newPos.x = upperLimit.x;
+        else if (newPos.x < lowerLimit.x)
+            newPos.x = lowerLimit.x;
 
+        if (newPos.z < upperLimit.y)
+            newPos.z = upperLimit.y;
+        else if (newPos.z > lowerLimit.y)
+            newPos.z = lowerLimit.y;
+
+        transform.position = newPos;
     }
 }

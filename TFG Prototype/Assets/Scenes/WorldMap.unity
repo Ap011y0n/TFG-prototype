@@ -6253,7 +6253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505869025}
   m_LocalRotation: {x: -0.0000010592659, y: -0.7071068, z: 0.7071068, w: -0.0000010592659}
-  m_LocalPosition: {x: -44.4, y: 50, z: -20.1}
+  m_LocalPosition: {x: -0, y: 50, z: 10.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6274,8 +6274,8 @@ MonoBehaviour:
   target: {fileID: 731770228}
   offset: {x: 0, y: 50, z: 0}
   SmoothTime: 0.3
-  cameraLimitsUpper: {x: 0, y: 0}
-  cameraLimitsLower: {x: 0, y: 0}
+  upperLimit: {x: 0, y: 0}
+  lowerLimit: {x: -94.4, y: 85.8}
 --- !u!1 &1519231097
 GameObject:
   m_ObjectHideFlags: 0
