@@ -9,6 +9,36 @@ EditorBuildSettings:
     path: Assets/Scenes/WorldMap.unity
     guid: 0c2564623fe2cc74f9c2c39620cac504
   - enabled: 1
-    path: Assets/Scenes/City Scene.unity
+    path: Assets/Scenes/Cities/Zlimouth.unity
     guid: 13fcfbc2a1f7b4146a68f1fec95c6372
+  - enabled: 1
+    path: Assets/Scenes/Cities/Antagate.unity
+    guid: 87445e2e598bf1d4db38e94b80ade607
+  - enabled: 1
+    path: Assets/Scenes/Cities/Esterwell.unity
+    guid: 11f2be45f99b30b4ab59345d0edd7389
+  - enabled: 1
+    path: Assets/Scenes/Cities/Heuburg.unity
+    guid: b9999b5778b30e74392b533bc7d1ffe5
+  - enabled: 1
+    path: Assets/Scenes/Cities/Kuufast.unity
+    guid: 6a3aab49031e9ce45a44c52f654fe47f
+  - enabled: 1
+    path: Assets/Scenes/Cities/Ovoddale.unity
+    guid: c9a311584431bd8448ff793aba6216b6
+  - enabled: 1
+    path: Assets/Scenes/Cities/Oylose.unity
+    guid: 46061d3f4542bf645a56c7725df105a6
+  - enabled: 1
+    path: Assets/Scenes/Cities/Plagos.unity
+    guid: ae4d29d414812b645aadd5e214d521b1
+  - enabled: 1
+    path: Assets/Scenes/Cities/Qragos.unity
+    guid: 53c17382e22d3b34fb6a4e15b49e0afa
+  - enabled: 1
+    path: Assets/Scenes/Cities/Vleennard.unity
+    guid: 961ccf33cb087114bbc509a3fa17d63c
+  - enabled: 1
+    path: Assets/Scenes/Cities/Zhison.unity
+    guid: aca3463ab6697e04d82ea044d1817cd7
   m_configObjects: {}

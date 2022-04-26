@@ -320,7 +320,10 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/VSSettingsProvider.ref.dll"
 "Assets/scripts/ChangeScene.cs"
 "Assets/scripts/followPlayer.cs"
+"Assets/scripts/meme.cs"
+"Assets/scripts/npc.cs"
 "Assets/scripts/PlayerController.cs"
+"Assets/scripts/SceneDirector.cs"
 -langversion:8.0
 
 /deterministic

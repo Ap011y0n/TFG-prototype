@@ -848,7 +848,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Kuufast
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -909,7 +913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Zhison
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -1834,7 +1842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Qragos
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -1991,7 +2003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Esterwell
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -3114,7 +3130,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Plagos
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -3770,7 +3790,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Vleennard
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -4795,7 +4819,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Heuburg
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -6225,7 +6253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505869025}
   m_LocalRotation: {x: -0.0000010592659, y: -0.7071068, z: 0.7071068, w: -0.0000010592659}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalPosition: {x: -44.4, y: 50, z: -20.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6246,6 +6274,8 @@ MonoBehaviour:
   target: {fileID: 731770228}
   offset: {x: 0, y: 50, z: 0}
   SmoothTime: 0.3
+  cameraLimitsUpper: {x: 0, y: 0}
+  cameraLimitsLower: {x: 0, y: 0}
 --- !u!1 &1519231097
 GameObject:
   m_ObjectHideFlags: 0
@@ -7349,7 +7379,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Antagate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -7698,7 +7732,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Zlimouth
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -8047,7 +8085,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Oylose
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -8601,6 +8643,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894112750}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1895446008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1895446010}
+  - component: {fileID: 1895446009}
+  m_Layer: 0
+  m_Name: SceneDirector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1895446009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895446008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637a40461083b5b4eae06415676894fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcPrefab: {fileID: 5749385414847991376, guid: 1d93350a33e660d4c8afb6ebcef6718c, type: 3}
+--- !u!4 &1895446010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895446008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11, y: 0.27382714, z: 0.6274452}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1908880336
 GameObject:
   m_ObjectHideFlags: 0
@@ -9693,7 +9779,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
-      value: ChangeScene
+      value: Ovoddale
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: savePos
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText
@@ -9722,7 +9812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7268431202518894949, guid: 6cba455237bc5ff4e943671ceefefd98, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -49.4
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 7268431202518894949, guid: 6cba455237bc5ff4e943671ceefefd98, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9730,7 +9820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7268431202518894949, guid: 6cba455237bc5ff4e943671ceefefd98, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 44.3
+      value: 29.6
       objectReference: {fileID: 0}
     - target: {fileID: 7268431202518894949, guid: 6cba455237bc5ff4e943671ceefefd98, type: 3}
       propertyPath: m_LocalRotation.w
