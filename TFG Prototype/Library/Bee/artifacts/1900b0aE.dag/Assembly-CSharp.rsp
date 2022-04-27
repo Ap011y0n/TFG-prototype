@@ -323,6 +323,8 @@
 "Assets/scripts/meme.cs"
 "Assets/scripts/npc.cs"
 "Assets/scripts/PlayerController.cs"
+"Assets/scripts/QuestGiver.cs"
+"Assets/scripts/QuestManager.cs"
 "Assets/scripts/SceneDirector.cs"
 -langversion:8.0
 

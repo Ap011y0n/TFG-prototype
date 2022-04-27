@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - SpawnPoint
+  - forest
+  - cave
+  - mountain
+  - plain
+  - river
   layers:
   - Default
   - TransparentFX

@@ -192,6 +192,6 @@ public class SceneDirector : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(playerPos);
+     //   Debug.Log(playerPos);
     }
 }
