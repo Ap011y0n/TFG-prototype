@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Npc : MonoBehaviour
 {
     public string npcName;
+    public string cityName;
     public TextMesh displayName;
     public GameObject canvas;
     public GameObject chatUI;
@@ -28,20 +29,25 @@ public class Npc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && startChatting.activeSelf && playerNear)
+        if (Input.GetKeyDown(KeyCode.E) && playerNear)
         {
-            chatUI.SetActive(true);
-            chatUI.GetComponentInChildren<Text>().text = npcName;
-            ChatManager.Instance.focusedNPC = this;
-            startChatting.SetActive(false);
-            PlayerController.Instance.UIfocused = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && !startChatting.activeSelf && playerNear)
-        {
-            chatUI.SetActive(false);
-            startChatting.SetActive(true);
-            PlayerController.Instance.UIfocused = false;
+            if (startChatting.activeSelf)
+            {
+                Debug.Log("Open by " + npcName);
+                chatUI.SetActive(true);
+                chatUI.GetComponentInChildren<Text>().text = npcName;
+                ChatManager.Instance.focusedNPC = this;
+                startChatting.SetActive(false);
+                PlayerController.Instance.UIfocused = true;
+            }
+            else
+            {
+                Debug.Log("closed by" + npcName);
+                chatUI.SetActive(false);
+                startChatting.SetActive(true);
+                PlayerController.Instance.UIfocused = false;
 
+            }
         }
     }
 
@@ -63,8 +69,9 @@ public class Npc : MonoBehaviour
         }
     }
 
-   public void setInitParams(string name)
+   public void setInitParams(string name, string city)
     {
         npcName = name;
+        cityName = city;
     }
 }
