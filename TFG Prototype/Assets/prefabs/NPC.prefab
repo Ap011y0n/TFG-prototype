@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 3163709347755031239}
   - component: {fileID: 8479400897479080468}
   - component: {fileID: 2306486897760820255}
+  - component: {fileID: 5936733296802293418}
   - component: {fileID: 1812293341116029149}
   m_Layer: 0
   m_Name: NPC
@@ -279,6 +280,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &5936733296802293418
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749385414847991376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1812293341116029149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,3 +307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Romund
   displayName: {fileID: 3895741525401141919}
+  chatUI: {fileID: 0}
+  startChatting: {fileID: 0}
+  savePos: 0

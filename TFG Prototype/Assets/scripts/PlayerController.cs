@@ -6,8 +6,19 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     NavMeshAgent agent;
+    public bool UIfocused = false;
 
-    // Start is called before the first frame update
+    private static PlayerController _instance;
+    public static PlayerController Instance { get { return _instance; } }
+
+
+    void Awake()
+    {
+            _instance = this;
+
+        Debug.Log("Awake");
+    }
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -16,7 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (Input.GetMouseButtonDown(0)) {
+         if (Input.GetMouseButtonDown(0) && !UIfocused) {
                 RaycastHit hit;
                 
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {

@@ -149,7 +149,7 @@ public class SceneDirector : MonoBehaviour
             spawnPositions.RemoveAt(randomPos);
             int genre = Random.Range(0, 2);
             temp.name = GenerateName(genre);
-            
+            temp.GetComponent<Npc>().setInitParams(temp.name);
             npc newNpc;
             newNpc.name = temp.name;
             newNpc.position = temp.transform.position;
@@ -164,6 +164,7 @@ public class SceneDirector : MonoBehaviour
         {
             GameObject temp = GameObject.Instantiate(npcPrefab, info.sceneNpcs[i].position, Quaternion.identity);
             temp.name = info.sceneNpcs[i].name;
+            temp.GetComponent<Npc>().setInitParams(info.sceneNpcs[i].name);
         }
     }
 

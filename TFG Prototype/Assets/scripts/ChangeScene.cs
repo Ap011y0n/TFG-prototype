@@ -35,13 +35,6 @@ public class ChangeScene : MonoBehaviour
             canEnter = true;
         }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            
-        }
-    }
 
     private void OnTriggerExit(Collider other)
     {
