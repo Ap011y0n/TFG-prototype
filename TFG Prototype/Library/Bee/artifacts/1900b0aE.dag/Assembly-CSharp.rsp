@@ -323,6 +323,7 @@
 "Assets/scripts/ChatManager.cs"
 "Assets/scripts/followPlayer.cs"
 "Assets/scripts/GridMap/HexCell.cs"
+"Assets/scripts/GridMap/HexCellPriorityQueue.cs"
 "Assets/scripts/GridMap/HexGrid.cs"
 "Assets/scripts/GridMap/HexMapEditor.cs"
 "Assets/scripts/GridMap/HexMesh.cs"

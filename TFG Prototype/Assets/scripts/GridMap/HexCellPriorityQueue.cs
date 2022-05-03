@@ -8,10 +8,28 @@ public class HexCellPriorityQueue
 
 	public void Change(HexCell cell, int oldPriority)
 	{
+		HexCell current = list[oldPriority];
+		HexCell next = current.NextWithSamePriority;
+		if (current == cell)
+		{
+			list[oldPriority] = next;
+		}
+		else
+		{
+			while (next != cell)
+			{
+				current = next;
+				next = current.NextWithSamePriority;
+			}
+		}
+		current.NextWithSamePriority = cell.NextWithSamePriority;
+		Enqueue(cell);
+		count -= 1;
+
 	}
 
 	int count = 0;
-
+	int minimum = int.MaxValue;
 	public int Count
 	{
 		get
@@ -24,6 +42,10 @@ public class HexCellPriorityQueue
 	{
 		count += 1;
 		int priority = cell.SearchPriority;
+		if (priority < minimum)
+		{
+			minimum = priority;
+		}
 		while (priority >= list.Count)
 		{
 			list.Add(null);
@@ -35,13 +57,22 @@ public class HexCellPriorityQueue
 	public HexCell Dequeue()
 	{
 		count -= 1;
+		for (; minimum < list.Count; minimum++)
+		{
+			HexCell cell = list[minimum];
+			if (cell != null)
+			{
+				list[minimum] = cell.NextWithSamePriority;
+				return cell;
+			}
+		}
 		return null;
 	}
-	
 	public void Clear()
 	{
 		list.Clear();
 		count = 0;
+		minimum = int.MaxValue;
 	}
 
 }
