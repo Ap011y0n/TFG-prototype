@@ -8,8 +8,6 @@ public class HexMapEditor : MonoBehaviour
 	public Color[] colors;
 	public HexGrid hexGrid;
 	private Color activeColor;
-	public bool editMode = false;
-	public bool playMode = true;
 	public bool mapInfoMode = false;
 	public bool pathfindingMode = false;
 	public bool spawnMode = false;
@@ -26,7 +24,7 @@ public class HexMapEditor : MonoBehaviour
 
 	void Update()
 	{
-		if(editMode)
+		if(hexGrid.editMode)
         {
 			if (mapInfoMode)
 			{
@@ -95,7 +93,7 @@ public class HexMapEditor : MonoBehaviour
 
 				if (searchFromCell && searchFromCell != currentCell)
 				{
-
+					hexGrid.disableAllHighlights();
 					hexGrid.FindPath(searchFromCell, currentCell, 24);
 				}
 
@@ -127,10 +125,26 @@ public class HexMapEditor : MonoBehaviour
 			{
 				HexUnit unit = Instantiate(unitPrefab);
 				unit.Location = cell;
+				unit.grid = hexGrid;
+				unit.faction = 0;
+				unit.GetComponent<Renderer>().material.color = Color.blue;
 			}
 
 		}
-		
+		if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
+		{
+			HexCell cell = GetCellUnderCursor();
+			if (cell && !cell.Unit)
+			{
+				HexUnit unit = Instantiate(unitPrefab);
+				unit.Location = cell;
+				unit.grid = hexGrid;
+				unit.faction = 1;
+				unit.GetComponent<Renderer>().material.color = Color.red;
+			}
+
+		}
+
 	}
 
 
@@ -148,13 +162,12 @@ public class HexMapEditor : MonoBehaviour
 	{
 		editPanel.SetActive(true);
 		colorPanel.SetActive(false);
-		editMode = !editMode;
+		hexGrid.editMode = true;
 	}
 	public void SetPlayMode(bool toggle)
 	{
 		editPanel.SetActive(false);
 		colorPanel.SetActive(false);
-		playMode = !playMode;
 	}
 	public void SetEditMapInfoMode(bool toggle)
 	{

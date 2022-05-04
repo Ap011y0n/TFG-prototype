@@ -178,7 +178,6 @@ public class HexCell : MonoBehaviour
     public void UpdateDistanceLabel()
     {
         Text label = uiRect.GetComponent<Text>();
-
         if (distance != int.MaxValue)
         {
             label.text = distance.ToString();
@@ -203,8 +202,6 @@ public class HexCell : MonoBehaviour
     }
     public void EnableHighlight(Color color)
     {
-        Debug.Log(color);
-
         Image highlight = uiRect.GetChild(0).GetComponent<Image>();
         highlight.color = color;
         highlight.enabled = true;

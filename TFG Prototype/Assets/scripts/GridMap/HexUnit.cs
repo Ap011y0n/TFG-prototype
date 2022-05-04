@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class HexUnit : MonoBehaviour
 {
+
+	public List<HexCell> path;
+	public int faction = 0;
+	public HexGrid grid;
+
 	public HexCell Location
 	{
 		get
@@ -20,11 +25,27 @@ public class HexUnit : MonoBehaviour
 
 	HexCell location;
 
-	public void Die()
+    private void Start()
+    {
+		path = new List<HexCell>();
+	}
+    public void Die()
     {
 
 		location.Unit = null;
 		Destroy(this.gameObject);
 	
 	}
+	public void Move()
+    {
+		if (path != null)
+		{
+			Location = path[0];
+			grid.disableAllHighlights();
+			path = null;
+
+		}
+		else
+			Debug.LogWarning(gameObject.name + " path is null!");
+    }
 }

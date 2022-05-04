@@ -12,7 +12,8 @@ using System.Collections;
 
 	public HexCell cellPrefab;
     public Text cellLabelPrefab;
-        
+    [HideInInspector]
+    public bool editMode = false;
 	HexCell[] cells;
 
     Canvas gridCanvas;
@@ -40,6 +41,7 @@ using System.Collections;
                 CreateCell(x, z, i++);
             }
         }
+
     }
 
     void Start()
@@ -88,7 +90,6 @@ using System.Collections;
         label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
         cell.uiRect = label.rectTransform;
 
-
     }
 
     public void ShowUI(bool visible)
@@ -112,6 +113,7 @@ using System.Collections;
 
     public void FindDistancesTo(HexCell cell, int speed)
     {
+        Debug.Log("select");
         Search(cell, speed);
     }
 
@@ -149,19 +151,31 @@ using System.Collections;
                     break;
                 }
                 neighbor.Distance = distance;
-                neighbor.UpdateDistanceLabel();
-                neighbor.EnableHighlight(Color.red);
+                if (editMode)
+                    neighbor.UpdateDistanceLabel();
+                neighbor.EnableHighlight(Color.yellow);
                 neighbor.PathFrom = current;
                 frontier.Enqueue(neighbor);
             }
         }
     }
 
-    public void FindPath(HexCell fromCell, HexCell toCell, int speed)
+    public List<HexCell> FindPath(HexCell fromCell, HexCell toCell, int speed)
     {
-        Search(fromCell, toCell, speed);
+        if (fromCell && toCell)
+            return Search(fromCell, toCell, speed);
+        return null;
     }
 
+    public void disablePathHighLights(List<HexCell> toDisable)
+    {
+        for (int i= 0; i < toDisable.Count; i++)
+        {
+            toDisable[i].Distance = int.MaxValue;
+            toDisable[i].UpdateDistanceLabel();
+            toDisable[i].EnableHighlight(Color.yellow);
+        }
+    }
     public void disableAllHighlights()
     {
         for (int i = 0; i < cells.Length; i++)
@@ -185,12 +199,13 @@ using System.Collections;
             searchFrontier.Clear();
         }
 
-        disableAllHighlights();
+       // disableAllHighlights();
 
         fromCell.SearchPhase = searchFrontierPhase;
         fromCell.Distance = 0;
         fromCell.EnableHighlight(Color.blue);
-        fromCell.UpdateDistanceLabel();
+        if (editMode)
+            fromCell.UpdateDistanceLabel();
 
         searchFrontier.Enqueue(fromCell);
 
@@ -207,13 +222,15 @@ using System.Collections;
                 while (current != fromCell)
                 {
                     ret.Add(current);
+                    if(editMode)
                     current.UpdateDistanceLabel();
-                    current.EnableHighlight(Color.white);
+                    current.EnableHighlight(Color.grey);
                     current = current.PathFrom;
                 }
                 ret.Add(fromCell);
                 toCell.EnableHighlight(Color.green);
-                toCell.UpdateDistanceLabel();
+                if (editMode)
+                    toCell.UpdateDistanceLabel();
                 return ret;
             }
 
@@ -226,10 +243,11 @@ using System.Collections;
                 {
                     continue;
                 }
-                /*  if (neighbor.IsUnderwater)
-                  {
-                      continue;
-                  }*/
+                if (neighbor.Unit && neighbor.Unit.faction != fromCell.Unit.faction)
+                {
+                    continue;
+                }
+
                 int moveCost = 5; //editar luego
                 int distance = current.Distance + moveCost;
                 int turn = distance / speed;
