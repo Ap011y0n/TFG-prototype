@@ -328,6 +328,7 @@
 "Assets/scripts/GridMap/HexMapEditor.cs"
 "Assets/scripts/GridMap/HexMesh.cs"
 "Assets/scripts/GridMap/HexMetrics.cs"
+"Assets/scripts/GridMap/HexUnit.cs"
 "Assets/scripts/npc.cs"
 "Assets/scripts/PlayerController.cs"
 "Assets/scripts/QuestGiver.cs"

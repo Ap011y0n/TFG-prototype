@@ -23,6 +23,9 @@ using System.Collections;
 
     HexCellPriorityQueue searchFrontier;
 
+    int searchFrontierPhase;
+
+
     private void Awake()
     {
         gridCanvas = GetComponentInChildren<Canvas>();
@@ -104,28 +107,23 @@ using System.Collections;
         return cells[index];
     }
 
-    public void FindDistancesTo(HexCell cell)
+    public void FindDistancesTo(HexCell cell, int speed)
     {
-        StopAllCoroutines();
-        StartCoroutine(Search(cell));
+        Search(cell, speed);
     }
 
-    IEnumerator Search(HexCell cell)
+    void Search(HexCell cell, int speed)
     {
-        for (int i = 0; i < cells.Length; i++)
-        {
-            cells[i].Distance = int.MaxValue;
-        }
 
-        WaitForSeconds delay = new WaitForSeconds(1 / 60f);
+
+        disableAllHighlights();
+
         Queue<HexCell> frontier = new Queue<HexCell>();
         cell.Distance = 0;
         frontier.Enqueue(cell);
         while (frontier.Count > 0)
         {
-            Debug.Log("Search");
 
-            yield return delay;
             HexCell current = frontier.Dequeue();
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
             {
@@ -138,21 +136,43 @@ using System.Collections;
                   {
                       continue;
                   }*/
+                int currentTurn = current.Distance / speed;
 
-                neighbor.Distance = current.Distance + 1; //valor de atravesar esta casilla;
+                int moveCost = 5; //editar luego
+                int distance = current.Distance + moveCost;
+                int turn = distance / speed;
+                if (turn > currentTurn)
+                {
+                    break;
+                }
+                neighbor.Distance = distance;
+                neighbor.UpdateDistanceLabel();
+                neighbor.EnableHighlight(Color.red);
+                neighbor.PathFrom = current;
                 frontier.Enqueue(neighbor);
             }
         }
     }
 
-    public void FindPath(HexCell fromCell, HexCell toCell)
+    public void FindPath(HexCell fromCell, HexCell toCell, int speed)
     {
-        StopAllCoroutines();
-        StartCoroutine(Search(fromCell, toCell));
+        Search(fromCell, toCell, speed);
     }
 
-    IEnumerator Search(HexCell fromCell, HexCell toCell)
+    public void disableAllHighlights()
     {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            cells[i].Distance = int.MaxValue;
+            cells[i].UpdateDistanceLabel();
+            cells[i].DisableHighlight();
+
+        }
+    }
+    List<HexCell> Search(HexCell fromCell, HexCell toCell, int speed)
+    {
+        searchFrontierPhase += 2;
+
         if (searchFrontier == null)
         {
             searchFrontier = new HexCellPriorityQueue();
@@ -162,39 +182,44 @@ using System.Collections;
             searchFrontier.Clear();
         }
 
-        for (int i = 0; i < cells.Length; i++)
-        {
-            cells[i].Distance = int.MaxValue;
-            cells[i].DisableHighlight();
+        disableAllHighlights();
 
-        }
-        fromCell.EnableHighlight(Color.blue);
-        toCell.EnableHighlight(Color.red);
-
-        WaitForSeconds delay = new WaitForSeconds(1 / 60f);
+        fromCell.SearchPhase = searchFrontierPhase;
         fromCell.Distance = 0;
+        fromCell.EnableHighlight(Color.blue);
+        fromCell.UpdateDistanceLabel();
+
         searchFrontier.Enqueue(fromCell);
 
         while (searchFrontier.Count > 0)
         {
-            yield return delay;
             HexCell current = searchFrontier.Dequeue();
+            current.SearchPhase += 1;
 
             if (current == toCell)
             {
+                List<HexCell> ret = new List<HexCell>();
+                ret.Add(current);
                 current = current.PathFrom;
                 while (current != fromCell)
                 {
+                    ret.Add(current);
+                    current.UpdateDistanceLabel();
                     current.EnableHighlight(Color.white);
                     current = current.PathFrom;
                 }
-                break;
+                ret.Add(fromCell);
+                toCell.EnableHighlight(Color.green);
+                toCell.UpdateDistanceLabel();
+                return ret;
             }
+
+            int currentTurn = current.Distance / speed;
 
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
             {
                 HexCell neighbor = current.GetNeighbor(d);
-                if (neighbor == null || neighbor.Distance != int.MaxValue)
+                if (neighbor == null || neighbor.SearchPhase > searchFrontierPhase )
                 {
                     continue;
                 }
@@ -202,14 +227,19 @@ using System.Collections;
                   {
                       continue;
                   }*/
-                int distance = current.Distance + 5;
-
-                if (neighbor.Distance == int.MaxValue)
+                int moveCost = 5; //editar luego
+                int distance = current.Distance + moveCost;
+                int turn = distance / speed;
+                if (turn > currentTurn)
                 {
+                    return null;
+                }
+                if (neighbor.SearchPhase < searchFrontierPhase)
+                {
+                    neighbor.SearchPhase = searchFrontierPhase;
                     neighbor.Distance = distance;
                     neighbor.PathFrom = current;
-                    neighbor.SearchHeuristic =
-                    neighbor.coordinates.DistanceTo(toCell.coordinates) * 5;
+                    neighbor.SearchHeuristic = neighbor.coordinates.DistanceTo(toCell.coordinates) * 5;
                     searchFrontier.Enqueue(neighbor);
                 }
                 else if (distance < neighbor.Distance)
@@ -223,5 +253,6 @@ using System.Collections;
                 
             }
         }
+        return null;
     }
 }

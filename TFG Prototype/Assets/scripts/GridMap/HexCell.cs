@@ -148,10 +148,12 @@ public class HexCell : MonoBehaviour
         set
         {
             distance = value;
-            UpdateDistanceLabel();
 
         }
     }
+
+    public int SearchPhase { get; set; }
+
     public void SetNeighbor(HexDirection direction, HexCell cell)
     {
         neighbors[(int)direction] = cell;
@@ -163,10 +165,19 @@ public class HexCell : MonoBehaviour
         return neighbors[(int)direction];
     }
 
-    void UpdateDistanceLabel()
+    public void UpdateDistanceLabel()
     {
         Text label = uiRect.GetComponent<Text>();
-        label.text = distance.ToString();
+
+        if (distance != int.MaxValue)
+        {
+            label.text = distance.ToString();
+        }
+        else
+        {
+            label.text = "";
+        }
+
     }
 
     public void DisableHighlight()
