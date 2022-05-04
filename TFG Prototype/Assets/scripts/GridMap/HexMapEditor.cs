@@ -221,5 +221,6 @@ public class HexMapEditor : MonoBehaviour
 		{
 			hexGrid.Load(reader);
 		}
+		hexGrid.SpawnEntities(unitPrefab);
 	}
 }

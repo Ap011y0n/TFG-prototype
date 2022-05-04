@@ -40,6 +40,7 @@ public class HexUnit : MonoBehaviour
     {
 		if (path != null)
 		{
+			Location.Unit = null;
 			Location = path[0];
 			grid.disableAllHighlights();
 			path = null;

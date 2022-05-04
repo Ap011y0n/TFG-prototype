@@ -148,6 +148,10 @@ public class HexGrid : MonoBehaviour
                   {
                       continue;
                   }*/
+                if (neighbor.Unit && neighbor.Unit.faction != cell.Unit.faction)
+                {
+                    continue;
+                }
                 int currentTurn = current.Distance / speed;
 
                 int moveCost = 5; //editar luego
@@ -309,5 +313,20 @@ public class HexGrid : MonoBehaviour
             cells[i].Load(reader);
         }
         Refresh();
+    }
+
+    public void SpawnEntities(HexUnit unitPrefab)
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            if(cells[i].TerrainTypeIndex == 2)
+            {
+                HexUnit unit = Instantiate(unitPrefab);
+                unit.Location = cells[i];
+                unit.grid = this;
+                unit.faction = 1;
+                unit.GetComponent<Renderer>().material.color = Color.red;
+            }
+        }
     }
 }
