@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class HexUnit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public HexCell Location
+	{
+		get
+		{
+			return location;
+		}
+		set
+		{
+			location = value;
+			value.Unit = this;
+			transform.localPosition = value.Position;
+		}
+	}
 
-    // Update is called once per frame
-    void Update()
+	HexCell location;
+
+	public void Die()
     {
-        
-    }
+
+		location.Unit = null;
+		Destroy(this.gameObject);
+	
+	}
 }

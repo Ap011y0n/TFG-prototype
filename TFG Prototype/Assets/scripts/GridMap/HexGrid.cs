@@ -91,7 +91,10 @@ using System.Collections;
 
     }
 
-
+    public void ShowUI(bool visible)
+    {
+        gridCanvas.gameObject.SetActive(visible);
+    }
 
 
     public void Refresh()
@@ -252,6 +255,16 @@ using System.Collections;
                 }
                 
             }
+        }
+        return null;
+    }
+
+    public HexCell GetCell(Ray ray)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            return GetCell(hit.point);
         }
         return null;
     }

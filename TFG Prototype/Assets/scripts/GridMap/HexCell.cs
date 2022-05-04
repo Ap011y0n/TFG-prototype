@@ -152,6 +152,16 @@ public class HexCell : MonoBehaviour
         }
     }
 
+    public HexUnit Unit { get; set; }
+
+    public Vector3 Position
+    {
+        get
+        {
+            return transform.localPosition;
+        }
+    }
+
     public int SearchPhase { get; set; }
 
     public void SetNeighbor(HexDirection direction, HexCell cell)

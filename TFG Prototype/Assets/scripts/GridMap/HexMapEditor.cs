@@ -9,11 +9,15 @@ public class HexMapEditor : MonoBehaviour
 	public HexGrid hexGrid;
 	private Color activeColor;
 	public bool editMode = false;
+	public bool playMode = true;
+	public bool mapInfoMode = false;
 	public bool pathfindingMode = false;
 	public bool spawnMode = false;
 	public bool movementZoneMode = false;
 	HexCell previousCell, searchFromCell, currentCell;
 	public HexUnit unitPrefab;
+	public GameObject colorPanel;
+	public GameObject editPanel;
 
 	void Awake()
 	{
@@ -24,25 +28,29 @@ public class HexMapEditor : MonoBehaviour
 	{
 		if(editMode)
         {
-			editMap();
+			if (mapInfoMode)
+			{
+				editMapInfo();
+			}
+			else if (pathfindingMode)
+			{
+				pathFinding();
+			}
+			else if (spawnMode)
+			{
+				EntityMode();
+			}
+			else if (movementZoneMode)
+			{
+				movementZone();
+			}
 		}
-		else if(pathfindingMode)
-        {
-			pathFinding();
-		}
-		else if(spawnMode)
-        {
-
-        }
-		else if(movementZoneMode)
-        {
-			movementZone();
-		}
+		
 
 			
 	}
 
-	void editMap()
+	void editMapInfo()
     {
 		
 		if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
@@ -52,7 +60,7 @@ public class HexMapEditor : MonoBehaviour
 			if (Physics.Raycast(inputRay, out hit))
 			{
 				currentCell = hexGrid.GetCell(hit.point);
-				HandleInput();
+				EditCell(currentCell);
 			}
 		}
 	}
@@ -84,7 +92,12 @@ public class HexMapEditor : MonoBehaviour
 			{
 
 				previousCell = currentCell;
-				HandleInput();
+
+				if (searchFromCell && searchFromCell != currentCell)
+				{
+
+					hexGrid.FindPath(searchFromCell, currentCell, 24);
+				}
 
 			}
 		}
@@ -99,46 +112,25 @@ public class HexMapEditor : MonoBehaviour
 			if (Physics.Raycast(inputRay, out hit))
 			{
 				currentCell = hexGrid.GetCell(hit.point);
-				HandleInput();
+				hexGrid.FindDistancesTo(currentCell, 24);
 			}
 		}
 	}
 
-	void CreateEntity()
+	void EntityMode()
     {
-		HexCell cell = GetCellUnderCursor();
-		if (cell)
+		
+		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
-			HexUnit unit = Instantiate(unitPrefab);
-			unit.transform.SetParent(hexGrid.transform, false);
-		}
-	}
-	void HandleInput()
-	{
-
-
-		if (editMode)
-		{
-			EditCell(currentCell);
-		}
-		else if (pathfindingMode)
-		{
-			if (searchFromCell && searchFromCell != currentCell)
+			HexCell cell = GetCellUnderCursor();
+			if (cell && !cell.Unit)
 			{
-
-				hexGrid.FindPath(searchFromCell, currentCell, 24);
+				HexUnit unit = Instantiate(unitPrefab);
+				unit.Location = cell;
 			}
 
 		}
-		else
-		{
-			Debug.Log("Hola");
-			hexGrid.FindDistancesTo(currentCell, 24);
-
-		}
-
-
-
+		
 	}
 
 
@@ -154,22 +146,40 @@ public class HexMapEditor : MonoBehaviour
 	}
 	public void SetEditMode(bool toggle)
 	{
+		editPanel.SetActive(true);
+		colorPanel.SetActive(false);
 		editMode = !editMode;
+	}
+	public void SetPlayMode(bool toggle)
+	{
+		editPanel.SetActive(false);
+		colorPanel.SetActive(false);
+		playMode = !playMode;
+	}
+	public void SetEditMapInfoMode(bool toggle)
+	{
+		colorPanel.SetActive(true);
+		mapInfoMode = !mapInfoMode;
 	}
 	public void SetPathfindingMode(bool toggle)
 	{
+		colorPanel.SetActive(false);
 		pathfindingMode = !pathfindingMode;
 	}
-
+	public void SetZoneMode(bool toggle)
+	{
+		colorPanel.SetActive(false);
+		movementZoneMode = !movementZoneMode;
+	}
+	public void SpawnMode(bool toggle)
+	{
+		colorPanel.SetActive(false);
+		spawnMode = !spawnMode;
+	}
 	HexCell GetCellUnderCursor()
 	{
-		Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-		if (Physics.Raycast(inputRay, out hit))
-		{
-			return hexGrid.GetCell(hit.point);
-		}
-		return null;
+		return
+			hexGrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
 	}
 
 }
