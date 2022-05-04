@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.IO;
 
 
-    public class HexGrid : MonoBehaviour
+public class HexGrid : MonoBehaviour
 {
 	public int width = 6;
 	public int height = 6;
@@ -19,18 +20,19 @@ using System.Collections;
     Canvas gridCanvas;
     HexMesh hexMesh;
 
-    public Color defaultColor = Color.white;
     public Color touchedColor = Color.magenta;
 
     HexCellPriorityQueue searchFrontier;
 
     int searchFrontierPhase;
 
+    public Color[] colors;
 
     private void Awake()
     {
         gridCanvas = GetComponentInChildren<Canvas>();
         hexMesh = GetComponentInChildren<HexMesh>();
+        HexMetrics.colors = colors;
 
         cells = new HexCell[height * width];
 
@@ -44,6 +46,11 @@ using System.Collections;
 
     }
 
+    private void OnEnable()
+    {
+        HexMetrics.colors = colors;
+
+    }
     void Start()
     {
         hexMesh.Triangulate(cells);
@@ -60,7 +67,7 @@ using System.Collections;
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
-        cell.color = defaultColor;
+
         if (x > 0)
         {
             cell.SetNeighbor(HexDirection.W, cells[i - 1]);
@@ -285,5 +292,22 @@ using System.Collections;
             return GetCell(hit.point);
         }
         return null;
+    }
+
+    public void Save(BinaryWriter writer)
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            cells[i].Save(writer);
+        }
+    }
+
+    public void Load(BinaryReader reader)
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            cells[i].Load(reader);
+        }
+        Refresh();
     }
 }

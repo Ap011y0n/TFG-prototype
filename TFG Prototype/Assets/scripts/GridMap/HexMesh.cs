@@ -61,7 +61,7 @@ public class HexMesh : MonoBehaviour
 		Vector3 v2 = center + HexMetrics.GetSecondSolidCorner(direction);
 
 		AddTriangle(center, v1, v2);
-		AddTriangleColor(cell.color);
+		AddTriangleColor(HexMetrics.colors[cell.TerrainTypeIndex]);
 		if (direction <= HexDirection.SE)
 		{
 			TriangulateConnection(direction, cell, v1, v2);
@@ -80,13 +80,13 @@ public class HexMesh : MonoBehaviour
 		Vector3 v4 = v2 + bridge;
 
 		AddQuad(v1, v2, v3, v4);
-		AddQuadColor(cell.color, neighbor.color);
+		AddQuadColor(HexMetrics.colors[cell.TerrainTypeIndex], HexMetrics.colors[neighbor.TerrainTypeIndex]);
 
 		HexCell nextNeighbor = cell.GetNeighbor(direction.Next());
 		if (direction <= HexDirection.E && nextNeighbor != null)
 		{
 			AddTriangle(v2, v4, v2 + HexMetrics.GetBridge(direction.Next()));
-			AddTriangleColor(cell.color, neighbor.color, nextNeighbor.color);
+			AddTriangleColor(HexMetrics.colors[cell.TerrainTypeIndex], HexMetrics.colors[neighbor.TerrainTypeIndex],HexMetrics.colors[nextNeighbor.TerrainTypeIndex]);
 		}
 	}
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using System.IO;
+
 [System.Serializable]
 public struct HexCoordinates
 {
@@ -119,7 +121,7 @@ public class HexCell : MonoBehaviour
 
     public HexCoordinates coordinates;
 
-    public Color color;
+    int terrainTypeIndex;
 
     public int distance;
 
@@ -149,6 +151,21 @@ public class HexCell : MonoBehaviour
         {
             distance = value;
 
+        }
+    }
+
+    public int TerrainTypeIndex
+    {
+        get
+        {
+            return terrainTypeIndex;
+        }
+        set
+        {
+            if (terrainTypeIndex != value)
+            {
+                terrainTypeIndex = value;
+            }
         }
     }
 
@@ -205,5 +222,14 @@ public class HexCell : MonoBehaviour
         Image highlight = uiRect.GetChild(0).GetComponent<Image>();
         highlight.color = color;
         highlight.enabled = true;
+    }
+    public void Save(BinaryWriter writer)
+    {
+        writer.Write(terrainTypeIndex);
+    }
+
+    public void Load(BinaryReader reader)
+    {
+        terrainTypeIndex = reader.ReadInt32();
     }
 }

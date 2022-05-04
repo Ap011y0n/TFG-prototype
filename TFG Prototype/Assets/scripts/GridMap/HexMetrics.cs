@@ -9,6 +9,8 @@ public class HexMetrics : MonoBehaviour
 	public const float solidFactor = 0.75f;
 	public const float blendFactor = 1f - solidFactor;
 
+	public static Color[] colors;
+
 	static Vector3[] corners = {
 		new Vector3(0f, 0f, outerRadius),
 		new Vector3(innerRadius, 0f, 0.5f * outerRadius),

@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.IO;
 
 public class HexMapEditor : MonoBehaviour
 {
-	public Color[] colors;
 	public HexGrid hexGrid;
-	private Color activeColor;
 	public bool mapInfoMode = false;
 	public bool pathfindingMode = false;
 	public bool spawnMode = false;
@@ -16,10 +15,11 @@ public class HexMapEditor : MonoBehaviour
 	public HexUnit unitPrefab;
 	public GameObject colorPanel;
 	public GameObject editPanel;
+	int activeTerrainTypeIndex;
 
 	void Awake()
 	{
-		SelectColor(0);
+	//	SelectColor(0);
 	} 
 
 	void Update()
@@ -147,17 +147,23 @@ public class HexMapEditor : MonoBehaviour
 
 	}
 
-
+	public void SetTerrainTypeIndex(int index)
+	{
+		activeTerrainTypeIndex = index;
+	}
 	void EditCell(HexCell cell)
 	{
-		cell.color = activeColor;
-		hexGrid.Refresh();
+		if (cell)
+		{
+			if (activeTerrainTypeIndex >= 0)
+			{
+				cell.TerrainTypeIndex = activeTerrainTypeIndex;
+			}
+			hexGrid.Refresh();
+		}
 	}
 
-	public void SelectColor(int index)
-	{
-		activeColor = colors[index];
-	}
+
 	public void SetEditMode(bool toggle)
 	{
 		editPanel.SetActive(true);
@@ -195,4 +201,25 @@ public class HexMapEditor : MonoBehaviour
 			hexGrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
 	}
 
+	public void Save()
+	{
+		string path = Path.Combine(Application.persistentDataPath, "test.map");
+		
+		using (
+				BinaryWriter writer =
+					new BinaryWriter(File.Open(path, FileMode.Create))
+			)
+		{
+			hexGrid.Save(writer);
+		}
+	}
+
+	public void Load()
+	{
+		string path = Path.Combine(Application.persistentDataPath, "test.map");
+		using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+		{
+			hexGrid.Load(reader);
+		}
+	}
 }
