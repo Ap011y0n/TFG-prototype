@@ -195,6 +195,11 @@ public class SceneDirector : MonoBehaviour
 
     public void RefreshMapQuests()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("mission");
+        for(int i = objs.Length-1; i >= 0; i--)
+        {
+            Destroy(objs[i]);
+        }
         foreach (KeyValuePair<System.Guid, BattleMapInfo> entry in currentBattleMaps)
         {
             for (int i = 0; i < QuestManager.Instance.questPlaces.Count; i++)

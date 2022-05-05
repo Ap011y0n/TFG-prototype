@@ -41,7 +41,25 @@ public class CombatController : MonoBehaviour
 		{
 			Debug.LogWarning("File at: " + path + " does not exist");
 		}
+	}
 
+	public void Load()
+	{
+		string path = Path.Combine(Application.dataPath + "/maps", "test2.map");
 
+		if (System.IO.File.Exists(path))
+		{
+			Debug.Log("Loading file at: " + path);
+			grid.DeleteEntities();
+			using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+			{
+				grid.Load(reader);
+			}
+			grid.SpawnEntities(unitPrefab);
+		}
+		else
+		{
+			Debug.LogWarning("File at: " + path + " does not exist");
+		}
 	}
 }

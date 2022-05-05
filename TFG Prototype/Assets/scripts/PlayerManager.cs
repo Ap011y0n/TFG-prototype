@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManagemer : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private static PlayerManager _instance;
+    public static PlayerManager Instance { get { return _instance; } }
+
+    public int troopCount;
+    void Awake()
     {
-        
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+            _instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

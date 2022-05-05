@@ -10,6 +10,7 @@ TagManager:
   - mountain
   - plain
   - river
+  - mission
   layers:
   - Default
   - TransparentFX
