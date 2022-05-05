@@ -28,6 +28,8 @@ public class HexGrid : MonoBehaviour
 
     public Color[] colors;
 
+    public CombatController combatController;
+
     private void Awake()
     {
         gridCanvas = GetComponentInChildren<Canvas>();
@@ -120,7 +122,6 @@ public class HexGrid : MonoBehaviour
 
     public void FindDistancesTo(HexCell cell, int speed)
     {
-        Debug.Log("select");
         Search(cell, speed);
     }
 
@@ -150,6 +151,8 @@ public class HexGrid : MonoBehaviour
                   }*/
                 if (neighbor.Unit && neighbor.Unit.faction != cell.Unit.faction)
                 {
+                    if(!current.Unit)
+                    current.EnableHighlight(Color.red);
                     continue;
                 }
                 int currentTurn = current.Distance / speed;
@@ -319,13 +322,35 @@ public class HexGrid : MonoBehaviour
     {
         for (int i = 0; i < cells.Length; i++)
         {
-            if(cells[i].TerrainTypeIndex == 2)
+            if(cells[i].TerrainTypeIndex == 1)
             {
                 HexUnit unit = Instantiate(unitPrefab);
                 unit.Location = cells[i];
                 unit.grid = this;
                 unit.faction = 1;
                 unit.GetComponent<Renderer>().material.color = Color.red;
+                combatController.units.Add(unit);
+            }
+            if (cells[i].TerrainTypeIndex == 2)
+            {
+                HexUnit unit = Instantiate(unitPrefab);
+                unit.Location = cells[i];
+                unit.grid = this;
+                unit.faction = 0;
+                unit.GetComponent<Renderer>().material.color = Color.blue;
+                combatController.units.Add(unit);
+
+            }
+        }
+    }
+    public void DeleteEntities()
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            if (cells[i].Unit)
+            {
+                Destroy(cells[i].Unit.gameObject);
+                cells[i].Unit = null;
             }
         }
     }

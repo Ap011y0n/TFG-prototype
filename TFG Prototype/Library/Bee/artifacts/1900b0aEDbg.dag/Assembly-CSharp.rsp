@@ -321,6 +321,7 @@
 "Assets/scripts/ChangeScene.cs"
 "Assets/scripts/ChatButtons.cs"
 "Assets/scripts/ChatManager.cs"
+"Assets/scripts/CombatController.cs"
 "Assets/scripts/followPlayer.cs"
 "Assets/scripts/GridMap/HexCell.cs"
 "Assets/scripts/GridMap/HexCellPriorityQueue.cs"

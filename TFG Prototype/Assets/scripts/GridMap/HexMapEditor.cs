@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System.IO;
 
 public class HexMapEditor : MonoBehaviour
@@ -121,31 +122,45 @@ public class HexMapEditor : MonoBehaviour
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
 			HexCell cell = GetCellUnderCursor();
-			if (cell && !cell.Unit)
+			if (cell)
+				if(!cell.Unit)
 			{
 				HexUnit unit = Instantiate(unitPrefab);
 				unit.Location = cell;
 				unit.grid = hexGrid;
 				unit.faction = 0;
 				unit.GetComponent<Renderer>().material.color = Color.blue;
-			}
+				hexGrid.combatController.units.Add(unit);
+
+				}
+				else
+                {
+					cell.Unit.Destroy();
+                }
 
 		}
 		if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
 		{
 			HexCell cell = GetCellUnderCursor();
-			if (cell && !cell.Unit)
-			{
+			if (cell)
+				if (!cell.Unit)
+				{
 				HexUnit unit = Instantiate(unitPrefab);
 				unit.Location = cell;
 				unit.grid = hexGrid;
 				unit.faction = 1;
 				unit.GetComponent<Renderer>().material.color = Color.red;
+				hexGrid.combatController.units.Add(unit);
 			}
+				else
+				{
+					cell.Unit.Destroy();
+				}
 
 		}
 
 	}
+
 
 	public void SetTerrainTypeIndex(int index)
 	{
@@ -203,12 +218,8 @@ public class HexMapEditor : MonoBehaviour
 
 	public void Save()
 	{
-		string path = Path.Combine(Application.persistentDataPath, "test.map");
-		
-		using (
-				BinaryWriter writer =
-					new BinaryWriter(File.Open(path, FileMode.Create))
-			)
+		string path = Path.Combine(Application.dataPath + "/maps", editPanel.transform.Find("Map Name").GetComponent<InputField>().text + ".map");
+		using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
 		{
 			hexGrid.Save(writer);
 		}
@@ -216,11 +227,23 @@ public class HexMapEditor : MonoBehaviour
 
 	public void Load()
 	{
-		string path = Path.Combine(Application.persistentDataPath, "test.map");
-		using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+		string path = Path.Combine(Application.dataPath + "/maps", editPanel.transform.Find("Map Name").GetComponent<InputField>().text + ".map");
+
+		if (System.IO.File.Exists(path))
 		{
-			hexGrid.Load(reader);
+			Debug.Log("Loading file at: " + path);
+			hexGrid.DeleteEntities();
+			using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+			{
+				hexGrid.Load(reader);
+			}
+			hexGrid.SpawnEntities(unitPrefab);
 		}
-		hexGrid.SpawnEntities(unitPrefab);
+		else
+		{
+			Debug.LogWarning("File at: " + path + " does not exist");
+		}
+
+		
 	}
 }

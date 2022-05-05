@@ -22,11 +22,15 @@ public class HexGameUI : MonoBehaviour
 			{
 				if(!selectedUnit)
 				DoSelection();
-				else if(selectedUnit.path != null)
+				else if(selectedUnit.path != null && selectedUnit.movement)
                 {
 					selectedUnit.Move();
 					selectedUnit = null;
 				}
+				else if(currentCell.Unit && selectedUnit.isInRange(currentCell.Unit) && selectedUnit.action)
+                {
+					selectedUnit.Attack(currentCell.Unit);
+                }
 			}
 			else if(Input.GetMouseButtonDown(1))
             {
@@ -41,12 +45,17 @@ public class HexGameUI : MonoBehaviour
 	}
 	void DoSelection()
 	{
+
 		UpdateCurrentCell();
 		if (currentCell)
 		{
 			selectedUnit = currentCell.Unit;
 			if(selectedUnit)
-			grid.FindDistancesTo(currentCell, 24);
+            {
+				if (selectedUnit.movement)
+					grid.FindDistancesTo(currentCell, 24);
+			}
+				
 
 		}
 
@@ -54,13 +63,23 @@ public class HexGameUI : MonoBehaviour
 
 	void DoPathfinding()
 	{
-		if (UpdateCurrentCell() && IsValidDestination(currentCell))
+		if (UpdateCurrentCell() && selectedUnit.movement)
 		{
-			if(selectedUnit.path != null)
-			grid.disablePathHighLights(selectedUnit.path);
+			if(IsValidDestination(currentCell))
+            {
+				if (selectedUnit.path != null)
+					grid.disablePathHighLights(selectedUnit.path);
 
-			selectedUnit.path = grid.FindPath(selectedUnit.Location, currentCell, 24);
+				selectedUnit.path = grid.FindPath(selectedUnit.Location, currentCell, 24);
+			}
+			else
+			{
+				if (selectedUnit.path != null)
+					grid.disablePathHighLights(selectedUnit.path);
+				selectedUnit.path = null;
+			}
 		}
+		
 	}
 
 	public bool IsValidDestination(HexCell cell)
