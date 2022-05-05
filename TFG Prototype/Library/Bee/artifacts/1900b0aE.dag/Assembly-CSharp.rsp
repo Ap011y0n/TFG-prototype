@@ -321,6 +321,7 @@
 "Assets/scripts/ChangeScene.cs"
 "Assets/scripts/ChatButtons.cs"
 "Assets/scripts/ChatManager.cs"
+"Assets/scripts/CombatController.cs"
 "Assets/scripts/followPlayer.cs"
 "Assets/scripts/GridMap/HexCell.cs"
 "Assets/scripts/GridMap/HexCellPriorityQueue.cs"
@@ -332,7 +333,10 @@
 "Assets/scripts/GridMap/HexUnit.cs"
 "Assets/scripts/npc.cs"
 "Assets/scripts/PlayerController.cs"
+"Assets/scripts/PlayerManager.cs"
 "Assets/scripts/QuestGiver.cs"
+"Assets/scripts/QuestLoader.cs"
+"Assets/scripts/QuestLocations.cs"
 "Assets/scripts/QuestManager.cs"
 "Assets/scripts/SceneDirector.cs"
 -langversion:8.0

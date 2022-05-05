@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667555, g: 0.48427176, b: 0.5645241, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6308,6 +6308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1412020516}
+  - component: {fileID: 1412020517}
   m_Layer: 0
   m_Name: locations
   m_TagString: Untagged
@@ -6355,6 +6356,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1412020517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412020515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43afa9092de90124c95fa1515a4cef0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questPlaces:
+  - {fileID: 252947860}
+  - {fileID: 1143382239}
+  - {fileID: 690977677}
+  - {fileID: 1098563596}
+  - {fileID: 127116901}
+  - {fileID: 1381117595}
+  - {fileID: 1955376205}
+  - {fileID: 1501605856}
+  - {fileID: 957281892}
+  - {fileID: 1296987250}
+  - {fileID: 460330912}
+  - {fileID: 213954715}
+  - {fileID: 1181227036}
+  - {fileID: 1000622731}
+  - {fileID: 985035152}
+  - {fileID: 794793450}
+  - {fileID: 539321878}
+  - {fileID: 713108688}
+  - {fileID: 354811736}
+  - {fileID: 1965131467}
+  - {fileID: 2054264600}
+  - {fileID: 222138622}
+  - {fileID: 1096475212}
+  - {fileID: 32546456}
+  - {fileID: 155409805}
+  - {fileID: 1580168441}
 --- !u!1 &1412378328
 GameObject:
   m_ObjectHideFlags: 0
@@ -9533,6 +9573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcPrefab: {fileID: 5749385414847991376, guid: 1d93350a33e660d4c8afb6ebcef6718c, type: 3}
+  questLoader: {fileID: 8290987917506245173, guid: b4578d04ced052a47878139f32f8bd29, type: 3}
 --- !u!4 &1895446010
 Transform:
   m_ObjectHideFlags: 0

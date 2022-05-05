@@ -27,7 +27,7 @@ public class HexGameUI : MonoBehaviour
 					selectedUnit.Move();
 					selectedUnit = null;
 				}
-				else if(currentCell.Unit && selectedUnit.isInRange(currentCell.Unit) && selectedUnit.action)
+				else if(currentCell && currentCell.Unit && selectedUnit.isInRange(currentCell.Unit) && selectedUnit.action)
                 {
 					selectedUnit.Attack(currentCell.Unit);
                 }
@@ -47,14 +47,13 @@ public class HexGameUI : MonoBehaviour
 	{
 
 		UpdateCurrentCell();
-		if (currentCell)
+		if (currentCell && currentCell.Unit)
 		{
 			selectedUnit = currentCell.Unit;
-			if(selectedUnit)
-            {
+			
 				if (selectedUnit.movement)
 					grid.FindDistancesTo(currentCell, 24);
-			}
+			
 				
 
 		}
@@ -97,4 +96,6 @@ public class HexGameUI : MonoBehaviour
 		}
 		return false;
 	}
+
+	
 }

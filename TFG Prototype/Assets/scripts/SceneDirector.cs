@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public struct BattleMapInfo
+{
+    public string creatureName;
+    public string mapName;
+    public string place;
+}
+
+public enum enemyType
+{
+    DRAGON,
+    TROLL,
+}
 public class SceneDirector : MonoBehaviour
 {
     struct npc
@@ -15,6 +27,8 @@ public class SceneDirector : MonoBehaviour
         public string sceneName;
         public List<npc> sceneNpcs;
     }
+  
+   
     string[] maleNames =  new string[] 
     {
         "Rhuhmud Nohlar",
@@ -55,6 +69,7 @@ public class SceneDirector : MonoBehaviour
 };
 
     public GameObject npcPrefab;
+    public QuestLoader questLoader;
 
     Dictionary<string, sceneInfo> LoadedScenes;
 
@@ -64,6 +79,10 @@ public class SceneDirector : MonoBehaviour
     private static SceneDirector _instance;
     public static SceneDirector Instance { get { return _instance; } }
 
+    [HideInInspector]
+    public Dictionary<System.Guid, BattleMapInfo> currentBattleMaps;
+    [HideInInspector]
+    public BattleMapInfo currentBattleMapInfo;
     // called zero
     void Awake()
     {
@@ -78,7 +97,7 @@ public class SceneDirector : MonoBehaviour
         Debug.Log("Awake");
         DontDestroyOnLoad(this.gameObject);
         LoadedScenes = new Dictionary<string, sceneInfo>();
-
+        currentBattleMaps = new Dictionary<System.Guid, BattleMapInfo>();
     }
 
     // called first
@@ -99,20 +118,36 @@ public class SceneDirector : MonoBehaviour
             newScene.sceneName = scene.name;
             newScene.sceneNpcs = new List<npc>();
 
-            if (scene.name != "WorldMap")
+            if (scene.name == "WorldMap")
+            {
+                LoadedScenes.Add(scene.name, newScene);
+
+            }
+            else if (scene.name == "BattleMap")
+            {
+                CombatController controller = GameObject.Find("CombatController").GetComponent<CombatController>();
+                controller.Load(currentBattleMapInfo);
+            }
+            else
             {
                 newScene.sceneNpcs = createNpcs(newScene);
-            }
-          
+                LoadedScenes.Add(scene.name, newScene);
 
-            LoadedScenes.Add(scene.name, newScene);
-           
+            }
+
+
         }
         else
         {
             if (scene.name == "WorldMap")
             {
                 playerRef.transform.position = playerPos;
+
+                RefreshMapQuests();
+
+            }
+            else if (scene.name == "BattleMap")
+            {
 
             }
             else
@@ -158,6 +193,21 @@ public class SceneDirector : MonoBehaviour
         return npcList;
     }
 
+    public void RefreshMapQuests()
+    {
+        foreach (KeyValuePair<System.Guid, BattleMapInfo> entry in currentBattleMaps)
+        {
+            for (int i = 0; i < QuestManager.Instance.questPlaces.Count; i++)
+            {
+                GameObject place = QuestManager.Instance.questPlaces[i];
+                if (entry.Value.place == place.name)
+                {
+                    QuestLoader loader = Instantiate(questLoader, place.transform.position, Quaternion.identity);
+                    loader.guid = entry.Key;
+                }
+            }
+        }
+    }
     void spawnNpcs(sceneInfo info)
     {
         for(int i = 0; i < info.sceneNpcs.Count; i++)

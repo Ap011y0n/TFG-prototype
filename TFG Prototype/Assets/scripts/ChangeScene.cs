@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class ChangeScene : MonoBehaviour
 {
     public GameObject EnterText;
-    public bool savePos = false;
+    public bool savePos = true;
     private bool canEnter = false;
     // Start is called before the first frame update
     void Start()

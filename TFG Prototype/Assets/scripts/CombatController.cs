@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class CombatController : MonoBehaviour
 {
     int turn = 0;
-    public List<HexUnit> units;
+	public HexUnit unitPrefab;
+	public List<HexUnit> units;
+	public HexGrid grid;
 
-    public void ResetTurn()
+	public void ResetTurn()
     {
         turn = 0;
     }
@@ -19,4 +22,26 @@ public class CombatController : MonoBehaviour
             units[i].ResetActions();
         }
     }
+   
+    public void Load(BattleMapInfo mapInfo)
+	{
+		string path = Path.Combine(Application.dataPath + "/maps", mapInfo.mapName +".map");
+
+		if (System.IO.File.Exists(path))
+		{
+			Debug.Log("Loading file at: " + path);
+			grid.DeleteEntities();
+			using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+			{
+				grid.Load(reader);
+			}
+			grid.SpawnEntities(unitPrefab);
+		}
+		else
+		{
+			Debug.LogWarning("File at: " + path + " does not exist");
+		}
+
+
+	}
 }

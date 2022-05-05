@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class QuestManager : MonoBehaviour
         public string questName;
         public string questDescription;
         public QuestType type;
+        BattleMapInfo mapInfo;
     }
 
     struct QuestText
@@ -43,6 +45,7 @@ public class QuestManager : MonoBehaviour
         public string name;
     }
 
+    [HideInInspector]
     public List<GameObject> questPlaces;
     private List<Quest> activeQuests;
     private List<Quest> completedQuests;
@@ -68,6 +71,11 @@ public class QuestManager : MonoBehaviour
         Debug.Log("Awake");
         DontDestroyOnLoad(this.gameObject);
 
+       
+    }
+
+    void Start()
+    {
         activeQuests = new List<Quest>();
         completedQuests = new List<Quest>();
         questTexts = new List<QuestText>();
@@ -79,20 +87,16 @@ public class QuestManager : MonoBehaviour
         AddPlaces();
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            Quest newQuest =GenerateQuest("GOD");
+            Quest newQuest = GenerateQuest("GOD");
             Debug.Log(newQuest.questName);
             Debug.Log(newQuest.questGiver);
             Debug.Log(newQuest.questDescription);
+           
 
         }
     }
@@ -100,6 +104,8 @@ public class QuestManager : MonoBehaviour
     public Quest GenerateQuest(string giver)
     {
         Quest newquest = new Quest();
+        BattleMapInfo info = new BattleMapInfo();
+
         newquest.questGiver = giver;
         newquest.type = (QuestType)Random.Range(0, questTypes);
       
@@ -112,6 +118,9 @@ public class QuestManager : MonoBehaviour
 
         text.text = text.text.Replace("place", place.name);
         newquest.questDescription = text.text.Replace("monster", creature.name);
+       
+        info.creatureName = creature.name;
+        info.place = place.name;
 
         switch (newquest.type)
         {
@@ -120,8 +129,19 @@ public class QuestManager : MonoBehaviour
                 break;
             case QuestType.HUNT:
                 newquest.questName = "Hunt the " + creature.name;
+                info.mapName = "test2";
+
                 break;
         }
+
+        System.Guid guid = System.Guid.NewGuid();
+        SceneDirector.Instance.currentBattleMaps.Add(guid, info);
+        Scene scene = SceneManager.GetActiveScene();
+        if(scene.name == "WorldMap")
+        {
+            SceneDirector.Instance.RefreshMapQuests();
+        }
+
 
         return newquest;
     }
