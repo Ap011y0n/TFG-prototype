@@ -14,6 +14,10 @@ public class CombatController : MonoBehaviour
     {
         turn = 0;
     }
+	public int getCurrentTurn()
+    {
+		return turn;
+    }
     public void EndTurn()
     {
         turn++;

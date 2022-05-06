@@ -331,7 +331,7 @@
 "Assets/scripts/GridMap/HexMesh.cs"
 "Assets/scripts/GridMap/HexMetrics.cs"
 "Assets/scripts/GridMap/HexUnit.cs"
-"Assets/scripts/npc.cs"
+"Assets/scripts/Npc.cs"
 "Assets/scripts/PlayerController.cs"
 "Assets/scripts/PlayerManager.cs"
 "Assets/scripts/QuestGiver.cs"

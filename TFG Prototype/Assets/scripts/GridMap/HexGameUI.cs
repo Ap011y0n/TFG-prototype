@@ -14,6 +14,10 @@ public class HexGameUI : MonoBehaviour
 	public Text deployedTroopCount;
 	public GameObject startPanel;
 
+	public GameObject turnButton;
+	public Text turnCount;
+	public GameObject turnPanel;
+
 	public void SetPlayMode()
 	{
 		grid.editMode = false;
@@ -25,13 +29,17 @@ public class HexGameUI : MonoBehaviour
 		startPanel.SetActive(false);
 		playbutton.SetActive(false);
 
+		turnButton.SetActive(true);
+		turnPanel.SetActive(true);
+		turnCount.text = combatController.getCurrentTurn().ToString();
+
 	}
-    private void Start()
+	private void Start()
     {
 		//availableTroops = PlayerManager.Instance.troopCount;
 		availableTroops = 4;
 		deployedTroopCount.text = availableTroops.ToString();
-	//	combatController.Load();
+		combatController.Load();
 
 	}
 
@@ -79,10 +87,25 @@ public class HexGameUI : MonoBehaviour
 		if (currentCell && currentCell.Unit)
 		{
 			selectedUnit = currentCell.Unit;
-			
-				if (selectedUnit.movement)
-					grid.FindDistancesTo(currentCell, 24);
-			
+			grid.disableAllHighlights();
+
+			if (selectedUnit.movement)
+            {
+				selectedUnit.Location.EnableHighlight(Color.blue);
+				grid.FindDistancesTo(selectedUnit.Location, 24);
+
+			}
+			else
+            {
+				if (selectedUnit.HasEnemyInRange())
+					selectedUnit.Location.EnableHighlight(Color.red);
+				else
+				selectedUnit.Location.EnableHighlight(Color.blue);
+
+
+			}
+
+
 		}
 
 	}
@@ -115,15 +138,19 @@ public class HexGameUI : MonoBehaviour
 		{
 			if(IsValidDestination(currentCell))
             {
-				if (selectedUnit.path != null)
-					grid.disablePathHighLights(selectedUnit.path);
 
+
+				grid.FindDistancesTo(selectedUnit.Location, 24);
 				selectedUnit.path = grid.FindPath(selectedUnit.Location, currentCell, 24);
+				if (selectedUnit.path != null)
+					grid.PaintPath(selectedUnit.path);
+			
 			}
 			else
 			{
+				grid.FindDistancesTo(selectedUnit.Location, 24);
+				selectedUnit.Location.EnableHighlight(Color.blue);
 				if (selectedUnit.path != null)
-					grid.disablePathHighLights(selectedUnit.path);
 				selectedUnit.path = null;
 			}
 		}
@@ -146,5 +173,8 @@ public class HexGameUI : MonoBehaviour
 		return false;
 	}
 
-	
+	public void PassTurn()
+    {
+		turnCount.text = combatController.getCurrentTurn().ToString();
+	}
 }

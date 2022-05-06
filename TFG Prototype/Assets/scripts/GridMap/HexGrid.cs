@@ -128,7 +128,6 @@ public class HexGrid : MonoBehaviour
     void Search(HexCell cell, int speed)
     {
 
-
         disableAllHighlights();
 
         Queue<HexCell> frontier = new Queue<HexCell>();
@@ -167,7 +166,7 @@ public class HexGrid : MonoBehaviour
                 neighbor.Distance = distance;
                 if (editMode)
                     neighbor.UpdateDistanceLabel();
-                neighbor.EnableHighlight(Color.yellow);
+                neighbor.EnableHighlight(Color.white);
                 neighbor.PathFrom = current;
                 frontier.Enqueue(neighbor);
             }
@@ -181,13 +180,21 @@ public class HexGrid : MonoBehaviour
         return null;
     }
 
+    public void PaintPath(List<HexCell> path)
+    {
+        path[path.Count-1].EnableHighlight(Color.blue);
+        for (int i = 0; i < path.Count -1; i++)
+        {
+            path[i].EnableHighlight(Color.yellow);
+        }
+    }
     public void disablePathHighLights(List<HexCell> toDisable)
     {
         for (int i= 0; i < toDisable.Count; i++)
         {
             toDisable[i].Distance = int.MaxValue;
             toDisable[i].UpdateDistanceLabel();
-            toDisable[i].EnableHighlight(Color.yellow);
+            toDisable[i].DisableHighlight();
         }
     }
     public void disableAllHighlights()
@@ -217,7 +224,7 @@ public class HexGrid : MonoBehaviour
 
         fromCell.SearchPhase = searchFrontierPhase;
         fromCell.Distance = 0;
-        fromCell.EnableHighlight(Color.blue);
+    //    fromCell.EnableHighlight(Color.blue);
         if (editMode)
             fromCell.UpdateDistanceLabel();
 
@@ -238,11 +245,11 @@ public class HexGrid : MonoBehaviour
                     ret.Add(current);
                     if(editMode)
                     current.UpdateDistanceLabel();
-                    current.EnableHighlight(Color.grey);
+                  //  current.EnableHighlight(Color.grey);
                     current = current.PathFrom;
                 }
                 ret.Add(fromCell);
-                toCell.EnableHighlight(Color.green);
+           //     toCell.EnableHighlight(Color.green);
                 if (editMode)
                     toCell.UpdateDistanceLabel();
                 return ret;

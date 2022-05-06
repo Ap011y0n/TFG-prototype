@@ -71,6 +71,23 @@ public class HexUnit : MonoBehaviour
 
 		return ret;
     }
+	public bool HasEnemyInRange()
+	{
+		bool ret = false;
+		for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
+		{
+			if (location.GetNeighbor(d).Unit && location.GetNeighbor(d).Unit.faction != faction)
+			{
+				Debug.Log("Enemy in range");
+				ret = true;
+			}
+
+
+		}
+
+
+		return ret;
+	}
 	public void Attack(HexUnit enemy)
     {
 		enemy.Destroy();
