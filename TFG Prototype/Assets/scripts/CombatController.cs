@@ -6,8 +6,11 @@ using System.IO;
 public class CombatController : MonoBehaviour
 {
     int turn = 0;
+	public HexEnemy enemyPrefab;
 	public HexUnit unitPrefab;
 	public List<HexUnit> units;
+	public List<HexUnit> playerUnits;
+	public List<HexEnemy> enemyUnits;
 	public HexGrid grid;
 
 	public void ResetTurn()
@@ -18,7 +21,7 @@ public class CombatController : MonoBehaviour
     {
 		return turn;
     }
-    public void EndTurn()
+    public void NextTurn()
     {
         turn++;
         for(int i = 0; i < units.Count; i++)
@@ -27,6 +30,34 @@ public class CombatController : MonoBehaviour
         }
     }
    
+	public void EndPlayerTurn()
+    {
+		for (int i = 0; i < playerUnits.Count; i++)
+		{
+			playerUnits[i].EndActions();
+		}
+		EnemyTurn();
+	}
+
+	public void EnemyTurn()
+    {
+		for (int i = 0; i < enemyUnits.Count; i++)
+		{
+			HexCell destination, enemy;
+			grid.SearchEnemy(enemyUnits[i].Location, 24, out destination, out enemy);
+			if(destination != null)
+            {
+				enemyUnits[i].path = grid.FindPath(enemyUnits[i].Location, destination, 24);
+				if(enemyUnits[i].path != null)
+                {
+					enemyUnits[i].Move();
+					enemyUnits[i].Attack(enemy.Unit);
+                }
+			}
+		}
+		NextTurn();
+	}
+
     public void Load(BattleMapInfo mapInfo)
 	{
 		string path = Path.Combine(Application.dataPath + "/maps", mapInfo.mapName +".map");
@@ -39,7 +70,7 @@ public class CombatController : MonoBehaviour
 			{
 				grid.Load(reader);
 			}
-			grid.SpawnEntities(unitPrefab);
+			grid.SpawnEntities(enemyPrefab);
 		}
 		else
 		{
@@ -59,7 +90,7 @@ public class CombatController : MonoBehaviour
 			{
 				grid.Load(reader);
 			}
-			grid.SpawnEntities(unitPrefab);
+			grid.SpawnEntities(enemyPrefab);
 		}
 		else
 		{

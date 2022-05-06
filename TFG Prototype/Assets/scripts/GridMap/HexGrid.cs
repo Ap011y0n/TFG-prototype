@@ -325,18 +325,19 @@ public class HexGrid : MonoBehaviour
         Refresh();
     }
 
-    public void SpawnEntities(HexUnit unitPrefab)
+    public void SpawnEntities(HexEnemy unitPrefab)
     {
         for (int i = 0; i < cells.Length; i++)
         {
             if(cells[i].TerrainTypeIndex == 1)
             {
-                HexUnit unit = Instantiate(unitPrefab);
+                HexEnemy unit = Instantiate(unitPrefab);
                 unit.Location = cells[i];
                 unit.grid = this;
                 unit.faction = 1;
                 unit.GetComponent<Renderer>().material.color = Color.red;
                 combatController.units.Add(unit);
+                combatController.enemyUnits.Add(unit);
             }
             if (cells[i].TerrainTypeIndex == 2)
             {
@@ -354,6 +355,62 @@ public class HexGrid : MonoBehaviour
             {
                 Destroy(cells[i].Unit.gameObject);
                 cells[i].Unit = null;
+            }
+        }
+    }
+
+
+
+    public void SearchEnemy(HexCell cell, int speed, out HexCell destination, out HexCell enemy)
+    {
+        destination = null;
+        enemy = null;
+
+        disableAllHighlights();
+
+        Queue<HexCell> frontier = new Queue<HexCell>();
+        cell.Distance = 0;
+        frontier.Enqueue(cell);
+        while (frontier.Count > 0)
+        {
+
+            HexCell current = frontier.Dequeue();
+            for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
+            {
+                HexCell neighbor = current.GetNeighbor(d);
+                if (neighbor == null || neighbor.Distance != int.MaxValue)
+                {
+                    continue;
+                }
+                /*  if (neighbor.IsUnderwater)
+                  {
+                      continue;
+                  }*/
+                if (neighbor.Unit && neighbor.Unit.faction != cell.Unit.faction)
+                {
+                    if (!current.Unit)
+                    {
+                        destination = current;
+                        enemy = neighbor;
+                        break;
+                    }
+                    continue;
+                }
+                int currentTurn = current.Distance / speed;
+
+                int moveCost = 5; //editar luego
+                int distance = current.Distance + moveCost;
+                int turn = distance / speed;
+                if (turn > currentTurn)
+                {
+                    break;
+                }
+                neighbor.Distance = distance;
+                if (editMode)
+                    neighbor.UpdateDistanceLabel();
+                neighbor.EnableHighlight(Color.white);
+                neighbor.PathFrom = current;
+                frontier.Enqueue(neighbor);
             }
         }
     }

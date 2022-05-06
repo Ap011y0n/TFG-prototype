@@ -20,9 +20,8 @@ public class ChangeScene : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && canEnter)
         {
             canEnter = false;
-            SceneManager.LoadScene(gameObject.name);
-            if(savePos)
-            SceneDirector.Instance.SetPlayerPos(transform.position);
+            //   SceneManager.LoadScene(gameObject.name);
+            SceneDirector.Instance.loadScene(this.gameObject);
         }
     }
 

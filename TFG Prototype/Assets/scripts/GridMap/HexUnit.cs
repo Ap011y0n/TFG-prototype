@@ -26,16 +26,17 @@ public class HexUnit : MonoBehaviour
 		}
 	}
 
-	HexCell location;
+	protected HexCell location;
 
     private void Start()
     {
 		path = new List<HexCell>();
 	}
-    public void Destroy()
+    public virtual void Destroy()
     {
 
 		location.Unit = null;
+		grid.combatController.playerUnits.Remove(this);
 		grid.combatController.units.Remove(this);
 		Destroy(this.gameObject);
 	
@@ -98,4 +99,9 @@ public class HexUnit : MonoBehaviour
 		action = true;
 		movement = true;
     }
+	public void EndActions()
+    {
+		action = false;
+		movement = false;
+	}
 }

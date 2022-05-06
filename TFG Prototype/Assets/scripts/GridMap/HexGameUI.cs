@@ -121,6 +121,7 @@ public class HexGameUI : MonoBehaviour
 			unit.faction = 0;
 			unit.GetComponent<Renderer>().material.color = Color.blue;
 			combatController.units.Add(unit);
+			combatController.playerUnits.Add(unit);
 			availableTroops--;
 			deployedTroopCount.text = availableTroops.ToString();
 		}
@@ -138,8 +139,6 @@ public class HexGameUI : MonoBehaviour
 		{
 			if(IsValidDestination(currentCell))
             {
-
-
 				grid.FindDistancesTo(selectedUnit.Location, 24);
 				selectedUnit.path = grid.FindPath(selectedUnit.Location, currentCell, 24);
 				if (selectedUnit.path != null)

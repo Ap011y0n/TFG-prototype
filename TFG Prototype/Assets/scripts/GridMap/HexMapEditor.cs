@@ -14,6 +14,7 @@ public class HexMapEditor : MonoBehaviour
 	public bool movementZoneMode = false;
 	HexCell previousCell, searchFromCell, currentCell;
 	public HexUnit unitPrefab;
+	public HexEnemy enemyPrefab;
 	public GameObject colorPanel;
 	public GameObject editPanel;
 	int activeTerrainTypeIndex;
@@ -131,6 +132,7 @@ public class HexMapEditor : MonoBehaviour
 				unit.faction = 0;
 				unit.GetComponent<Renderer>().material.color = Color.blue;
 				hexGrid.combatController.units.Add(unit);
+				hexGrid.combatController.playerUnits.Add(unit);
 
 				}
 				else
@@ -145,13 +147,15 @@ public class HexMapEditor : MonoBehaviour
 			if (cell)
 				if (!cell.Unit)
 				{
-				HexUnit unit = Instantiate(unitPrefab);
+				HexEnemy unit = Instantiate(enemyPrefab);
 				unit.Location = cell;
 				unit.grid = hexGrid;
 				unit.faction = 1;
 				unit.GetComponent<Renderer>().material.color = Color.red;
 				hexGrid.combatController.units.Add(unit);
-			}
+				hexGrid.combatController.enemyUnits.Add(unit);
+
+				}
 				else
 				{
 					cell.Unit.Destroy();
@@ -237,7 +241,7 @@ public class HexMapEditor : MonoBehaviour
 			{
 				hexGrid.Load(reader);
 			}
-			hexGrid.SpawnEntities(unitPrefab);
+			hexGrid.SpawnEntities(enemyPrefab);
 		}
 		else
 		{

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -668,7 +668,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 781987977}
         m_TargetAssemblyTypeName: CombatController, Assembly-CSharp
-        m_MethodName: EndTurn
+        m_MethodName: EndPlayerTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1052,8 +1052,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba71530546d92348b257732f95826da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 1048280540497582356, guid: 00f2094f7096e5f4f98cda4b04e2df4f, type: 3}
   unitPrefab: {fileID: 1522675259732915384, guid: a55bbafd13eb36c4d83bb93df591112f, type: 3}
   units: []
+  playerUnits: []
+  enemyUnits: []
   grid: {fileID: 762467067}
 --- !u!4 &781987978
 Transform:
