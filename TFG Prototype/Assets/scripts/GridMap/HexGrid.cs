@@ -338,16 +338,12 @@ public class HexGrid : MonoBehaviour
                 unit.GetComponent<Renderer>().material.color = Color.red;
                 combatController.units.Add(unit);
             }
-            //if (cells[i].TerrainTypeIndex == 2)
-            //{
-            //    HexUnit unit = Instantiate(unitPrefab);
-            //    unit.Location = cells[i];
-            //    unit.grid = this;
-            //    unit.faction = 0;
-            //    unit.GetComponent<Renderer>().material.color = Color.blue;
-            //    combatController.units.Add(unit);
+            if (cells[i].TerrainTypeIndex == 2)
+            {
+                cells[i].EnableHighlight(Color.blue);
 
-            //}
+            }
+
         }
     }
     public void DeleteEntities()

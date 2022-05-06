@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 7070223}
   - component: {fileID: 7070222}
   - component: {fileID: 7070221}
+  - component: {fileID: 7070224}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -206,6 +207,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &7070224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7070220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b686c2fdeea65cc42a14c5f207da746a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
 --- !u!1 &43011371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,8 +2557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21147573a96a9946a359dcea9310c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 40
-  height: 40
+  width: 15
+  height: 10
   cellPrefab: {fileID: 5812210989673677919, guid: 55270598f15dd3f468cef768aa02903b, type: 3}
   cellLabelPrefab: {fileID: 4809054386593271810, guid: 765bbe2d0c122624f8d6ce58b616dad8, type: 3}
   editMode: 0
@@ -2677,7 +2691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba71530546d92348b257732f95826da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitPrefab: {fileID: 0}
   units: []
+  grid: {fileID: 0}
 --- !u!4 &781987978
 Transform:
   m_ObjectHideFlags: 0
@@ -4982,6 +4998,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 762467067}
+  play: 0
+  combatController: {fileID: 0}
+  playbutton: {fileID: 0}
+  deployedTroopCount: {fileID: 0}
+  startPanel: {fileID: 0}
+  turnButton: {fileID: 0}
+  turnCount: {fileID: 0}
+  turnPanel: {fileID: 0}
 --- !u!1 &1671207330
 GameObject:
   m_ObjectHideFlags: 0
