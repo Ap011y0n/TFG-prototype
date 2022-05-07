@@ -122,6 +122,7 @@ public class HexGameUI : MonoBehaviour
 			unit.GetComponent<Renderer>().material.color = Color.blue;
 			combatController.units.Add(unit);
 			combatController.playerUnits.Add(unit);
+			unit.setStats(HexUnit.unitType.HumanPlayer, 50);
 			availableTroops--;
 			deployedTroopCount.text = availableTroops.ToString();
 		}

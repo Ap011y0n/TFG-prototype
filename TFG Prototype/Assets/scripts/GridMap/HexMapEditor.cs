@@ -124,21 +124,22 @@ public class HexMapEditor : MonoBehaviour
 		{
 			HexCell cell = GetCellUnderCursor();
 			if (cell)
-				if(!cell.Unit)
-			{
-				HexUnit unit = Instantiate(unitPrefab);
-				unit.Location = cell;
-				unit.grid = hexGrid;
-				unit.faction = 0;
-				unit.GetComponent<Renderer>().material.color = Color.blue;
-				hexGrid.combatController.units.Add(unit);
-				hexGrid.combatController.playerUnits.Add(unit);
+				if (!cell.Unit)
+				{
+					HexUnit unit = Instantiate(unitPrefab);
+					unit.Location = cell;
+					unit.grid = hexGrid;
+					unit.faction = 0;
+					unit.GetComponent<Renderer>().material.color = Color.blue;
+					hexGrid.combatController.units.Add(unit);
+					unit.setStats(HexUnit.unitType.HumanPlayer, 50);
+					hexGrid.combatController.playerUnits.Add(unit);
 
 				}
 				else
-                {
+				{
 					cell.Unit.Destroy();
-                }
+				}
 
 		}
 		if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
@@ -147,13 +148,14 @@ public class HexMapEditor : MonoBehaviour
 			if (cell)
 				if (!cell.Unit)
 				{
-				HexEnemy unit = Instantiate(enemyPrefab);
-				unit.Location = cell;
-				unit.grid = hexGrid;
-				unit.faction = 1;
-				unit.GetComponent<Renderer>().material.color = Color.red;
-				hexGrid.combatController.units.Add(unit);
-				hexGrid.combatController.enemyUnits.Add(unit);
+					HexEnemy unit = Instantiate(enemyPrefab);
+					unit.Location = cell;
+					unit.grid = hexGrid;
+					unit.faction = 1;
+					unit.GetComponent<Renderer>().material.color = Color.red;
+					hexGrid.combatController.units.Add(unit);
+					unit.setStats(HexUnit.unitType.HumanEnemy, 40);
+					hexGrid.combatController.enemyUnits.Add(unit);
 
 				}
 				else

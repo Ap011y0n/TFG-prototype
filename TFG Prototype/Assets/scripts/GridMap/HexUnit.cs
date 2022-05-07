@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HexUnit : MonoBehaviour
 {
@@ -12,6 +13,26 @@ public class HexUnit : MonoBehaviour
 	public bool movement = true;
 	[HideInInspector]
 	public bool action = true;
+
+	public TextMeshProUGUI text;
+	public GameObject damageTextPrefab;
+	public GameObject unitCanvas;
+
+	public int meleAttack;
+	public int meleDefense;
+	public int weaponPen;
+	public int armor;
+	public int weaponDamage;
+	public int entityHp;
+	public int entityNum;
+	int totalHP;
+
+	public enum unitType
+    {
+		HumanPlayer,
+		HumanEnemy,
+		Monster,
+    }
 	public HexCell Location
 	{
 		get
@@ -31,6 +52,73 @@ public class HexUnit : MonoBehaviour
     private void Start()
     {
 		path = new List<HexCell>();
+	}
+	public void setStats(unitType type, int unitSize)
+    {
+		entityNum = unitSize;
+		text.text = entityNum.ToString();
+		switch (type)
+        {
+			default:
+				break;
+			case unitType.HumanPlayer:
+                {
+					meleAttack = 50;
+					meleDefense = 40;
+					weaponPen = 0;
+					armor = 4;
+					weaponDamage = 1;
+					entityHp = 1;
+					totalHP = entityNum * entityHp;
+				}
+				break;
+			case unitType.HumanEnemy:
+                {
+					meleAttack = 50;
+					meleDefense = 40;
+					weaponPen = 0;
+					armor = 4;
+					weaponDamage = 1;
+					entityHp = 1;
+					totalHP = entityNum * entityHp;
+				}
+				break;
+			case unitType.Monster:
+                {
+					meleAttack = 60;
+					meleDefense = 50;
+					weaponPen = 2;
+					armor = 3;
+					weaponDamage = 20;
+					entityHp = 20;
+					totalHP = entityNum * entityHp;
+				}
+				break;
+
+		}
+    }
+
+	public void takeDamage(int damage, HexUnit enemy, bool retaliation)
+    {
+		totalHP -= damage;
+		GameObject damageText = Instantiate(damageTextPrefab, unitCanvas.transform);
+		damageText.GetComponent<DamageText>().text.text = damage.ToString();
+		
+		if (totalHP < 0)
+        {
+			entityNum = 0;
+			Destroy();
+		}
+		else
+        {
+			entityNum -= damage / entityHp;
+			text.text = entityNum.ToString();
+			if (isInRange(enemy) && retaliation)
+			{
+				Attack(enemy, false);
+			}
+
+		}
 	}
     public virtual void Destroy()
     {
@@ -89,9 +177,32 @@ public class HexUnit : MonoBehaviour
 
 		return ret;
 	}
-	public void Attack(HexUnit enemy)
+	public void Attack(HexUnit enemy, bool enemyCanRetaliate = true)
     {
-		enemy.Destroy();
+		//float meleAttack;
+		//float meleDefense;
+		//float weaponPen;
+		//float armor;
+		//float weaponDamage;
+		//int entityHp;
+		//int entityNum;
+		int totalDamage = 0;
+		for(int i = 0; i < entityNum; i++)
+        {
+			int attack = Random.Range(0, meleAttack);
+			int def = Random.Range(0, meleDefense);
+			if(attack > def)
+            {
+				int armorSave = Random.Range(1, 7);
+				if(armorSave < enemy.armor - weaponPen)
+                {
+					totalDamage += weaponDamage;
+                }
+            }
+
+		}
+		
+		enemy.takeDamage(totalDamage, this, enemyCanRetaliate);
 		action = false;
     }
 	public void ResetActions()

@@ -338,6 +338,7 @@ public class HexGrid : MonoBehaviour
                 unit.GetComponent<Renderer>().material.color = Color.red;
                 combatController.units.Add(unit);
                 combatController.enemyUnits.Add(unit);
+                unit.setStats(HexUnit.unitType.HumanEnemy, 40);
             }
             if (cells[i].TerrainTypeIndex == 2)
             {
