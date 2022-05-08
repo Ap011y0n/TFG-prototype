@@ -15,20 +15,20 @@ public enum enemyType
     DRAGON,
     TROLL,
 }
+public struct npc
+{
+    public string name;
+    public Vector3 position;
+}
+public struct sceneInfo
+{
+    public string sceneName;
+    public List<npc> sceneNpcs;
+    public npc QuestGiver;
+}
 public class SceneDirector : MonoBehaviour
 {
-    struct npc
-    {
-        public string name;
-        public Vector3 position;
-    }
-    struct sceneInfo
-    {
-        public string sceneName;
-        public List<npc> sceneNpcs;
-    }
   
-   
     string[] maleNames =  new string[] 
     {
         "Rhuhmud Nohlar",
@@ -130,7 +130,8 @@ public class SceneDirector : MonoBehaviour
             }
             else
             {
-                newScene.sceneNpcs = createNpcs(newScene);
+                newScene = createNpcs(newScene);
+                spawnNpcs(newScene);
                 LoadedScenes.Add(scene.name, newScene);
 
             }
@@ -172,25 +173,25 @@ public class SceneDirector : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    List<npc> createNpcs(sceneInfo info)
+    sceneInfo createNpcs(sceneInfo info)
     {
-        List<npc> npcList = new List<npc>();
+       
         List<GameObject> spawnPositions = new List<GameObject>(GameObject.FindGameObjectsWithTag("SpawnPoint"));
         int maxNpc = Random.Range((int)(spawnPositions.Count / 3), spawnPositions.Count);
         for (int i = 0; i < maxNpc; ++i)
         {
-            int randomPos = Random.Range(0, spawnPositions.Count);
-            GameObject temp = GameObject.Instantiate(npcPrefab, spawnPositions[randomPos].transform.position, Quaternion.identity);
-            spawnPositions.RemoveAt(randomPos);
-            int genre = Random.Range(0, 2);
-            temp.name = GenerateName(genre);
-            temp.GetComponent<Npc>().setInitParams(temp.name, info.sceneName);
             npc newNpc;
-            newNpc.name = temp.name;
-            newNpc.position = temp.transform.position;
-            npcList.Add(newNpc);
+            int randomPos = Random.Range(0, spawnPositions.Count);
+            int genre = Random.Range(0, 2);
+            newNpc.name = GenerateName(genre);
+            newNpc.position = spawnPositions[randomPos].transform.position;
+            spawnPositions.RemoveAt(randomPos);
+            info.sceneNpcs.Add(newNpc);
         }
-        return npcList;
+
+        int questGiver = Random.Range(0, maxNpc);
+        info.QuestGiver = info.sceneNpcs[questGiver];
+        return info;
     }
 
     public void RefreshMapQuests()
@@ -219,9 +220,10 @@ public class SceneDirector : MonoBehaviour
         {
             GameObject temp = GameObject.Instantiate(npcPrefab, info.sceneNpcs[i].position, Quaternion.identity);
             temp.name = info.sceneNpcs[i].name;
-            temp.GetComponent<Npc>().setInitParams(info.sceneNpcs[i].name, info.sceneName);
+            temp.GetComponent<Npc>().setInitParams(info.sceneNpcs[i].name, info);
 
         }
+
     }
 
     public string GenerateName(int genre)

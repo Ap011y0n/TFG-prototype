@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class Npc : MonoBehaviour
 {
     public string npcName;
-    public string cityName;
+    public sceneInfo cityInfo;
     public TextMesh displayName;
     public GameObject canvas;
     public GameObject chatUI;
     public GameObject startChatting;
     public bool savePos = false;
     bool playerNear = false;
+    bool questOn = true;
     private void Awake()
     {
         canvas = GameObject.Find("Canvas");
@@ -69,9 +70,9 @@ public class Npc : MonoBehaviour
         }
     }
 
-   public void setInitParams(string name, string city)
+   public void setInitParams(string name, sceneInfo city)
     {
         npcName = name;
-        cityName = city;
+        cityInfo = city;
     }
 }

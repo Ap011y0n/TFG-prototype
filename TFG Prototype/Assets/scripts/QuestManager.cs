@@ -47,12 +47,13 @@ public class QuestManager : MonoBehaviour
 
     [HideInInspector]
     public List<GameObject> questPlaces;
-    private List<Quest> activeQuests;
+   // private List<Quest> activeQuests;
     private List<Quest> completedQuests;
     private List<QuestText> questTexts;
     private List<CreatureName> creatureNames;
     private List<PlaceName> placeNames;
 
+    public Dictionary<Quest, Npc> activeQuests;
 
     private static QuestManager _instance;
     public static QuestManager Instance { get { return _instance; } }
@@ -76,7 +77,7 @@ public class QuestManager : MonoBehaviour
 
     void Start()
     {
-        activeQuests = new List<Quest>();
+        activeQuests = new Dictionary<Quest, Npc>();
         completedQuests = new List<Quest>();
         questTexts = new List<QuestText>();
         creatureNames = new List<CreatureName>();
@@ -145,12 +146,13 @@ public class QuestManager : MonoBehaviour
 
         return newquest;
     }
-    public void AddQuest(Quest newquest)
+    public void AddQuest(Quest newquest, Npc giver)
     {
-        activeQuests.Add(newquest);
+        activeQuests.Add(newquest, giver);
     }
     public void EndQuest(Quest endedQuest)
     {
+        //activeQuests.Remove(endedQuest);
         activeQuests.Remove(endedQuest);
         completedQuests.Add(endedQuest);
     }

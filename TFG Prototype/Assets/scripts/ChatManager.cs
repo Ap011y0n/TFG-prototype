@@ -49,12 +49,27 @@ public class ChatManager : MonoBehaviour
     public string generateCityInfo()
     {
         string ret = "This is city, I'm glad you visited us";
-        ret = ret.Replace("city", focusedNPC.cityName);
+        ret = ret.Replace("city", focusedNPC.cityInfo.sceneName);
         return ret;
     }
     public string generateRumours()
     {
-        string ret = "I heard there's a monster in place";
+        string ret = "";
+        if (focusedNPC.cityInfo.QuestGiver.name == focusedNPC.name && !QuestManager.Instance.activeQuests.ContainsValue(focusedNPC))
+        {
+            QuestManager.Quest newQuest = QuestManager.Instance.GenerateQuest(focusedNPC.name);
+            QuestManager.Instance.AddQuest(newQuest, focusedNPC);
+
+            ret = "Are you willing to help me? Please, go and doquest";
+            ret = ret.Replace("doquest", newQuest.questDescription);
+
+        }
+        else
+        {
+            ret = "I heard that npc was in need of help to solve a problem";
+            ret = ret.Replace("npc", focusedNPC.cityInfo.QuestGiver.name);
+        }
+
         return ret;
     }
 }
