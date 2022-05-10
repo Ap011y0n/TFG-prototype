@@ -154,7 +154,7 @@ public class HexMapEditor : MonoBehaviour
 					unit.faction = 1;
 					unit.GetComponent<Renderer>().material.color = Color.red;
 					hexGrid.combatController.units.Add(unit);
-					unit.setStats(HexUnit.unitType.HumanEnemy, 40);
+					unit.setStats(HexUnit.unitType.SmallMonster, 40);
 					hexGrid.combatController.enemyUnits.Add(unit);
 
 				}

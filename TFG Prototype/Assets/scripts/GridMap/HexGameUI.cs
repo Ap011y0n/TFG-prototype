@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HexGameUI : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class HexGameUI : MonoBehaviour
 	public Text turnCount;
 	public GameObject turnPanel;
 
+	public GameObject endingPanel;
 	public void SetPlayMode()
 	{
 		grid.editMode = false;
@@ -39,8 +41,8 @@ public class HexGameUI : MonoBehaviour
 		//availableTroops = PlayerManager.Instance.troopCount;
 		availableTroops = 4;
 		deployedTroopCount.text = availableTroops.ToString();
-		combatController.Load();
-
+		//combatController.Load(SceneDirector.Instance.currentBattleMapInfo);
+		//combatController.Load();
 	}
 
 	void Update()
@@ -176,5 +178,17 @@ public class HexGameUI : MonoBehaviour
 	public void PassTurn()
     {
 		turnCount.text = combatController.getCurrentTurn().ToString();
+	}
+
+	public void ActivateEndUi()
+    {
+		endingPanel.SetActive(true);
+		turnButton.SetActive(false);
+
+	}
+	public void EndBattle()
+    {
+		SceneManager.LoadScene("WorldMap");
+
 	}
 }

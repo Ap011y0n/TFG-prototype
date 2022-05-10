@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public struct BattleMapInfo
 {
-    public string creatureName;
+    public HexUnit.unitType creature;
     public string mapName;
     public string place;
 }
@@ -13,7 +13,7 @@ public struct BattleMapInfo
 public enum enemyType
 {
     DRAGON,
-    TROLL,
+    PLEB,
 }
 public struct npc
 {

@@ -325,7 +325,7 @@ public class HexGrid : MonoBehaviour
         Refresh();
     }
 
-    public void SpawnEntities(HexEnemy unitPrefab)
+    public void SpawnEntities(HexEnemy unitPrefab, HexUnit.unitType type = HexUnit.unitType.SmallMonster, int unitNumber = 50)
     {
         for (int i = 0; i < cells.Length; i++)
         {
@@ -338,7 +338,7 @@ public class HexGrid : MonoBehaviour
                 unit.GetComponent<Renderer>().material.color = Color.red;
                 combatController.units.Add(unit);
                 combatController.enemyUnits.Add(unit);
-                unit.setStats(HexUnit.unitType.HumanEnemy, 40);
+                unit.setStats(type, unitNumber);
             }
             if (cells[i].TerrainTypeIndex == 2)
             {

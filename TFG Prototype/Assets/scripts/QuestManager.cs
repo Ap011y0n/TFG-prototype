@@ -38,6 +38,7 @@ public class QuestManager : MonoBehaviour
     {
         public List<Tag> tags;
         public string name;
+        public bool multiple;
     }
     struct PlaceName
     {
@@ -119,8 +120,12 @@ public class QuestManager : MonoBehaviour
 
         text.text = text.text.Replace("place", place.name);
         newquest.questDescription = text.text.Replace("monster", creature.name);
-       
-        info.creatureName = creature.name;
+
+        if (creature.multiple)
+            info.creature = HexUnit.unitType.SmallMonster;
+        else
+            info.creature = HexUnit.unitType.BigMonster;
+
         info.place = place.name;
 
         switch (newquest.type)
@@ -130,8 +135,10 @@ public class QuestManager : MonoBehaviour
                 break;
             case QuestType.HUNT:
                 newquest.questName = "Hunt the " + creature.name;
-                info.mapName = "test2";
-
+                if(creature.multiple)
+                    info.mapName = "MultiEntityMap";
+                else
+                    info.mapName = "SingleEntityMap";
                 break;
         }
 
@@ -175,13 +182,15 @@ public class QuestManager : MonoBehaviour
         newCreature.tags = new List<Tag>();
         newCreature.tags.Add(Tag.RIVER);
         newCreature.tags.Add(Tag.FOREST);
-        newCreature.name = "Kelpie";
+        newCreature.multiple = true;
+        newCreature.name = "Kelpies";
         creatureNames.Add(newCreature);
 
         newCreature = new CreatureName();
         newCreature.tags = new List<Tag>();
         newCreature.tags.Add(Tag.CAVE);
         newCreature.name = "Golem";
+        newCreature.multiple = false;
         creatureNames.Add(newCreature);
 
         newCreature = new CreatureName();
@@ -189,13 +198,15 @@ public class QuestManager : MonoBehaviour
         newCreature.tags.Add(Tag.MOUNTAINS);
         newCreature.tags.Add(Tag.CAVE);
         newCreature.tags.Add(Tag.PLAIN);
+        newCreature.multiple = false;
         newCreature.name = "Dragon";
         creatureNames.Add(newCreature);
 
         newCreature = new CreatureName();
         newCreature.tags = new List<Tag>();
         newCreature.tags.Add(Tag.FOREST);
-        newCreature.name = "Wolpertinger";
+        newCreature.name = "Wolpertingers";
+        newCreature.multiple = true;
         creatureNames.Add(newCreature);
 
         newCreature = new CreatureName();
@@ -203,20 +214,23 @@ public class QuestManager : MonoBehaviour
         newCreature.tags.Add(Tag.MOUNTAINS);
         newCreature.tags.Add(Tag.PLAIN);
         newCreature.name = "Manticore";
+        newCreature.multiple = false;
         creatureNames.Add(newCreature);
 
         newCreature = new CreatureName();
         newCreature.tags = new List<Tag>();
         newCreature.tags.Add(Tag.PLAIN);
         newCreature.tags.Add(Tag.FOREST);
-        newCreature.name = "Ghost";
+        newCreature.name = "Ghosts";
+        newCreature.multiple = true;
         creatureNames.Add(newCreature);
 
         newCreature = new CreatureName();
         newCreature.tags = new List<Tag>();
         newCreature.tags.Add(Tag.CAVE);
         newCreature.tags.Add(Tag.RIVER);
-        newCreature.name = "Troll";
+        newCreature.name = "Trolls";
+        newCreature.multiple = true;
         creatureNames.Add(newCreature);
 
         newCreature = new CreatureName();
@@ -224,6 +238,7 @@ public class QuestManager : MonoBehaviour
         newCreature.tags.Add(Tag.MOUNTAINS);
         newCreature.tags.Add(Tag.FOREST);
         newCreature.name = "Giant";
+        newCreature.multiple = false;
         creatureNames.Add(newCreature);
     }
     public void AddPlaces()

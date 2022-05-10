@@ -12,6 +12,7 @@ public class CombatController : MonoBehaviour
 	public List<HexUnit> playerUnits;
 	public List<HexEnemy> enemyUnits;
 	public HexGrid grid;
+	public HexGameUI UI;
 
 	public void ResetTurn()
     {
@@ -41,26 +42,33 @@ public class CombatController : MonoBehaviour
 
 	public void EnemyTurn()
     {
-		for (int i = 0; i < enemyUnits.Count; i++)
-		{
-			HexCell destination, enemy;
-			grid.SearchEnemy(enemyUnits[i].Location, 24, out destination, out enemy);
-			if(destination != null)
-            {
-				enemyUnits[i].path = grid.FindPath(enemyUnits[i].Location, destination, 24);
-				if(enemyUnits[i].path != null)
-                {
-					enemyUnits[i].Move();
-					enemyUnits[i].Attack(enemy.Unit);
-                }
-			}
+		if (enemyUnits.Count <= 0)
+        {
+			UI.ActivateEndUi();
 		}
+		else
+			for (int i = 0; i < enemyUnits.Count; i++)
+			{
+				HexCell destination, enemy;
+				grid.SearchEnemy(enemyUnits[i].Location, 24, out destination, out enemy);
+				if (destination != null)
+				{
+					enemyUnits[i].path = grid.FindPath(enemyUnits[i].Location, destination, 24);
+					if (enemyUnits[i].path != null)
+					{
+						enemyUnits[i].Move();
+						enemyUnits[i].Attack(enemy.Unit);
+					}
+				}
+			}
+
 		NextTurn();
 	}
 
     public void Load(BattleMapInfo mapInfo)
 	{
-		string path = Path.Combine(Application.dataPath + "/maps", mapInfo.mapName +".map");
+			string path = Path.Combine(Application.dataPath + "/maps", mapInfo.mapName +".map");
+
 
 		if (System.IO.File.Exists(path))
 		{
@@ -70,7 +78,17 @@ public class CombatController : MonoBehaviour
 			{
 				grid.Load(reader);
 			}
-			grid.SpawnEntities(enemyPrefab);
+			int num = 1;
+			switch(mapInfo.creature)
+            {
+				case HexUnit.unitType.BigMonster:
+					num = 1;
+					break;
+				case HexUnit.unitType.SmallMonster:
+					num = 40;
+					break;
+			}
+			grid.SpawnEntities(enemyPrefab, mapInfo.creature, num);
 		}
 		else
 		{
@@ -80,7 +98,8 @@ public class CombatController : MonoBehaviour
 
 	public void Load()
 	{
-		string path = Path.Combine(Application.dataPath + "/maps", "test2.map");
+		Debug.LogError("Warning, this load is only intended for debug purposes");
+		string path = Path.Combine(Application.dataPath + "/maps", "SingleEntityMap.map");
 
 		if (System.IO.File.Exists(path))
 		{
@@ -90,7 +109,7 @@ public class CombatController : MonoBehaviour
 			{
 				grid.Load(reader);
 			}
-			grid.SpawnEntities(enemyPrefab);
+			grid.SpawnEntities(enemyPrefab, HexUnit.unitType.BigMonster, 1);
 		}
 		else
 		{

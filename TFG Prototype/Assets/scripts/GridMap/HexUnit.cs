@@ -30,8 +30,8 @@ public class HexUnit : MonoBehaviour
 	public enum unitType
     {
 		HumanPlayer,
-		HumanEnemy,
-		Monster,
+		SmallMonster,
+		BigMonster,
     }
 	public HexCell Location
 	{
@@ -72,7 +72,7 @@ public class HexUnit : MonoBehaviour
 					totalHP = entityNum * entityHp;
 				}
 				break;
-			case unitType.HumanEnemy:
+			case unitType.SmallMonster:
                 {
 					meleAttack = 50;
 					meleDefense = 40;
@@ -83,12 +83,12 @@ public class HexUnit : MonoBehaviour
 					totalHP = entityNum * entityHp;
 				}
 				break;
-			case unitType.Monster:
+			case unitType.BigMonster:
                 {
-					meleAttack = 60;
-					meleDefense = 50;
-					weaponPen = 2;
-					armor = 3;
+					meleAttack = 90;
+					meleDefense = 80;
+					weaponPen = 3;
+					armor = 2;
 					weaponDamage = 20;
 					entityHp = 20;
 					totalHP = entityNum * entityHp;
@@ -104,7 +104,7 @@ public class HexUnit : MonoBehaviour
 		GameObject damageText = Instantiate(damageTextPrefab, unitCanvas.transform);
 		damageText.GetComponent<DamageText>().text.text = damage.ToString();
 		
-		if (totalHP < 0)
+		if (totalHP <= 0)
         {
 			entityNum = 0;
 			Destroy();
@@ -179,22 +179,16 @@ public class HexUnit : MonoBehaviour
 	}
 	public void Attack(HexUnit enemy, bool enemyCanRetaliate = true)
     {
-		//float meleAttack;
-		//float meleDefense;
-		//float weaponPen;
-		//float armor;
-		//float weaponDamage;
-		//int entityHp;
-		//int entityNum;
+
 		int totalDamage = 0;
 		for(int i = 0; i < entityNum; i++)
         {
 			int attack = Random.Range(0, meleAttack);
-			int def = Random.Range(0, meleDefense);
+			int def = Random.Range(0, enemy.meleDefense);
 			if(attack > def)
             {
 				int armorSave = Random.Range(1, 7);
-				if(armorSave < enemy.armor - weaponPen)
+				if(armorSave > enemy.armor - weaponPen)
                 {
 					totalDamage += weaponDamage;
                 }
