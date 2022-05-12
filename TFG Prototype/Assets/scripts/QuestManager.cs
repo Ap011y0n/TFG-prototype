@@ -25,7 +25,7 @@ public class QuestManager : MonoBehaviour
         public string questName;
         public string questDescription;
         public QuestType type;
-        BattleMapInfo mapInfo;
+        public System.Guid guid;
     }
 
     struct QuestText
@@ -143,9 +143,12 @@ public class QuestManager : MonoBehaviour
         }
 
         System.Guid guid = System.Guid.NewGuid();
+        newquest.guid = guid;
+        info.guid = guid;
+
         SceneDirector.Instance.currentBattleMaps.Add(guid, info);
         Scene scene = SceneManager.GetActiveScene();
-        if(scene.name == "WorldMap")
+        if (scene.name == "WorldMap")
         {
             SceneDirector.Instance.RefreshMapQuests();
         }
@@ -161,7 +164,21 @@ public class QuestManager : MonoBehaviour
     {
         //activeQuests.Remove(endedQuest);
         activeQuests.Remove(endedQuest);
+        SceneDirector.Instance.currentBattleMaps.Remove(endedQuest.guid);
         completedQuests.Add(endedQuest);
+    }
+    public Quest GetActiveQuest(System.Guid guid)
+    {
+        foreach (KeyValuePair<Quest, Npc> entry in activeQuests)
+        {
+            if(entry.Key.guid == guid)
+            {
+                return entry.Key;
+            }
+        }
+
+        Debug.LogError("No quest with guid " + guid.ToString());
+        return new Quest();
     }
     public void AddQuestTexts()
     {

@@ -77,7 +77,7 @@ public class HexUnit : MonoBehaviour
 					meleAttack = 50;
 					meleDefense = 40;
 					weaponPen = 0;
-					armor = 4;
+					armor = 5;
 					weaponDamage = 1;
 					entityHp = 1;
 					totalHP = entityNum * entityHp;
@@ -88,7 +88,7 @@ public class HexUnit : MonoBehaviour
 					meleAttack = 90;
 					meleDefense = 80;
 					weaponPen = 3;
-					armor = 2;
+					armor = 3;
 					weaponDamage = 20;
 					entityHp = 20;
 					totalHP = entityNum * entityHp;
@@ -188,7 +188,7 @@ public class HexUnit : MonoBehaviour
 			if(attack > def)
             {
 				int armorSave = Random.Range(1, 7);
-				if(armorSave > enemy.armor - weaponPen)
+				if(armorSave < enemy.armor + weaponPen)
                 {
 					totalDamage += weaponDamage;
                 }

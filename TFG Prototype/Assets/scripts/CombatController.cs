@@ -13,7 +13,7 @@ public class CombatController : MonoBehaviour
 	public List<HexEnemy> enemyUnits;
 	public HexGrid grid;
 	public HexGameUI UI;
-
+	public System.Guid guid;
 	public void ResetTurn()
     {
         turn = 0;
@@ -67,7 +67,8 @@ public class CombatController : MonoBehaviour
 
     public void Load(BattleMapInfo mapInfo)
 	{
-			string path = Path.Combine(Application.dataPath + "/maps", mapInfo.mapName +".map");
+		guid = mapInfo.guid;
+		string path = Path.Combine(Application.dataPath + "/maps", mapInfo.mapName + ".map");
 
 
 		if (System.IO.File.Exists(path))

@@ -19,6 +19,7 @@ public class HexGameUI : MonoBehaviour
 	public Text turnCount;
 	public GameObject turnPanel;
 
+
 	public GameObject endingPanel;
 	public void SetPlayMode()
 	{
@@ -188,6 +189,8 @@ public class HexGameUI : MonoBehaviour
 	}
 	public void EndBattle()
     {
+		QuestManager.Quest quest = QuestManager.Instance.GetActiveQuest(combatController.guid);
+		QuestManager.Instance.EndQuest(quest);
 		SceneManager.LoadScene("WorldMap");
 
 	}
