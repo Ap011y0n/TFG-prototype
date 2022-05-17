@@ -21,6 +21,7 @@ public class HexGameUI : MonoBehaviour
 
 
 	public GameObject endingPanel;
+
 	public void SetPlayMode()
 	{
 		grid.editMode = false;
@@ -40,7 +41,7 @@ public class HexGameUI : MonoBehaviour
 	private void Start()
     {
 		//availableTroops = PlayerManager.Instance.troopCount;
-		availableTroops = 4;
+		availableTroops = PlayerManager.Instance.getTroopCount();
 		deployedTroopCount.text = availableTroops.ToString();
 		//combatController.Load(SceneDirector.Instance.currentBattleMapInfo);
 		//combatController.Load();
@@ -191,7 +192,7 @@ public class HexGameUI : MonoBehaviour
     {
 		QuestManager.Quest quest = QuestManager.Instance.GetActiveQuest(combatController.guid);
 		QuestManager.Instance.EndQuest(quest);
+		PlayerManager.Instance.setTroops(combatController.playerUnits.Count);
 		SceneManager.LoadScene("WorldMap");
-
 	}
 }

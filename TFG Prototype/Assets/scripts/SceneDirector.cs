@@ -122,7 +122,7 @@ public class SceneDirector : MonoBehaviour
             if (scene.name == "WorldMap")
             {
                 LoadedScenes.Add(scene.name, newScene);
-
+                PlayerManager.Instance.RefreshUI();
             }
             else if (scene.name == "BattleMap")
             {
@@ -144,6 +144,7 @@ public class SceneDirector : MonoBehaviour
             if (scene.name == "WorldMap")
             {
                 playerRef.transform.position = playerPos;
+                PlayerManager.Instance.RefreshUI();
 
                 RefreshMapQuests();
 

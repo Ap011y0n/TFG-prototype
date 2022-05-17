@@ -26,6 +26,7 @@ public class QuestManager : MonoBehaviour
         public string questDescription;
         public QuestType type;
         public System.Guid guid;
+        public int reward;
     }
 
     struct QuestText
@@ -153,7 +154,7 @@ public class QuestManager : MonoBehaviour
             SceneDirector.Instance.RefreshMapQuests();
         }
 
-
+        newquest.reward = 100;
         return newquest;
     }
     public void AddQuest(Quest newquest, Npc giver)
@@ -162,10 +163,10 @@ public class QuestManager : MonoBehaviour
     }
     public void EndQuest(Quest endedQuest)
     {
-        //activeQuests.Remove(endedQuest);
         activeQuests.Remove(endedQuest);
         SceneDirector.Instance.currentBattleMaps.Remove(endedQuest.guid);
         completedQuests.Add(endedQuest);
+        PlayerManager.Instance.addGold(endedQuest.reward);
     }
     public Quest GetActiveQuest(System.Guid guid)
     {
