@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager _instance;
@@ -15,8 +14,7 @@ public class PlayerManager : MonoBehaviour
     private int gold = 1000;
 
     public GameObject canvas;
-    private TextMeshProUGUI goldUi;
-    private TextMeshProUGUI troopsUi;
+
 
     void Awake()
     {
@@ -38,7 +36,7 @@ public class PlayerManager : MonoBehaviour
         if (!canvas)
             canvas = GameObject.Find("Canvas");
         setGold(1000);
-        setTroops(10);
+        setTroops(4);
         RefreshUI();
     }
     private void Update()
@@ -55,6 +53,12 @@ public class PlayerManager : MonoBehaviour
         gold += value;
     }
 
+    public bool canBuy(int price)
+    {
+        if ((gold - price) > 0)
+            return true;
+        return false;
+    }
     public int getGold()
     {
         return gold;
@@ -62,15 +66,10 @@ public class PlayerManager : MonoBehaviour
     public void setTroops(int value)
     {
         troopCount = value;
-   
-      
     }
     public void addTroops(int value)
     {
         troopCount += value;
-     
-
-        
     }
 
     public int getTroopCount()
@@ -80,31 +79,15 @@ public class PlayerManager : MonoBehaviour
 
     public void RefreshUI()
     {
-        GameObject go = null;
-        Transform trans = null;
-            canvas = GameObject.Find("Canvas");
+        if(!canvas)
+        canvas = GameObject.Find("Canvas");
 
-        if (!goldUi)
+        InventoryUI inventory = canvas.GetComponent<InventoryUI>();
+        if(inventory)
         {
-            trans = canvas.transform.Find("GoldCount");
-            if (trans)
-                go = trans.gameObject;
-            if (go)
-                goldUi = go.GetComponent<TextMeshProUGUI>();
-        }
-        if (goldUi)
-            goldUi.text = gold.ToString();
+           inventory.SetGold(gold.ToString());
+           inventory.SetTroops(troopCount.ToString());
 
-        if (!troopsUi)
-        {
-            trans = canvas.transform.Find("TroopsCount");
-            if (trans)
-                go = trans.gameObject;
-            if (go)
-                troopsUi = go.GetComponent<TextMeshProUGUI>();
         }
-        if (troopsUi)
-            troopsUi.text = troopCount.ToString();
-
     }
 }

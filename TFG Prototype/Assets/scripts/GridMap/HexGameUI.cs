@@ -192,7 +192,7 @@ public class HexGameUI : MonoBehaviour
     {
 		QuestManager.Quest quest = QuestManager.Instance.GetActiveQuest(combatController.guid);
 		QuestManager.Instance.EndQuest(quest);
-		PlayerManager.Instance.setTroops(combatController.playerUnits.Count);
+		PlayerManager.Instance.setTroops(combatController.playerUnits.Count + availableTroops);
 		SceneManager.LoadScene("WorldMap");
 	}
 }
