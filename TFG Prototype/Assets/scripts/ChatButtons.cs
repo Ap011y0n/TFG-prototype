@@ -17,6 +17,10 @@ public class ChatButtons : MonoBehaviour
     {
 
     }
+    public void ResetAnswers()
+    {
+        answers.GetComponent<Text>().text = "";
+    }
 
     public void askPersonalInfo()
     {

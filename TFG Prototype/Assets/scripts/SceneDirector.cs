@@ -222,7 +222,8 @@ public class SceneDirector : MonoBehaviour
         {
             GameObject temp = GameObject.Instantiate(npcPrefab, info.sceneNpcs[i].position, Quaternion.identity);
             temp.name = info.sceneNpcs[i].name;
-            temp.GetComponent<Npc>().setInitParams(info.sceneNpcs[i].name, info);
+            Mood mood = (Mood)Random.Range(0, (int)Mood.maxMoods);
+            temp.GetComponent<Npc>().setInitParams(info.sceneNpcs[i].name, info, mood);
 
         }
 

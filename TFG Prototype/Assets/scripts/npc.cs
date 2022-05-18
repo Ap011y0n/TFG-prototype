@@ -3,17 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum Mood
+{
+   // fear,
+  //  anger,
+    joy,
+    sadness, 
+    disgust,
+    surprise,
+    maxMoods,
+}
+
 public class Npc : MonoBehaviour
 {
     public string npcName;
+    public string npcWork;
+
+    public bool introduced = false;
     public sceneInfo cityInfo;
     public TextMesh displayName;
     public GameObject canvas;
     public GameObject chatUI;
     public GameObject startChatting;
     public bool savePos = false;
+    public Mood npcMood;
     bool playerNear = false;
-    bool questOn = true;
+
+    string[] jobs = new string[]
+    {
+        "smith",
+        "merchant",
+        "book seller"
+    };
     private void Awake()
     {
         canvas = GameObject.Find("Canvas");
@@ -44,6 +65,7 @@ public class Npc : MonoBehaviour
             else
             {
                 Debug.Log("closed by" + npcName);
+                chatUI.GetComponent<ChatButtons>().ResetAnswers();
                 chatUI.SetActive(false);
                 startChatting.SetActive(true);
                 PlayerController.Instance.UIfocused = false;
@@ -70,9 +92,10 @@ public class Npc : MonoBehaviour
         }
     }
 
-   public void setInitParams(string name, sceneInfo city)
+   public void setInitParams(string name, sceneInfo city, Mood mood)
     {
         npcName = name;
         cityInfo = city;
+        npcMood = mood;
     }
 }

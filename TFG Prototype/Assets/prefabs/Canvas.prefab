@@ -2027,6 +2027,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1415656932237526720, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 840
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656932237526720, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 149
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
 --- !u!224 &8795040026172682413 stripped
