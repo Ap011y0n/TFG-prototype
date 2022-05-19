@@ -337,6 +337,7 @@
 "Assets/scripts/GridMap/HexUnit.cs"
 "Assets/scripts/InventoryUI.cs"
 "Assets/scripts/Npc.cs"
+"Assets/scripts/ObjectMarker.cs"
 "Assets/scripts/PlayerController.cs"
 "Assets/scripts/PlayerManager.cs"
 "Assets/scripts/QuestGiver.cs"

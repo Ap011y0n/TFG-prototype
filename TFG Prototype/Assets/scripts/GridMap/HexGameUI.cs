@@ -18,7 +18,7 @@ public class HexGameUI : MonoBehaviour
 	public GameObject turnButton;
 	public Text turnCount;
 	public GameObject turnPanel;
-
+	public int playerFaction = 0;
 
 	public GameObject endingPanel;
 
@@ -88,7 +88,7 @@ public class HexGameUI : MonoBehaviour
 	{
 
 		UpdateCurrentCell();
-		if (currentCell && currentCell.Unit)
+		if (currentCell && currentCell.Unit && currentCell.Unit.faction == playerFaction)
 		{
 			selectedUnit = currentCell.Unit;
 			grid.disableAllHighlights();
