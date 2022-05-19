@@ -340,6 +340,7 @@
 "Assets/scripts/ObjectMarker.cs"
 "Assets/scripts/PlayerController.cs"
 "Assets/scripts/PlayerManager.cs"
+"Assets/scripts/PoliticsGenerator.cs"
 "Assets/scripts/QuestGiver.cs"
 "Assets/scripts/QuestLoader.cs"
 "Assets/scripts/QuestLocations.cs"

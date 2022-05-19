@@ -53,7 +53,7 @@ public class ChatManager : MonoBehaviour
     public string generatePersonalInfo()
     {
         List<PersonalInfo> infoList;
-        if (focusedNPC.introduced)
+        if (focusedNPC.introducedHimself)
         {
             infoList = ReturnPersonalInfoList(ChatType.work, Mood.maxMoods);
         }
@@ -61,7 +61,7 @@ public class ChatManager : MonoBehaviour
         {
             infoList = ReturnPersonalInfoList(ChatType.intro, focusedNPC.npcMood);
 
-            focusedNPC.introduced = true;
+            focusedNPC.introducedHimself = true;
 
         }
 
@@ -72,10 +72,101 @@ public class ChatManager : MonoBehaviour
 
         return ret;
     }
+    public string returnCompicityText(int value)
+    {
+        string ret = "";
+
+        if(value == 0)
+        {
+            ret = "I'm so happy with this city views on our replace1";
+        }
+        else if (value > 0 && value < 2)
+        {
+            ret = "i'm ok with this city views on our replace1, but we could use more replace2";
+        }
+        else
+        {
+            ret = "I hate this city views on replace1, we shoud use more replace2";
+        }
+        return ret;
+    }
     public string generateCityInfo()
     {
-        string ret = "This is city, I'm glad you visited us";
-        ret = ret.Replace("city", focusedNPC.cityInfo.sceneName);
+        string ret = "";
+        if (focusedNPC.introducedCity)
+        {
+            int rand = Random.Range(0, 8);
+            switch (rand)
+            {
+                case 0:
+                    {
+                        ret = returnCompicityText(PoliticsGenerator.checkLeadership(focusedNPC.profile.leadership, focusedNPC.cityInfo.profile.leadership));
+                        ret = ret.Replace("replace1", returnLeadershipView(focusedNPC.cityInfo.profile.leadership));
+                        ret = ret.Replace("replace2", returnLeadershipView(focusedNPC.profile.leadership));
+                    }
+                    break;
+                case 1:
+                    {
+                        ret = returnCompicityText(PoliticsGenerator.checkReligion(focusedNPC.profile.religion, focusedNPC.cityInfo.profile.religion));
+                        ret = ret.Replace("replace1", returnReligiousView(focusedNPC.cityInfo.profile.religion));
+                        ret = ret.Replace("replace2", returnReligiousView(focusedNPC.profile.religion));
+                    }
+                    break;
+                case 2:
+                    {
+                        ret = returnCompicityText(PoliticsGenerator.checkForeign(focusedNPC.profile.foreign, focusedNPC.cityInfo.profile.foreign));
+                        ret = ret.Replace("replace1", returnForeignView(focusedNPC.cityInfo.profile.foreign));
+                        ret = ret.Replace("replace2", returnForeignView(focusedNPC.profile.foreign));
+                    }
+                    break;
+                case 3:
+                    {
+                        ret = returnCompicityText(PoliticsGenerator.checkEconomy(focusedNPC.profile.economy, focusedNPC.cityInfo.profile.economy));
+                        ret = ret.Replace("replace1", returnEconomyView(focusedNPC.cityInfo.profile.economy));
+                        ret = ret.Replace("replace2", returnEconomyView(focusedNPC.profile.economy));
+                    }
+                    break;
+                case 4:
+                    {
+                        ret = returnCompicityText(PoliticsGenerator.checkMilitary(focusedNPC.profile.military, focusedNPC.cityInfo.profile.military));
+                        ret = ret.Replace("replace1", returnMilitaryView(focusedNPC.cityInfo.profile.military));
+                        ret = ret.Replace("replace2", returnMilitaryView(focusedNPC.profile.military));
+                    }
+                    break;
+                case 5:
+                    {
+                        ret = returnCompicityText(PoliticsGenerator.checkCulture(focusedNPC.profile.cultural, focusedNPC.cityInfo.profile.cultural));
+                        ret = ret.Replace("replace1", returnCulturalView(focusedNPC.cityInfo.profile.cultural));
+                        ret = ret.Replace("replace2", returnCulturalView(focusedNPC.profile.cultural));
+                    }
+                    break;
+                case 6:
+                    {
+                        ret = returnCompicityText(PoliticsGenerator.checkIntellectual(focusedNPC.profile.intellectual, focusedNPC.cityInfo.profile.intellectual));
+                        ret = ret.Replace("replace1", returnIntellectualView(focusedNPC.cityInfo.profile.intellectual));
+                        ret = ret.Replace("replace2", returnIntellectualView(focusedNPC.profile.intellectual));
+                    }
+                    break;
+                case 7:
+                    {
+                        ret = returnCompicityText(PoliticsGenerator.checkJustice(focusedNPC.profile.justice, focusedNPC.cityInfo.profile.justice));
+                        ret = ret.Replace("replace1", returnJudicialView(focusedNPC.cityInfo.profile.justice));
+                        ret = ret.Replace("replace2", returnJudicialView(focusedNPC.profile.justice));
+
+                    }
+                    break;
+            }
+          
+        }
+        else
+        {
+            ret = "This is city, I'm glad you visited us";
+            ret = ret.Replace("city", focusedNPC.cityInfo.sceneName);
+
+            focusedNPC.introducedCity = true;
+
+        }
+
         return ret;
     }
     public string generateRumours()
@@ -124,7 +215,167 @@ public class ChatManager : MonoBehaviour
         newInfo.type = type;
         return newInfo;
     }
+    private string returnLeadershipView(Leadership leadership)
+    {
+        string ret = "";
+        switch (leadership)
+        {
+            case Leadership.Representation:
+                ret = "democratic representation";
+                break;
+            case Leadership.Monarchy:
+                ret = "monarchical rule";
+                break;
+            case Leadership.Theocracy:
+                ret = "religious representation in the government";
+                break;
+            case Leadership.Statocracy:
+                ret = "military representation in the government";
+                break;
+        }
+        return ret;
+    }
+    private string returnReligiousView(Religion religion)
+    {
+        string ret = "";
+        switch (religion)
+        {
+            case Religion.Atheism:
+                ret = "state atheism";
+                break;
+            case Religion.CollectiveFaith:
+                ret = "participation from everyone in our religion";
+                break;
+            case Religion.OrganizedReligion:
+                ret = "institutional religion";
+                break;
+            case Religion.Zealotry:
+                ret = "religious fervour";
+                break;
+        }
+        return ret;
+    }
+    private string returnForeignView(Foreign foreign)
+    {
+        string ret = "";
+        switch (foreign)
+        {
+            case Foreign.Isolationist:
+                ret = "isolationism";
+                break;
+            case Foreign.Interventionist:
+                ret = "attention to foreign affairs";
+                break;
+            case Foreign.Internationalist:
+                ret = "poilitical interference";
+                break;
+            case Foreign.Imperialist:
+                ret = "military expansionism";
+                break;
+        }
+        return ret;
+    }
+    private string returnEconomyView(Economy economy)
+    {
+        string ret = "";
+        switch (economy)
+        {
+            case Economy.Protectionism:
+                ret = "intervention in the prices";
+                break;
+            case Economy.Mercantilism:
+                ret = "taxes to foreign merchants";
+                break;
+            case Economy.FreeTrade:
+                ret = "market autoregulations";
+                break;
+            case Economy.Slavery:
+                ret = "slavery";
+                break;
+        }
+        return ret;
+    }
+    private string returnMilitaryView(Military military)
+    {
+        string ret = "";
+        switch (military)
+        {
+            case Military.StandingArmy:
+                ret = "nation's standing army";
+                break;
+            case Military.Conscription:
+                ret = "conscription laws";
+                break;
+            case Military.Militia:
+                ret = "militias";
+                break;
+            case Military.Pacifism:
+                ret = "nation's disarment";
+                break;
+        }
+        return ret;
+    }
+    private string returnCulturalView(Cultural culture)
+    {
+        string ret = "";
+        switch (culture)
+        {
+            case Cultural.Aesthetics:
+                ret = "aesthetical values";
+                break;
+            case Cultural.Contemplation:
+                ret = "philosophical contemplation";
+                break;
+            case Cultural.Populism:
+                ret = "hero worshipping";
+                break;
+            case Cultural.Hegemony:
+                ret = "cultural pride";
+                break;
+        }
+        return ret;
+    }
 
+    private string returnIntellectualView(Intellectual intellectual)
+    {
+        string ret = "";
+        switch (intellectual)
+        {
+            case Intellectual.Antiquarian:
+                ret = "focusing on historical events";
+                break;
+            case Intellectual.Literary:
+                ret = "focusing on literacy";
+                break;
+            case Intellectual.Scholarly:
+                ret = "focusing on natural laws";
+                break;
+            case Intellectual.Mechanical:
+                ret = "focusing on engineering";
+                break;
+        }
+        return ret;
+    }
+    private string returnJudicialView(Justice justice)
+    {
+        string ret = "";
+        switch (justice)
+        {
+            case Justice.Frontier:
+                ret = "survival of the fittest";
+                break;
+            case Justice.Vigilantism:
+                ret = "focusing on bounty hunters";
+                break;
+            case Justice.Penitentiary:
+                ret = "focusing on our prisons";
+                break;
+            case Justice.Ordeal:
+                ret = "tortures and executions";
+                break;
+        }
+        return ret;
+    }
     private List<PersonalInfo> FillPersonalInfoList()
     {
         List<PersonalInfo> temp = new List<PersonalInfo>();

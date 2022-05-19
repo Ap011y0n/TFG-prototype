@@ -19,15 +19,17 @@ public class Npc : MonoBehaviour
     public string npcName;
     public string npcWork;
 
-    public bool introduced = false;
+    public bool introducedHimself = false;
+    public bool introducedCity = false;
     public sceneInfo cityInfo;
     public TextMesh displayName;
     public GameObject canvas;
     public GameObject chatUI;
     public GameObject startChatting;
     public bool savePos = false;
-    public Mood npcMood;
     bool playerNear = false;
+    public Mood npcMood;
+    public PoliticProfile profile;
 
     string[] jobs = new string[]
     {
@@ -92,10 +94,11 @@ public class Npc : MonoBehaviour
         }
     }
 
-   public void setInitParams(string name, sceneInfo city, Mood mood)
+   public void setInitParams(string name, sceneInfo city, Mood mood, PoliticProfile politics)
     {
         npcName = name;
         cityInfo = city;
         npcMood = mood;
+        profile = politics;
     }
 }

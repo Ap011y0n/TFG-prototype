@@ -20,12 +20,15 @@ public struct npc
 {
     public string name;
     public Vector3 position;
+    public Mood mood;
+    public PoliticProfile profile;
 }
 public struct sceneInfo
 {
     public string sceneName;
     public List<npc> sceneNpcs;
     public npc QuestGiver;
+    public PoliticProfile profile;
 }
 public class SceneDirector : MonoBehaviour
 {
@@ -118,6 +121,7 @@ public class SceneDirector : MonoBehaviour
             sceneInfo newScene = new sceneInfo();
             newScene.sceneName = scene.name;
             newScene.sceneNpcs = new List<npc>();
+            newScene.profile = PoliticsGenerator.createProfile();
 
             if (scene.name == "WorldMap")
             {
@@ -187,6 +191,8 @@ public class SceneDirector : MonoBehaviour
             int genre = Random.Range(0, 2);
             newNpc.name = GenerateName(genre);
             newNpc.position = spawnPositions[randomPos].transform.position;
+            newNpc.mood = (Mood)Random.Range(0, (int)Mood.maxMoods);
+            newNpc.profile = PoliticsGenerator.createProfile();
             spawnPositions.RemoveAt(randomPos);
             info.sceneNpcs.Add(newNpc);
         }
@@ -222,9 +228,8 @@ public class SceneDirector : MonoBehaviour
         {
             GameObject temp = GameObject.Instantiate(npcPrefab, info.sceneNpcs[i].position, Quaternion.identity);
             temp.name = info.sceneNpcs[i].name;
-            Mood mood = (Mood)Random.Range(0, (int)Mood.maxMoods);
-            temp.GetComponent<Npc>().setInitParams(info.sceneNpcs[i].name, info, mood);
-
+            Mood mood = info.sceneNpcs[i].mood;
+            temp.GetComponent<Npc>().setInitParams(info.sceneNpcs[i].name, info, mood, info.sceneNpcs[i].profile);
         }
 
     }
