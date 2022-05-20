@@ -96,7 +96,7 @@ public class HexGameUI : MonoBehaviour
 			if (selectedUnit.movement)
             {
 				selectedUnit.Location.EnableHighlight(Color.blue);
-				grid.FindDistancesTo(selectedUnit.Location, 24);
+				grid.FindDistancesTo(selectedUnit.Location, 19);
 
 			}
 			else
@@ -144,15 +144,15 @@ public class HexGameUI : MonoBehaviour
 		{
 			if(IsValidDestination(currentCell))
             {
-				grid.FindDistancesTo(selectedUnit.Location, 24);
-				selectedUnit.path = grid.FindPath(selectedUnit.Location, currentCell, 24);
+				grid.FindDistancesTo(selectedUnit.Location, 19);
+				selectedUnit.path = grid.FindPath(selectedUnit.Location, currentCell, 19);
 				if (selectedUnit.path != null)
 					grid.PaintPath(selectedUnit.path);
 			
 			}
 			else
 			{
-				grid.FindDistancesTo(selectedUnit.Location, 24);
+				grid.FindDistancesTo(selectedUnit.Location, 19);
 				selectedUnit.Location.EnableHighlight(Color.blue);
 				if (selectedUnit.path != null)
 				selectedUnit.path = null;

@@ -96,7 +96,7 @@ public class HexMapEditor : MonoBehaviour
 				if (searchFromCell && searchFromCell != currentCell)
 				{
 					hexGrid.disableAllHighlights();
-					hexGrid.FindPath(searchFromCell, currentCell, 24);
+					hexGrid.FindPath(searchFromCell, currentCell, 19);
 				}
 
 			}
@@ -112,7 +112,7 @@ public class HexMapEditor : MonoBehaviour
 			if (Physics.Raycast(inputRay, out hit))
 			{
 				currentCell = hexGrid.GetCell(hit.point);
-				hexGrid.FindDistancesTo(currentCell, 24);
+				hexGrid.FindDistancesTo(currentCell, 19);
 			}
 		}
 	}
