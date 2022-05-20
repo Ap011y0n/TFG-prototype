@@ -55,21 +55,29 @@ public class ChatManager : MonoBehaviour
     public string generatePersonalInfo()
     {
         List<PersonalInfo> infoList;
-        if (focusedNPC.introducedHimself)
+        string ret = "";
+        if (focusedNPC.job != "" )
+        {
+            ret = focusedNPC.job;
+        }
+        else if(focusedNPC.introducedHimself)
         {
             infoList = ReturnPersonalInfoList(ChatType.work, Mood.maxMoods);
+            int randomPos = Random.Range(0, infoList.Count);
+            ret = infoList[randomPos].text;
+            ret = ret.Replace("myname", focusedNPC.npcName);
+            focusedNPC.job = ret;
+
         }
         else
         {
             infoList = ReturnPersonalInfoList(ChatType.intro, focusedNPC.npcMood);
-
             focusedNPC.introducedHimself = true;
+            int randomPos = Random.Range(0, infoList.Count);
+            ret = infoList[randomPos].text;
+            ret = ret.Replace("myname", focusedNPC.npcName);
         }
 
-
-        int randomPos = Random.Range(0, infoList.Count);
-        string ret = infoList[randomPos].text;
-        ret = ret.Replace("myname", focusedNPC.npcName);
 
         return ret;
     }
@@ -79,15 +87,15 @@ public class ChatManager : MonoBehaviour
 
         if(value == 0)
         {
-            ret = "I'm so happy with this city views on our replace1";
+            ret = "I'm so happy with this city policies on our replace1";
         }
         else if (value > 0 && value < 2)
         {
-            ret = "i'm ok with this city views on our replace1, but we could use more replace2";
+            ret = "i'm ok with this city policies on our replace1, but we could have more replace2";
         }
         else
         {
-            ret = "I hate this city views on replace1, we shoud use more replace2";
+            ret = "I hate this city policies on replace1, we should have more replace2";
         }
         return ret;
     }
@@ -173,13 +181,28 @@ public class ChatManager : MonoBehaviour
     public string generateRumours()
     {
         string ret = "";
-        if (focusedNPC.cityInfo.QuestGiver.name == focusedNPC.name && !QuestManager.Instance.activeQuests.ContainsValue(focusedNPC))
+        if (focusedNPC.cityInfo.QuestGiver.name == focusedNPC.name)
         {
-            QuestManager.Quest newQuest = QuestManager.Instance.GenerateQuest(focusedNPC.name);
-            QuestManager.Instance.AddQuest(newQuest, focusedNPC);
+            if(!QuestManager.Instance.activeQuests.ContainsValue(focusedNPC))
+            {
+                QuestManager.Quest newQuest = QuestManager.Instance.GenerateQuest(focusedNPC.name);
+                QuestManager.Instance.AddQuest(newQuest, focusedNPC);
 
-            ret = "Are you willing to help me? Please, go and doquest";
-            ret = ret.Replace("doquest", newQuest.questDescription);
+                ret = "Are you willing to help me? Please, go and doquest";
+                ret = ret.Replace("doquest", newQuest.questDescription);
+            }
+            else
+            {
+                ret = "Are you willing to help me? Please, go and doquest";
+
+                foreach (KeyValuePair<QuestManager.Quest, Npc> entry in QuestManager.Instance.activeQuests)
+                {
+                    if(entry.Value == focusedNPC)
+                    ret = ret.Replace("doquest", entry.Key.questDescription);
+
+
+                }
+            }
 
         }
         else

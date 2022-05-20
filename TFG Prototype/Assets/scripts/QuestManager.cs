@@ -190,7 +190,7 @@ public class QuestManager : MonoBehaviour
         {
             newText.tags.Add((Tag)i);
         }
-        newText.text = "Kill the monster at the place";
+        newText.text = "Kill the monster at place";
         questTexts.Add(newText);
     }
 

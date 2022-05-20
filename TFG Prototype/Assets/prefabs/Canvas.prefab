@@ -1935,6 +1935,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8795040026843200090}
     m_Modifications:
+    - target: {fileID: 1415656931578262333, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656931578262333, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656931578262333, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1415656932212457926, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2034,6 +2046,34 @@ PrefabInstance:
     - target: {fileID: 1415656932237526720, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 149
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656932237526750, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656932237526750, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656932237526750, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656932575882292, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.a
+      value: 0.9647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656932575882292, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656932575882292, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.g
+      value: 0.27058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415656932575882292, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5647059
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bedbae7af1b7be448d4628730a9ed98, type: 3}

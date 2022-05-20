@@ -61,6 +61,7 @@ public class CombatController : MonoBehaviour
 					}
 				}
 			}
+		grid.disableAllHighlights();
 
 		NextTurn();
 	}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum Mood
 {
@@ -22,7 +23,7 @@ public class Npc : MonoBehaviour
     public bool introducedHimself = false;
     public bool introducedCity = false;
     public sceneInfo cityInfo;
-    public TextMesh displayName;
+    public TextMeshPro displayName;
     public GameObject canvas;
     public GameObject chatUI;
     public GameObject startChatting;
@@ -30,7 +31,7 @@ public class Npc : MonoBehaviour
     bool playerNear = false;
     public Mood npcMood;
     public PoliticProfile profile;
-
+    public string job = "";
     string[] jobs = new string[]
     {
         "smith",
@@ -46,7 +47,6 @@ public class Npc : MonoBehaviour
     }
     void Start()
     {
-        displayName = displayName.GetComponent<TextMesh>();
         displayName.text = gameObject.name;
     }
 

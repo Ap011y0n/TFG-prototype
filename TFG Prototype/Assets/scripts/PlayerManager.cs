@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!canvas)
             canvas = GameObject.Find("Canvas");
-        setGold(1000);
+        setGold(200);
         setTroops(4);
         RefreshUI();
     }
