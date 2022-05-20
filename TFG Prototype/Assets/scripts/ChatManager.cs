@@ -31,6 +31,8 @@ public class ChatManager : MonoBehaviour
 
     [HideInInspector]
     public Npc focusedNPC;
+    public GameObject npcQuestMarker = null;
+    public GameObject markerPrefab;
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -62,7 +64,6 @@ public class ChatManager : MonoBehaviour
             infoList = ReturnPersonalInfoList(ChatType.intro, focusedNPC.npcMood);
 
             focusedNPC.introducedHimself = true;
-
         }
 
 
@@ -185,6 +186,8 @@ public class ChatManager : MonoBehaviour
         {
             ret = "I heard that npc was in need of help to solve a problem";
             ret = ret.Replace("npc", focusedNPC.cityInfo.QuestGiver.name);
+            if (!npcQuestMarker)
+                npcQuestMarker = Instantiate(markerPrefab, focusedNPC.cityInfo.QuestGiver.position, Quaternion.identity);
         }
 
         return ret;
