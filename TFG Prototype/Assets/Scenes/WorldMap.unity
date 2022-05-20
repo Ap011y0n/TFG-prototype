@@ -13065,7 +13065,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 731770225, guid: 6cba455237bc5ff4e943671ceefefd98, type: 3}
       propertyPath: UIfocused
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7268431202518894945, guid: 6cba455237bc5ff4e943671ceefefd98, type: 3}
       propertyPath: m_Name

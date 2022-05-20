@@ -127,6 +127,7 @@ public class SceneDirector : MonoBehaviour
             {
                 LoadedScenes.Add(scene.name, newScene);
                 PlayerManager.Instance.RefreshUI();
+                playerRef.GetComponent<PlayerController>().UIFocused();
             }
             else if (scene.name == "BattleMap")
             {
@@ -149,8 +150,9 @@ public class SceneDirector : MonoBehaviour
             {
                 playerRef.transform.position = playerPos;
                 PlayerManager.Instance.RefreshUI();
-
+                GameObject.Find("Intro").SetActive(false);
                 RefreshMapQuests();
+               
 
             }
             else if (scene.name == "BattleMap")

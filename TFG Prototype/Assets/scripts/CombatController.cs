@@ -50,10 +50,10 @@ public class CombatController : MonoBehaviour
 			for (int i = 0; i < enemyUnits.Count; i++)
 			{
 				HexCell destination, enemy;
-				grid.SearchEnemy(enemyUnits[i].Location, 24, out destination, out enemy);
+				grid.SearchEnemy(enemyUnits[i].Location, 19, out destination, out enemy);
 				if (destination != null)
 				{
-					enemyUnits[i].path = grid.FindPath(enemyUnits[i].Location, destination, 24);
+					enemyUnits[i].path = grid.FindPath(enemyUnits[i].Location, destination, 19);
 					if (enemyUnits[i].path != null)
 					{
 						enemyUnits[i].Move();
