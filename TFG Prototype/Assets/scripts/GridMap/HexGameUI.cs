@@ -21,6 +21,7 @@ public class HexGameUI : MonoBehaviour
 	public int playerFaction = 0;
 
 	public GameObject endingPanel;
+	public GameObject menu;
 
 	public void SetPlayMode()
 	{
@@ -49,6 +50,11 @@ public class HexGameUI : MonoBehaviour
 
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+
+			menu.SetActive(!menu.activeSelf);
+		}
 		if (!grid.editMode && !EventSystem.current.IsPointerOverGameObject())
 		{
 			if (Input.GetMouseButtonDown(0))

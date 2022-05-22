@@ -261,8 +261,6 @@ public class SceneDirector : MonoBehaviour
     }
     public void loadScene(GameObject sceneChanger)
     {
-        if(sceneChanger.name != "WorldMap")
-        playerPos = sceneChanger.transform.position;
 
         SceneManager.LoadScene(sceneChanger.name);
 
@@ -271,4 +269,6 @@ public class SceneDirector : MonoBehaviour
     {
      //   Debug.Log(playerPos);
     }
+
+  
 }

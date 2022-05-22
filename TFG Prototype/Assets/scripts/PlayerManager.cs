@@ -55,7 +55,7 @@ public class PlayerManager : MonoBehaviour
 
     public bool canBuy(int price)
     {
-        if ((gold - price) > 0)
+        if ((gold - price) >= 0)
             return true;
         return false;
     }

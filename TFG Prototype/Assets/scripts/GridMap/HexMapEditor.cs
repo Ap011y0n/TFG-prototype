@@ -224,7 +224,7 @@ public class HexMapEditor : MonoBehaviour
 
 	public void Save()
 	{
-		string path = Path.Combine(Application.dataPath + "/maps", editPanel.transform.Find("Map Name").GetComponent<InputField>().text + ".map");
+		string path = Path.Combine(Application.dataPath + "/maps", editPanel.transform.Find("Map Name").GetComponent<InputField>().text + ".txt");
 		using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
 		{
 			hexGrid.Save(writer);

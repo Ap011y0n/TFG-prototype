@@ -40,4 +40,9 @@ public class PlayerController : MonoBehaviour
     {
         UIfocused = !UIfocused;
     }
+    public void goToPos(Vector3 pos)
+    {
+        agent.destination = pos;
+
+    }
 }

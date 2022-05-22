@@ -10,7 +10,8 @@ public class InventoryUI : MonoBehaviour
     public TextMeshProUGUI storeGold;
     public TextMeshProUGUI storeTroops;
     public GameObject inventory;
-    public GameObject store;
+    public GameObject store; 
+    public GameObject menu;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,11 @@ public class InventoryUI : MonoBehaviour
             storeTroops.text = troopsUi.text;
             storeGold.text = goldUi.text;
             store.SetActive(!store.activeSelf);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+
+            menu.SetActive(!menu.activeSelf);
         }
     }
 

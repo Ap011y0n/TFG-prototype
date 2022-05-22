@@ -91,7 +91,7 @@ public class ChatManager : MonoBehaviour
         }
         else if (value > 0 && value < 2)
         {
-            ret = "i'm ok with this city policies on our replace1, but we could have more replace2";
+            ret = "I'm ok with this city policies on our replace1, but we could focus more on replace2";
         }
         else
         {
@@ -307,7 +307,7 @@ public class ChatManager : MonoBehaviour
         switch (economy)
         {
             case Economy.Protectionism:
-                ret = "intervention in the prices";
+                ret = "economic interventionism";
                 break;
             case Economy.Mercantilism:
                 ret = "taxes to foreign merchants";
@@ -316,7 +316,7 @@ public class ChatManager : MonoBehaviour
                 ret = "market autoregulations";
                 break;
             case Economy.Slavery:
-                ret = "slavery";
+                ret = "slave trading";
                 break;
         }
         return ret;
@@ -368,16 +368,16 @@ public class ChatManager : MonoBehaviour
         switch (intellectual)
         {
             case Intellectual.Antiquarian:
-                ret = "focusing on historical events";
+                ret = "historical events";
                 break;
             case Intellectual.Literary:
-                ret = "focusing on literacy";
+                ret = "literacy";
                 break;
             case Intellectual.Scholarly:
-                ret = "focusing on natural laws";
+                ret = "natural laws";
                 break;
             case Intellectual.Mechanical:
-                ret = "focusing on engineering";
+                ret = "engineering";
                 break;
         }
         return ret;
@@ -391,10 +391,10 @@ public class ChatManager : MonoBehaviour
                 ret = "survival of the fittest";
                 break;
             case Justice.Vigilantism:
-                ret = "focusing on bounty hunters";
+                ret = "bounty hunters";
                 break;
             case Justice.Penitentiary:
-                ret = "focusing on our prisons";
+                ret = "penitentiary centers";
                 break;
             case Justice.Ordeal:
                 ret = "tortures and executions";

@@ -311,6 +311,7 @@
 "Assets/scripts/QuestLoader.cs"
 "Assets/scripts/QuestLocations.cs"
 "Assets/scripts/QuestManager.cs"
+"Assets/scripts/QuitScript.cs"
 "Assets/scripts/SceneDirector.cs"
 -langversion:8.0
 

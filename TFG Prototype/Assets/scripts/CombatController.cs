@@ -69,17 +69,21 @@ public class CombatController : MonoBehaviour
     public void Load(BattleMapInfo mapInfo)
 	{
 		guid = mapInfo.guid;
-		string path = Path.Combine(Application.dataPath + "/maps", mapInfo.mapName + ".map");
+		string path = Path.Combine(Application.dataPath + "/Resources", mapInfo.mapName + ".map");
 
 
-		if (System.IO.File.Exists(path))
-		{
+		//if (System.IO.File.Exists(path))
+		//{
 			Debug.Log("Loading file at: " + path);
 			grid.DeleteEntities();
-			using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
-			{
+			TextAsset data = Resources.Load(mapInfo.mapName) as TextAsset;
+			Stream s = new MemoryStream(data.bytes);
+			BinaryReader reader = new BinaryReader(s);
+
+			//using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+			
 				grid.Load(reader);
-			}
+			
 			int num = 1;
 			switch(mapInfo.creature)
             {
@@ -91,11 +95,11 @@ public class CombatController : MonoBehaviour
 					break;
 			}
 			grid.SpawnEntities(enemyPrefab, mapInfo.creature, num);
-		}
-		else
-		{
-			Debug.LogWarning("File at: " + path + " does not exist");
-		}
+		//}
+		//else
+		//{
+		//	Debug.LogWarning("File at: " + path + " does not exist");
+		//}
 	}
 
 	public void Load()

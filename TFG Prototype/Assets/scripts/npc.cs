@@ -58,6 +58,7 @@ public class Npc : MonoBehaviour
             if (startChatting.activeSelf)
             {
                 Debug.Log("Open by " + npcName);
+                PlayerController.Instance.goToPos(transform.position);
                 chatUI.SetActive(true);
                 chatUI.GetComponentInChildren<Text>().text = npcName;
                 ChatManager.Instance.focusedNPC = this;
