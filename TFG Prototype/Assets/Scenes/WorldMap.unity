@@ -752,7 +752,7 @@ MonoBehaviour:
     Each quest will award
     you some gold.
 
-    Yoiu can press "I" to check your gold and available troops.
+    You can press "I" to check your gold and available troops.
 
     While
     in a town, press "P" to open a shop and be able to buy more troops.
@@ -4600,7 +4600,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A group of monsters have appeared nearby, You don't have much time to think,
+  m_text: A group of monsters have appeared nearby. You don't have much time to think,
     will you face them in battle or will you flee leaving some inventory behind?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13151,6 +13151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPanel: {fileID: 1158623356}
   uiText: {fileID: 745585869}
+  player: {fileID: 1060823694}
 --- !u!4 &1960352966
 Transform:
   m_ObjectHideFlags: 0
@@ -14812,6 +14813,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 731770225, guid: 6cba455237bc5ff4e943671ceefefd98, type: 3}
+      propertyPath: director
+      value: 
+      objectReference: {fileID: 1960352965}
     - target: {fileID: 731770225, guid: 6cba455237bc5ff4e943671ceefefd98, type: 3}
       propertyPath: UIfocused
       value: 0

@@ -148,11 +148,7 @@ public class QuestManager : MonoBehaviour
         info.guid = guid;
 
         SceneDirector.Instance.currentBattleMaps.Add(guid, info);
-        Scene scene = SceneManager.GetActiveScene();
-        if (scene.name == "WorldMap")
-        {
-            SceneDirector.Instance.RefreshMapQuests();
-        }
+      
 
         newquest.reward = 100;
         return newquest;
@@ -167,6 +163,11 @@ public class QuestManager : MonoBehaviour
         SceneDirector.Instance.currentBattleMaps.Remove(endedQuest.guid);
         completedQuests.Add(endedQuest);
         PlayerManager.Instance.addGold(endedQuest.reward);
+    }
+    public void AbortQuest(Quest endedQuest)
+    {
+        activeQuests.Remove(endedQuest);
+        SceneDirector.Instance.currentBattleMaps.Remove(endedQuest.guid);
     }
     public Quest GetActiveQuest(System.Guid guid)
     {
