@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameDirector : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class GameDirector : MonoBehaviour
     private int second = 1;
     int progressBar = 0;
     public GameObject uiPanel;
-    public GameObject uiText;
+    public TextMeshProUGUI uiText;
     bool eventLaunched = false;
     public PlayerController player;
     QuestManager.Quest currentQuest;
+    public GameObject tooltip1;
+    public GameObject tooltip2;
+    public string questText;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +33,7 @@ public class GameDirector : MonoBehaviour
         {
             timer = 0;
             progressBar++;
-            int res = Random.Range(0, 20);
+            int res = Random.Range(0, 2);
             if(res < progressBar)
             {
                 progressBar = 0;
@@ -44,8 +48,10 @@ public class GameDirector : MonoBehaviour
         uiPanel.SetActive(true);
         eventLaunched = true;
         player.UIfocused = true;
-
+        player.goToPos(player.transform.position);
         currentQuest = QuestManager.Instance.GenerateQuest("world");
+        uiText.text = questText;
+        uiText.text = uiText.text.Replace("monster", currentQuest.questName.Replace("Hunt a", ""));
         Npc dummy = new Npc();
 
         QuestManager.Instance.AddQuest(currentQuest, dummy);
@@ -72,6 +78,8 @@ public class GameDirector : MonoBehaviour
     }
     public void EvadeMission()
     {
+        PlayerManager.Instance.addGold(-50);
+        PlayerManager.Instance.RefreshUI();
         QuestManager.Instance.AbortQuest(currentQuest);
         eventLaunched = false;
         player.UIfocused = false;

@@ -1140,6 +1140,16 @@ MonoBehaviour:
   - {r: 1, g: 0.9326622, b: 0, a: 1}
   - {r: 0, g: 1, b: 0.09963703, a: 1}
   combatController: {fileID: 781987977}
+  sprites:
+  - {fileID: 0}
+  - {fileID: 21300000, guid: c58a4e8a3e53c60448310cafab0049d3, type: 3}
+  - {fileID: 21300000, guid: fb390cc208ed3014a86eedb4c7863b47, type: 3}
+  - {fileID: 21300000, guid: 2b131c66529af3343a40badc4dabf958, type: 3}
+  - {fileID: 21300000, guid: edc2950c732956d4c842d04ce79bbe7a, type: 3}
+  - {fileID: 21300000, guid: e20247588cf033940903e82cd72d1188, type: 3}
+  - {fileID: 21300000, guid: 28851506231bc7447bbfbaf102d1bff1, type: 3}
+  - {fileID: 21300000, guid: 213cf0c4ac5fec44dbf9785fb3513986, type: 3}
+  - {fileID: 21300000, guid: 1246a6b037fe62d448528d345f7f9bfe, type: 3}
 --- !u!4 &762467068
 Transform:
   m_ObjectHideFlags: 0

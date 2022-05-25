@@ -132,7 +132,7 @@ public class HexMapEditor : MonoBehaviour
 					unit.faction = 0;
 					unit.GetComponent<Renderer>().material.color = Color.blue;
 					hexGrid.combatController.units.Add(unit);
-					unit.setStats(HexUnit.unitType.HumanPlayer, 50);
+					unit.setStats(HexUnit.unitType.Human, 50);
 					hexGrid.combatController.playerUnits.Add(unit);
 
 				}
@@ -154,7 +154,7 @@ public class HexMapEditor : MonoBehaviour
 					unit.faction = 1;
 					unit.GetComponent<Renderer>().material.color = Color.red;
 					hexGrid.combatController.units.Add(unit);
-					unit.setStats(HexUnit.unitType.SmallMonster, 40);
+					unit.setStats(HexUnit.unitType.Kelpie, 40);
 					hexGrid.combatController.enemyUnits.Add(unit);
 
 				}

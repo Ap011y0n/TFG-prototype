@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
+
 public class HexUnit : MonoBehaviour
 {
 
@@ -26,13 +28,19 @@ public class HexUnit : MonoBehaviour
 	public int entityHp;
 	public int entityNum;
 	int totalHP;
-
 	public enum unitType
-    {
-		HumanPlayer,
-		SmallMonster,
-		BigMonster,
-    }
+	{
+		Human,
+		Kelpie,
+		Golem,
+		Dragon,
+		Wolpertinger,
+		Manticore,
+		Ghost,
+		Troll,
+		Giant
+	}
+
 	public HexCell Location
 	{
 		get
@@ -61,7 +69,7 @@ public class HexUnit : MonoBehaviour
         {
 			default:
 				break;
-			case unitType.HumanPlayer:
+			case unitType.Human:
                 {
 					meleAttack = 50;
 					meleDefense = 40;
@@ -72,7 +80,7 @@ public class HexUnit : MonoBehaviour
 					totalHP = entityNum * entityHp;
 				}
 				break;
-			case unitType.SmallMonster:
+			case unitType.Kelpie:
                 {
 					meleAttack = 50;
 					meleDefense = 40;
@@ -83,7 +91,29 @@ public class HexUnit : MonoBehaviour
 					totalHP = entityNum * entityHp;
 				}
 				break;
-			case unitType.BigMonster:
+			case unitType.Golem:
+				{
+					meleAttack = 50;
+					meleDefense = 40;
+					weaponPen = 0;
+					armor = 5;
+					weaponDamage = 1;
+					entityHp = 1;
+					totalHP = entityNum * entityHp;
+				}
+				break;
+			case unitType.Wolpertinger:
+				{
+					meleAttack = 50;
+					meleDefense = 40;
+					weaponPen = 0;
+					armor = 5;
+					weaponDamage = 1;
+					entityHp = 1;
+					totalHP = entityNum * entityHp;
+				}
+				break;
+			case unitType.Dragon:
                 {
 					meleAttack = 90;
 					meleDefense = 80;
@@ -94,7 +124,50 @@ public class HexUnit : MonoBehaviour
 					totalHP = entityNum * entityHp;
 				}
 				break;
-
+			case unitType.Manticore:
+				{
+					meleAttack = 90;
+					meleDefense = 80;
+					weaponPen = 3;
+					armor = 3;
+					weaponDamage = 20;
+					entityHp = 20;
+					totalHP = entityNum * entityHp;
+				}
+				break;
+			case unitType.Ghost:
+				{
+					meleAttack = 50;
+					meleDefense = 40;
+					weaponPen = 0;
+					armor = 5;
+					weaponDamage = 1;
+					entityHp = 1;
+					totalHP = entityNum * entityHp;
+				}
+				break;
+			case unitType.Troll:
+				{
+					meleAttack = 50;
+					meleDefense = 40;
+					weaponPen = 0;
+					armor = 5;
+					weaponDamage = 1;
+					entityHp = 1;
+					totalHP = entityNum * entityHp;
+				}
+				break;
+			case unitType.Giant:
+				{
+					meleAttack = 90;
+					meleDefense = 80;
+					weaponPen = 3;
+					armor = 3;
+					weaponDamage = 20;
+					entityHp = 20;
+					totalHP = entityNum * entityHp;
+				}
+				break;
 		}
     }
 
@@ -131,7 +204,7 @@ public class HexUnit : MonoBehaviour
 	}
 	public void Move()
     {
-		if (path != null)
+		if (path != null && path.Count > 0)
 		{
 			Location.Unit = null;
 			Location = path[0];
@@ -146,6 +219,7 @@ public class HexUnit : MonoBehaviour
 	public bool isInRange(HexUnit enemy)
     {
 		bool ret = false;
+		if(enemy.faction != faction)
 		for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
         {
 			if (location.GetNeighbor(d) == enemy.location)

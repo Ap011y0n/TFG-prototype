@@ -123,9 +123,9 @@ public class QuestManager : MonoBehaviour
         newquest.questDescription = text.text.Replace("monster", creature.name);
 
         if (creature.multiple)
-            info.creature = HexUnit.unitType.SmallMonster;
+            info.creature = HexUnit.unitType.Kelpie;
         else
-            info.creature = HexUnit.unitType.BigMonster;
+            info.creature = HexUnit.unitType.Giant;
 
         info.place = place.name;
 
@@ -135,11 +135,18 @@ public class QuestManager : MonoBehaviour
                 newquest.questName = "No quest type";
                 break;
             case QuestType.HUNT:
-                newquest.questName = "Hunt the " + creature.name;
                 if(creature.multiple)
+                {
+                    newquest.questName = "Hunt a group of " + creature.name;
                     info.mapName = "MultiEntityMap";
+
+                }
                 else
+                {
+                    newquest.questName = "Hunt a " + creature.name;
                     info.mapName = "SingleEntityMap";
+
+                }
                 break;
         }
 

@@ -85,16 +85,57 @@ public class CombatController : MonoBehaviour
 				grid.Load(reader);
 			
 			int num = 1;
-			switch(mapInfo.creature)
-            {
-				case HexUnit.unitType.BigMonster:
-					num = 1;
-					break;
-				case HexUnit.unitType.SmallMonster:
+		switch (mapInfo.creature)
+		{
+			default:
+				break;
+			case HexUnit.unitType.Human:
+				{
 					num = 40;
-					break;
-			}
-			grid.SpawnEntities(enemyPrefab, mapInfo.creature, num);
+				}
+				break;
+			case HexUnit.unitType.Kelpie:
+				{
+					num = 40;
+				}
+				break;
+			case HexUnit.unitType.Golem:
+				{
+					num = 40;
+				}
+				break;
+			case HexUnit.unitType.Wolpertinger:
+				{
+					num = 40;
+				}
+				break;
+			case HexUnit.unitType.Dragon:
+				{
+					num = 1;
+				}
+				break;
+			case HexUnit.unitType.Manticore:
+				{
+					num = 1;
+				}
+				break;
+			case HexUnit.unitType.Ghost:
+				{
+					num = 40;
+				}
+				break;
+			case HexUnit.unitType.Troll:
+				{
+					num = 40;
+				}
+				break;
+			case HexUnit.unitType.Giant:
+				{
+					num = 1;
+				}
+				break;
+		}
+		grid.SpawnEntities(enemyPrefab, mapInfo.creature, num);
 		//}
 		//else
 		//{
@@ -115,7 +156,7 @@ public class CombatController : MonoBehaviour
 			{
 				grid.Load(reader);
 			}
-			grid.SpawnEntities(enemyPrefab, HexUnit.unitType.BigMonster, 1);
+			grid.SpawnEntities(enemyPrefab, HexUnit.unitType.Troll, 40);
 		}
 		else
 		{
