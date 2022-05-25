@@ -33,7 +33,7 @@ public class GameDirector : MonoBehaviour
         {
             timer = 0;
             progressBar++;
-            int res = Random.Range(0, 2);
+            int res = Random.Range(0, 60);
             if(res < progressBar)
             {
                 progressBar = 0;

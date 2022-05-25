@@ -135,7 +135,7 @@ public class CombatController : MonoBehaviour
 				}
 				break;
 		}
-		grid.SpawnEntities(enemyPrefab, mapInfo.creature, num);
+		grid.SpawnEntities(enemyPrefab, mapInfo.creature, num, mapInfo.enemiesToSpawn);
 		//}
 		//else
 		//{

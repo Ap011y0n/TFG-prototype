@@ -326,21 +326,16 @@ public class HexGrid : MonoBehaviour
         Refresh();
     }
 
-    public void SpawnEntities(HexEnemy unitPrefab, HexUnit.unitType type = HexUnit.unitType.Troll, int unitNumber = 50)
+    public void SpawnEntities(HexEnemy unitPrefab, HexUnit.unitType type = HexUnit.unitType.Troll, int unitNumber = 50, int number = 4)
     {
+        List<HexCell> spawnableCells = new List<HexCell>();
         for (int i = 0; i < cells.Length; i++)
         {
             if(cells[i].TerrainTypeIndex == 1)
             {
-                HexEnemy unit = Instantiate(unitPrefab);
-                unit.Location = cells[i];
-                unit.grid = this;
-                unit.faction = 1;
-                unit.GetComponent<Renderer>().material.color = Color.red;
-                combatController.units.Add(unit);
-                combatController.enemyUnits.Add(unit);
-                unit.setStats(type, unitNumber);
-                unit.SetUnitCard(sprites[(int)type]);
+                spawnableCells.Add(cells[i]);
+
+                
             }
             if (cells[i].TerrainTypeIndex == 2)
             {
@@ -348,6 +343,22 @@ public class HexGrid : MonoBehaviour
 
             }
 
+        }
+
+        for (int i = 0; i < number; i++)
+        {
+            int rand = Random.Range(0, spawnableCells.Count);
+            HexEnemy unit = Instantiate(unitPrefab);
+            unit.Location = spawnableCells[rand];
+            unit.grid = this;
+            unit.faction = 1;
+            unit.GetComponent<Renderer>().material.color = Color.red;
+            combatController.units.Add(unit);
+            combatController.enemyUnits.Add(unit);
+            unit.setStats(type, unitNumber);
+            unit.SetUnitCard(sprites[(int)type]);
+
+            spawnableCells.RemoveAt(rand);
         }
     }
     public void DeleteEntities()

@@ -8,6 +8,7 @@ public struct BattleMapInfo
     public HexUnit.unitType creature;
     public string mapName;
     public string place;
+    public int enemiesToSpawn;
     public System.Guid guid;
 }
 
