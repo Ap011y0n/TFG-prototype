@@ -30,6 +30,7 @@ public class HexGrid : MonoBehaviour
 
     public CombatController combatController;
     public Sprite[] sprites;
+    public RuntimeAnimatorController[] animations;
 
     private void Awake()
     {
@@ -357,6 +358,7 @@ public class HexGrid : MonoBehaviour
             combatController.enemyUnits.Add(unit);
             unit.setStats(type, unitNumber);
             unit.SetUnitCard(sprites[(int)type]);
+            unit.SetUnitAnimation(animations[(int)type]);
 
             spawnableCells.RemoveAt(rand);
         }

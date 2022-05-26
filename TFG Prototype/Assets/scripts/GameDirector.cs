@@ -27,13 +27,11 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-
         if(timer > second)
         {
             timer = 0;
             progressBar++;
-            int res = Random.Range(0, 60);
+            int res = Random.Range(0, 2);
             if(res < progressBar)
             {
                 progressBar = 0;

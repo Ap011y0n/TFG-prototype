@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HexEnemy : HexUnit
 {
     public Image unitCard;
+    public Animator animation;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,10 @@ public class HexEnemy : HexUnit
     public void SetUnitCard(Sprite sprite)
     {
         unitCard.sprite = sprite;
+    }
+    public void SetUnitAnimation(RuntimeAnimatorController newAnimation)
+    {
+        animation.runtimeAnimatorController = newAnimation;
 
     }
     // Update is called once per frame
