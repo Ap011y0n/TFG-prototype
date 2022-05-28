@@ -23,6 +23,8 @@ public struct npc
     public Vector3 position;
     public Mood mood;
     public PoliticProfile profile;
+    public System.Guid guid;
+    public bool hasActiveQuest;
 }
 public struct sceneInfo
 {
@@ -196,6 +198,8 @@ public class SceneDirector : MonoBehaviour
             newNpc.position = spawnPositions[randomPos].transform.position;
             newNpc.mood = (Mood)Random.Range(0, (int)Mood.maxMoods);
             newNpc.profile = PoliticsGenerator.createProfile();
+            newNpc.guid = System.Guid.NewGuid();
+            newNpc.hasActiveQuest = false;
             spawnPositions.RemoveAt(randomPos);
             info.sceneNpcs.Add(newNpc);
         }
@@ -231,8 +235,8 @@ public class SceneDirector : MonoBehaviour
         {
             GameObject temp = GameObject.Instantiate(npcPrefab, info.sceneNpcs[i].position, Quaternion.identity);
             temp.name = info.sceneNpcs[i].name;
-            Mood mood = info.sceneNpcs[i].mood;
-            temp.GetComponent<Npc>().setInitParams(info.sceneNpcs[i].name, info, mood, info.sceneNpcs[i].profile);
+
+            temp.GetComponent<Npc>().setInitParams(info, i);
         }
 
     }

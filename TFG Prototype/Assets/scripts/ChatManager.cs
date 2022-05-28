@@ -56,7 +56,32 @@ public class ChatManager : MonoBehaviour
     {
         List<PersonalInfo> infoList;
         string ret = "";
-        if (focusedNPC.job != "" )
+
+        if(QuestManager.Instance.completedQuests.ContainsValue(focusedNPC.NPCGuid) && 
+            (focusedNPC.HasActiveQuest || Random.value > 0.5f))
+        {
+            focusedNPC.HasActiveQuest = false;
+            for (int i = 0; i < focusedNPC.cityInfo.sceneNpcs.Count; ++i)
+                if (focusedNPC.cityInfo.sceneNpcs[i].guid == focusedNPC.NPCGuid)
+                {
+                    npc temp = focusedNPC.cityInfo.sceneNpcs[i];
+                    temp.hasActiveQuest = false;
+                    focusedNPC.cityInfo.sceneNpcs[i] = temp;
+                }
+            ret = "Thank you for helping me with the monsters, I hope the reward was enough.";
+
+            foreach (KeyValuePair<QuestManager.Quest, System.Guid> entry in QuestManager.Instance.completedQuests)
+            {
+                if (entry.Value == focusedNPC.NPCGuid)
+                {
+                    string temp = entry.Key.questName;
+                    temp = temp.Replace("Hunt a ", "");
+                    ret = ret.Replace("monsters",temp);
+
+                }
+            }
+        }
+        else if (focusedNPC.job != "" )
         {
             ret = focusedNPC.job;
         }
@@ -183,21 +208,29 @@ public class ChatManager : MonoBehaviour
         string ret = "";
         if (focusedNPC.cityInfo.QuestGiver.name == focusedNPC.name)
         {
-            if(!QuestManager.Instance.activeQuests.ContainsValue(focusedNPC))
+            if(!QuestManager.Instance.activeQuests.ContainsValue(focusedNPC.NPCGuid))
             {
                 QuestManager.Quest newQuest = QuestManager.Instance.GenerateQuest(focusedNPC.name);
                 QuestManager.Instance.AddQuest(newQuest, focusedNPC);
 
                 ret = "Are you willing to help me? Please, go and doquest";
                 ret = ret.Replace("doquest", newQuest.questDescription);
+                focusedNPC.HasActiveQuest = true;
+                for (int i = 0; i < focusedNPC.cityInfo.sceneNpcs.Count; ++i)
+                    if (focusedNPC.cityInfo.sceneNpcs[i].guid == focusedNPC.NPCGuid)
+                    {
+                        npc temp = focusedNPC.cityInfo.sceneNpcs[i];
+                        temp.hasActiveQuest = true;
+                        focusedNPC.cityInfo.sceneNpcs[i] = temp;
+                    }
             }
             else
             {
                 ret = "Are you willing to help me? Please, go and doquest";
 
-                foreach (KeyValuePair<QuestManager.Quest, Npc> entry in QuestManager.Instance.activeQuests)
+                foreach (KeyValuePair<QuestManager.Quest, System.Guid> entry in QuestManager.Instance.activeQuests)
                 {
-                    if(entry.Value == focusedNPC)
+                    if(entry.Value == focusedNPC.NPCGuid)
                     ret = ret.Replace("doquest", entry.Key.questDescription);
 
 
@@ -207,10 +240,23 @@ public class ChatManager : MonoBehaviour
         }
         else
         {
-            ret = "I heard that npc was in need of help to solve a problem";
-            ret = ret.Replace("npc", focusedNPC.cityInfo.QuestGiver.name);
-            if (!npcQuestMarker)
-                npcQuestMarker = Instantiate(markerPrefab, focusedNPC.cityInfo.QuestGiver.position, Quaternion.identity);
+            if(QuestManager.Instance.completedQuests.Count > 0 && Random.value > 0.5f)
+            {
+                List<QuestManager.Quest> keyList = new List<QuestManager.Quest>(QuestManager.Instance.completedQuests.Keys);
+                System.Random rand = new System.Random();
+                QuestManager.Quest randomKey = keyList[rand.Next(keyList.Count)];
+
+                ret = "I heard that you helped name with his problem, it's good to have you around";
+                ret = ret.Replace("name", randomKey.questGiver);
+            }
+            else
+            {
+                ret = "I heard that npc was in need of help to solve a problem";
+                ret = ret.Replace("npc", focusedNPC.cityInfo.QuestGiver.name);
+                if (!npcQuestMarker)
+                    npcQuestMarker = Instantiate(markerPrefab, focusedNPC.cityInfo.QuestGiver.position, Quaternion.identity);
+
+            }
         }
 
         return ret;

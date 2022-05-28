@@ -50,12 +50,12 @@ public class QuestManager : MonoBehaviour
     [HideInInspector]
     public List<GameObject> questPlaces;
    // private List<Quest> activeQuests;
-    private List<Quest> completedQuests;
     private List<QuestText> questTexts;
     private List<CreatureName> creatureNames;
     private List<PlaceName> placeNames;
 
-    public Dictionary<Quest, Npc> activeQuests;
+    public Dictionary<Quest, System.Guid> activeQuests;
+    public Dictionary<Quest, System.Guid> completedQuests;
 
     private static QuestManager _instance;
     public static QuestManager Instance { get { return _instance; } }
@@ -79,8 +79,8 @@ public class QuestManager : MonoBehaviour
 
     void Start()
     {
-        activeQuests = new Dictionary<Quest, Npc>();
-        completedQuests = new List<Quest>();
+        activeQuests = new Dictionary<Quest, System.Guid>();
+        completedQuests = new Dictionary<Quest, System.Guid>();
         questTexts = new List<QuestText>();
         creatureNames = new List<CreatureName>();
         placeNames = new List<PlaceName>();
@@ -186,13 +186,13 @@ public class QuestManager : MonoBehaviour
     }
     public void AddQuest(Quest newquest, Npc giver)
     {
-        activeQuests.Add(newquest, giver);
+        activeQuests.Add(newquest, giver.NPCGuid);
     }
     public void EndQuest(Quest endedQuest)
     {
+        completedQuests.Add(endedQuest, activeQuests[endedQuest]);
         activeQuests.Remove(endedQuest);
         SceneDirector.Instance.currentBattleMaps.Remove(endedQuest.guid);
-        completedQuests.Add(endedQuest);
         PlayerManager.Instance.addGold(endedQuest.reward);
     }
     public void AbortQuest(Quest endedQuest)
@@ -202,7 +202,7 @@ public class QuestManager : MonoBehaviour
     }
     public Quest GetActiveQuest(System.Guid guid)
     {
-        foreach (KeyValuePair<Quest, Npc> entry in activeQuests)
+        foreach (KeyValuePair<Quest, System.Guid> entry in activeQuests)
         {
             if(entry.Key.guid == guid)
             {

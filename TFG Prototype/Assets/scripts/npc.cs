@@ -22,6 +22,8 @@ public class Npc : MonoBehaviour
 
     public bool introducedHimself = false;
     public bool introducedCity = false;
+    public bool HasActiveQuest = false;
+
     public sceneInfo cityInfo;
     public TextMeshPro displayName;
     public GameObject canvas;
@@ -32,6 +34,7 @@ public class Npc : MonoBehaviour
     public Mood npcMood;
     public PoliticProfile profile;
     public string job = "";
+    public System.Guid NPCGuid;
     string[] jobs = new string[]
     {
         "smith",
@@ -95,11 +98,13 @@ public class Npc : MonoBehaviour
         }
     }
 
-   public void setInitParams(string name, sceneInfo city, Mood mood, PoliticProfile politics)
+   public void setInitParams(sceneInfo info, int id)
     {
-        npcName = name;
-        cityInfo = city;
-        npcMood = mood;
-        profile = politics;
+        npcName = info.sceneNpcs[id].name;
+        cityInfo = info;
+        npcMood = info.sceneNpcs[id].mood;
+        profile = info.sceneNpcs[id].profile;
+        NPCGuid = info.sceneNpcs[id].guid;
+        HasActiveQuest = info.sceneNpcs[id].hasActiveQuest;
     }
 }
