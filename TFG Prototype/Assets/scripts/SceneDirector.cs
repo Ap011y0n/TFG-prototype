@@ -20,16 +20,18 @@ public enum enemyType
 public struct npc
 {
     public string name;
-    public Vector3 position;
     public Mood mood;
     public PoliticProfile profile;
     public System.Guid guid;
     public bool hasActiveQuest;
+    public Family family;
+    public Vector3 position;
 }
 public struct sceneInfo
 {
     public string sceneName;
     public List<npc> sceneNpcs;
+    public List<Family> families;
     public npc QuestGiver;
     public PoliticProfile profile;
 }
@@ -38,41 +40,76 @@ public class SceneDirector : MonoBehaviour
   
     string[] maleNames =  new string[] 
     {
-        "Rhuhmud Nohlar",
-        "Fishun Padein",
-        "Gronken Greenshot",
-        "Stalvorn Skullcut",
-        "Glidrol Sitsk",
-        "Vif Kevin",
-        "Blurbem Ironmaw",
-        "Bror Bloodoak",
-        "Butar-Zeoz Ronskupvot",
-        "Tinis Fueltrekt",
-        "Golmothet Stomolzebe",
-        "Shislar Zenungi",
-        "Jah Cein",
-        "Fuing Wang",
-        "Martascol Margargi",
-        "Padrul Gunzurnas",
+        "Rhuhmud",
+        "Fishun",
+        "Gronken",
+        "Stalvorn",
+        "Glidrol",
+        "Vif",
+        "Blurbem",
+        "Bror",
+        "Butar-Zeoz",
+        "Tinis",
+        "Golmothet",
+        "Shislar",
+        "Jah",
+        "Fuing",
+        "Martascol",
+        "Padrul",
     };
     string[] femaleNames = new string[]
 {
-        "Cohmuroh Bhossod",
-        "Nuseil Janno",
-        "Relirru Flintblaze",
-        "Josvieh Rumblestrider",
-        "Sirles Grusk",
-        "Ci Duzarsk",
-        "Herhithro Truewound",
-        "Kige Winterbrow",
-        "Viresu Bekrizrud",
-        "Rizreth Luzifk",
-        "Eraldra Rugobyedye",
-        "Urse Vanunze",
-        "Xue Yung",
-        "Pai Xia",
-        "Quir Bodrese",
-        "Dartm Pastuscen",
+        "Cohmuroh",
+        "Nuseil",
+        "Relirru",
+        "Josvieh",
+        "Sirles",
+        "Ci",
+        "Herhithro",
+        "Kige",
+        "Viresu",
+        "Rizreth",
+        "Eraldra",
+        "Urse",
+        "Xue",
+        "Pai",
+        "Quir",
+        "Dartm",
+};
+    string[] surnames = new string[]
+{
+        " Bhossod",
+        " Janno",
+        " Flintblaze",
+        " Rumblestrider",
+        " Grusk",
+        " Duzarsk",
+        " Truewound",
+        " Winterbrow",
+        " Bekrizrud",
+        " Luzifk",
+        " Rugobyedye",
+        " Vanunze",
+        " Yung",
+        " Xia",
+        " Bodrese",
+        " Pastuscen",
+        " Nohlar",
+        " Padein",
+        " Greenshot",
+        " Skullcut",
+        " Sitsk",
+        " Kevin",
+        " Ironmaw",
+        " Bloodoak",
+        " Ronskupvot",
+        " Fueltrekt",
+        " Stomolzebe",
+        " Zenungi",
+        " Cein",
+        " Wang",
+        " Margargi",
+        " Gunzurnas",
 };
 
     public GameObject npcPrefab;
@@ -186,22 +223,43 @@ public class SceneDirector : MonoBehaviour
 
     sceneInfo createNpcs(sceneInfo info)
     {
-       
         List<GameObject> spawnPositions = new List<GameObject>(GameObject.FindGameObjectsWithTag("SpawnPoint"));
-        int maxNpc = Random.Range((int)(spawnPositions.Count / 3), spawnPositions.Count);
+        int maxNpc = spawnPositions.Count * 2;
+        Family family = CreateFamily();
+        info.families = new List<Family>();
+        info.families.Add(family);
+        int members = 0;
         for (int i = 0; i < maxNpc; ++i)
         {
+
+            members++;
+            if (members > 2 && Random.Range(members, 8) == 7)
+            {
+                family = CreateFamily();
+                members = 1;
+                info.families.Add(family);
+            }
             npc newNpc;
-            int randomPos = Random.Range(0, spawnPositions.Count);
+            newNpc.family = family;
             int genre = Random.Range(0, 2);
-            newNpc.name = GenerateName(genre);
-            newNpc.position = spawnPositions[randomPos].transform.position;
+            newNpc.name = GenerateName(genre, family.name);
             newNpc.mood = (Mood)Random.Range(0, (int)Mood.maxMoods);
             newNpc.profile = PoliticsGenerator.createProfile();
             newNpc.guid = System.Guid.NewGuid();
             newNpc.hasActiveQuest = false;
-            spawnPositions.RemoveAt(randomPos);
+            newNpc.position = new Vector3(0, 0, 0);
             info.sceneNpcs.Add(newNpc);
+            family.members.Add(newNpc);
+
+        }
+
+        for(int i = 0; i < info.families.Count; i++)
+        {
+            for(int j = 0; j < info.families.Count; j++)
+            {
+                if (i != j)
+                    info.families[i].relationships.Add(info.families[j], 0);
+            }
         }
 
         int questGiver = Random.Range(0, maxNpc);
@@ -209,6 +267,15 @@ public class SceneDirector : MonoBehaviour
         return info;
     }
 
+    Family CreateFamily()
+    {
+        Family family = new Family();
+        family.members = new List<npc>();
+        family.relationships = new Dictionary<Family, int>();
+        family.name = surnames[Random.Range(0, surnames.Length)];
+
+        return family;
+    }
     public void RefreshMapQuests()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("mission");
@@ -231,17 +298,40 @@ public class SceneDirector : MonoBehaviour
     }
     void spawnNpcs(sceneInfo info)
     {
-        for(int i = 0; i < info.sceneNpcs.Count; i++)
+        List<GameObject> spawnPositions = new List<GameObject>(GameObject.FindGameObjectsWithTag("SpawnPoint"));
+        List<npc> sceneNpcs = info.sceneNpcs;
+        int maxSpawns = Random.Range(spawnPositions.Count/2, spawnPositions.Count);
+        bool questgiver = false;
+        for (int i = 0; i < maxSpawns; i++)
         {
-            GameObject temp = GameObject.Instantiate(npcPrefab, info.sceneNpcs[i].position, Quaternion.identity);
-            temp.name = info.sceneNpcs[i].name;
+            int randomPos = Random.Range(0, spawnPositions.Count);
+            Vector3 spawnPos = spawnPositions[randomPos].transform.position;
+            GameObject temp = GameObject.Instantiate(npcPrefab, spawnPos, Quaternion.identity);
+            spawnPositions.RemoveAt(randomPos);
 
-            temp.GetComponent<Npc>().setInitParams(info, i);
+            if (!questgiver)
+            {
+                npc NewNpc = info.QuestGiver;
+                info.QuestGiver.position = spawnPos;
+                sceneNpcs.Remove(info.QuestGiver);
+                temp.name = NewNpc.name;
+                temp.GetComponent<Npc>().setInitParams(info, NewNpc);
+                questgiver = true;
+            }
+            else
+            {
+                int id = Random.Range(0, sceneNpcs.Count);
+                npc NewNpc = sceneNpcs[id];
+                sceneNpcs.RemoveAt(id);
+                temp.name = NewNpc.name;
+                temp.GetComponent<Npc>().setInitParams(info, NewNpc);
+            }
+       
         }
 
     }
 
-    public string GenerateName(int genre)
+    public string GenerateName(int genre, string surname)
     {
         string name = "No Name Found";
         switch(genre)
@@ -257,6 +347,7 @@ public class SceneDirector : MonoBehaviour
                 }
                 break;
         }
+        name += surname;
         return name;
     }
 

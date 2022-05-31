@@ -15,6 +15,12 @@ public enum Mood
     maxMoods,
 }
 
+public struct Family
+{
+    public string name;
+    public List<npc> members;
+    public Dictionary<Family, int> relationships;
+}
 public class Npc : MonoBehaviour
 {
     public string npcName;
@@ -35,6 +41,7 @@ public class Npc : MonoBehaviour
     public PoliticProfile profile;
     public string job = "";
     public System.Guid NPCGuid;
+    public Family family;
     string[] jobs = new string[]
     {
         "smith",
@@ -98,13 +105,14 @@ public class Npc : MonoBehaviour
         }
     }
 
-   public void setInitParams(sceneInfo info, int id)
+   public void setInitParams(sceneInfo info, npc newNpc)
     {
-        npcName = info.sceneNpcs[id].name;
+        npcName = newNpc.name;
         cityInfo = info;
-        npcMood = info.sceneNpcs[id].mood;
-        profile = info.sceneNpcs[id].profile;
-        NPCGuid = info.sceneNpcs[id].guid;
-        HasActiveQuest = info.sceneNpcs[id].hasActiveQuest;
+        npcMood = newNpc.mood;
+        profile = newNpc.profile;
+        NPCGuid = newNpc.guid;
+        family = newNpc.family;
+        HasActiveQuest = newNpc.hasActiveQuest;
     }
 }
