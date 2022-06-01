@@ -11,6 +11,7 @@ TagManager:
   - plain
   - river
   - mission
+  - WorldLight
   layers:
   - Default
   - TransparentFX

@@ -30,7 +30,7 @@ public class Npc : MonoBehaviour
     public bool introducedCity = false;
     public bool HasActiveQuest = false;
 
-    public sceneInfo cityInfo;
+    public SceneInfo cityInfo;
     public TextMeshPro displayName;
     public GameObject canvas;
     public GameObject chatUI;
@@ -42,6 +42,8 @@ public class Npc : MonoBehaviour
     public string job = "";
     public System.Guid NPCGuid;
     public Family family;
+    public float stress;
+
     string[] jobs = new string[]
     {
         "smith",
@@ -105,7 +107,7 @@ public class Npc : MonoBehaviour
         }
     }
 
-   public void setInitParams(sceneInfo info, npc newNpc)
+   public void setInitParams(SceneInfo info, npc newNpc)
     {
         npcName = newNpc.name;
         cityInfo = info;
@@ -113,6 +115,7 @@ public class Npc : MonoBehaviour
         profile = newNpc.profile;
         NPCGuid = newNpc.guid;
         family = newNpc.family;
+        stress = newNpc.stress;
         HasActiveQuest = newNpc.hasActiveQuest;
     }
 }
