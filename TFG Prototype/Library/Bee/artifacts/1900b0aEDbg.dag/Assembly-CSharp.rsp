@@ -341,6 +341,7 @@
 "Assets/scripts/Managers and generators/SceneDirector.cs"
 "Assets/scripts/MouseOver.cs"
 "Assets/scripts/Npc.cs"
+"Assets/scripts/NpcData.cs"
 "Assets/scripts/ObjectMarker.cs"
 "Assets/scripts/Player/InventoryUI.cs"
 "Assets/scripts/Player/PlayerController.cs"

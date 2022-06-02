@@ -4,21 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public enum Mood
-{
-   // fear,
-  //  anger,
-    joy,
-    sadness, 
-    disgust,
-    surprise,
-    maxMoods,
-}
+
 
 public struct Family
 {
     public string name;
-    public List<npc> members;
+    public List<NpcData> members;
     public Dictionary<Family, int> relationships;
 }
 public class Npc : MonoBehaviour
@@ -107,7 +98,7 @@ public class Npc : MonoBehaviour
         }
     }
 
-   public void setInitParams(SceneInfo info, npc newNpc)
+   public void setInitParams(SceneInfo info, NpcData newNpc)
     {
         npcName = newNpc.name;
         cityInfo = info;

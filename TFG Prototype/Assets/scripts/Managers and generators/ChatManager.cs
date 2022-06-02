@@ -64,7 +64,7 @@ public class ChatManager : MonoBehaviour
             for (int i = 0; i < focusedNPC.cityInfo.sceneNpcs.Count; ++i)
                 if (focusedNPC.cityInfo.sceneNpcs[i].guid == focusedNPC.NPCGuid)
                 {
-                    npc temp = focusedNPC.cityInfo.sceneNpcs[i];
+                    NpcData temp = focusedNPC.cityInfo.sceneNpcs[i];
                     temp.hasActiveQuest = false;
                     focusedNPC.cityInfo.sceneNpcs[i] = temp;
                 }
@@ -219,7 +219,7 @@ public class ChatManager : MonoBehaviour
                 for (int i = 0; i < focusedNPC.cityInfo.sceneNpcs.Count; ++i)
                     if (focusedNPC.cityInfo.sceneNpcs[i].guid == focusedNPC.NPCGuid)
                     {
-                        npc temp = focusedNPC.cityInfo.sceneNpcs[i];
+                        NpcData temp = focusedNPC.cityInfo.sceneNpcs[i];
                         temp.hasActiveQuest = true;
                         focusedNPC.cityInfo.sceneNpcs[i] = temp;
                     }

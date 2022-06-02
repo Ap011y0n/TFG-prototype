@@ -17,17 +17,7 @@ public enum enemyType
     DRAGON,
     PLEB,
 }
-public struct npc
-{
-    public string name;
-    public Mood mood;
-    public int stress;
-    public PoliticProfile profile;
-    public System.Guid guid;
-    public bool hasActiveQuest;
-    public Family family;
-    public Vector3 position;
-}
+
 
 public class SceneDirector : MonoBehaviour
 {
@@ -167,7 +157,7 @@ public class SceneDirector : MonoBehaviour
         {
             SceneInfo newScene = new SceneInfo();
             newScene.sceneName = scene.name;
-            newScene.sceneNpcs = new List<npc>();
+            newScene.sceneNpcs = new List<NpcData>();
             newScene.profile = PoliticsGenerator.createProfile();
 
             if (scene.name == "WorldMap")
@@ -231,6 +221,7 @@ public class SceneDirector : MonoBehaviour
     void Start()
     {
         Debug.Log("Start");
+        SceneInfo.fillMorningEvents();
     }
 
     // called when the game is terminated
@@ -258,7 +249,7 @@ public class SceneDirector : MonoBehaviour
                 members = 1;
                 info.families.Add(family);
             }
-            npc newNpc;
+            NpcData newNpc = new NpcData();
             newNpc.family = family;
             int genre = Random.Range(0, 2);
             newNpc.name = GenerateName(genre, family.name);
@@ -290,7 +281,7 @@ public class SceneDirector : MonoBehaviour
     Family CreateFamily()
     {
         Family family = new Family();
-        family.members = new List<npc>();
+        family.members = new List<NpcData>();
         family.relationships = new Dictionary<Family, int>();
         family.name = surnames[Random.Range(0, surnames.Length)];
 
@@ -319,7 +310,7 @@ public class SceneDirector : MonoBehaviour
     void spawnNpcs(SceneInfo info)
     {
         List<GameObject> spawnPositions = new List<GameObject>(GameObject.FindGameObjectsWithTag("SpawnPoint"));
-        List<npc> sceneNpcs = new List<npc> (info.sceneNpcs);
+        List<NpcData> sceneNpcs = new List<NpcData> (info.sceneNpcs);
         int maxSpawns = Random.Range(spawnPositions.Count/2, spawnPositions.Count);
         bool questgiver = false;
         for (int i = 0; i < maxSpawns; i++)
@@ -331,7 +322,7 @@ public class SceneDirector : MonoBehaviour
 
             if (!questgiver)
             {
-                npc NewNpc = info.QuestGiver;
+                NpcData NewNpc = info.QuestGiver;
                 info.QuestGiver.position = spawnPos;
                 sceneNpcs.Remove(info.QuestGiver);
                 temp.name = NewNpc.name;
@@ -341,7 +332,7 @@ public class SceneDirector : MonoBehaviour
             else
             {
                 int id = Random.Range(0, sceneNpcs.Count);
-                npc NewNpc = sceneNpcs[id];
+                NpcData NewNpc = sceneNpcs[id];
                 sceneNpcs.RemoveAt(id);
                 temp.name = NewNpc.name;
                 temp.GetComponent<Npc>().setInitParams(info, NewNpc);

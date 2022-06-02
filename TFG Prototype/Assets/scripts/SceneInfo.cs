@@ -5,27 +5,31 @@ using UnityEngine;
 public class SceneInfo
 {
     public string sceneName;
-    public List<npc> sceneNpcs;
+    public List<NpcData> sceneNpcs;
     public List<SceneInfo> SceneInfos;
 
     public List<Family> families;
-    public npc QuestGiver;
+    public NpcData QuestGiver;
     public PoliticProfile profile;
     public List<string> dailyEvents;
-
+    public static List<DailyEvent> morningEvents;
+    public struct DailyEvent
+    {
+        public Vector2Int stress;
+        public Mood mood;
+        public string text;
+    }
     public void MorningEvent()
     {
         dailyEvents = new List<string>();
         for (int i = 0; i < sceneNpcs.Count; ++i)
         {
-            npc tempNpc = sceneNpcs[i];
-            dailyEvents.Add(ReturnMorningEvents(out  tempNpc.stress).Replace("Name", tempNpc.name));
-            sceneNpcs[i] = tempNpc;
+            DailyEvent randomEvent = ReturnMorningEvent();
+            sceneNpcs[i].stress += Random.Range(randomEvent.stress.x, randomEvent.stress.y);
+            string eventText = randomEvent.text;
+            sceneNpcs[i].mood = randomEvent.mood;
+            dailyEvents.Add(eventText.Replace("Name", sceneNpcs[i].name));
 
-            //Convertir npc a clase npc data o algo asi, 
-            //para que puedas asignar estres a la copia dentro de la familia
-            //es posible que solo upgradeando a clase, ya altere el valor dentro de familia, 
-            //puesto a que puedes modificar valores como stress, y no tienes que hacer esta parafernalia
         }
         foreach (string item in dailyEvents)
         {
@@ -44,35 +48,222 @@ public class SceneInfo
 
     }
 
-    string ReturnMorningEvents(out int stress)
+    DailyEvent ReturnMorningEvent()
     {
-        string ret = "";
-        stress = 0;
+        return morningEvents[Random.Range(0, morningEvents.Count)]; 
+    }
+    public static void fillMorningEvents()
+    {
+        morningEvents = new List<DailyEvent>();
+        DailyEvent newEvent;
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name prayed after waking up, they were filled with joy";
+        morningEvents.Add(newEvent);
 
-        switch (Random.Range(0, 10))
-        {
-            case 0:
-                ret = "Name Prayed after waking up and is now feeling contented"; stress = Random.Range(0, 5); break;
-            case 1:
-                ret = "Name Read a chapter of their favorite book"; stress = Random.Range(1, 5); break;
-            case 2:
-                ret = "Name Had breakfast with their loved ones"; stress = Random.Range(1, 5); break;
-            case 3:
-                ret = "Name Received a letter from a relative"; stress = Random.Range(1, 5); break;
-            case 4:
-                ret = "Name Saw a dragon flying in the horizon"; stress = Random.Range(1, 5); break;
-            case 5:
-                ret = "Name Encountered some friendly forest elves"; stress = Random.Range(1, 5); break;
-            case 6:
-                ret = "Name Took some time to take a walk on the city centre"; stress = Random.Range(1, 5); break;
-            case 7:
-                ret = "Name Finished writting their book"; stress = Random.Range(1, 5); break;
-            case 8:
-                ret = "Name Listened to someone playing their favourite song"; stress = Random.Range(1, 5); break;
-            case 9:
-                ret = "Name Bought a beautiful asset in the city centre"; stress = Random.Range(1, 5); break;
-        }
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name prayed after waking up, but no one answered their prayings, they felt disgust";
+        morningEvents.Add(newEvent);
 
-        return ret;
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name prayed after waking up, they got a signal which surprised them";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name prayed after waking up, but no one answered their prayings, they felt sad";
+        morningEvents.Add(newEvent);
+        // ******************************
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name read a chapter of their favorite book, but their favourite character died, they felt anger against at the autor";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name read a chapter of their favorite book, but after a character died, they saddened";
+
+        morningEvents.Add(newEvent);
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name read a chapter of their favorite book, they feel blissful";
+        morningEvents.Add(newEvent);
+
+        morningEvents.Add(newEvent);
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name read a chapter of their favorite book, their expectations were suvberted!";
+        morningEvents.Add(newEvent);
+        // ******************************
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name had breakfast with their loved ones, they started the day with a cheerful attitudde";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name had breakfast alone, the quietness made him a bit sad";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name burned his breakfast, the quietness made him a bit sad";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name tried new food for breakfast, and they liked it";
+        morningEvents.Add(newEvent);
+        // ******************************
+
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name received a letter from a relative, they remembered happier times";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(3, 5);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name received a letter, remembering of his debt, they immediately got angrier";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name received a letter, a distant relative died, they felt sadness because of the tragic news";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name received a loved letter, its content surprised them";
+        morningEvents.Add(newEvent);
+        // ******************************
+
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name saw a dragon flying in the horizon, this rare sight improved their day";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name saw a dragon flying in the horizon, even though scared, they felt kinda excited to witness such an event";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name saw a dragon flying in the horizon, they hates this creatures";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name saw a dragon flying in the horizon, that remembered them of last years incident in a near village";
+        morningEvents.Add(newEvent);
+        // ******************************
+
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name encountered some friendly forest fairies, their funny pranks improved their mood";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name encountered some friendly forest fairies, they told them some gossips about the townfolks";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name encountered some forest fairies, which robbed their purse. Nedless to say, they didn't like that prank";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name encountered some forest fairies, they started whispering their mistakes and failures, worsening their mood";
+        morningEvents.Add(newEvent);
+        // ******************************
+
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name took some time to take a walk on the city centre, the peaceful streets calmed their mind";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name took some time to take a walk on the city centre but suddenly he got mugged by two brigands";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name took some time to take a walk on the city centre, the weather depressed hm a little";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name took some time to take a walk on the city centre. While in the park, some squirrels approached them";
+        morningEvents.Add(newEvent);
+        // ******************************
+
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name listened to someone playing a song. It was their favourite which brought a smile to their face";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name listened to someone playing a song which they hate, that worsened their day";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name listened to someone playing a song. It was a sad song which affected their mood";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name listened to someone playing a song, they were surprised to listen something new";
+        morningEvents.Add(newEvent);
+        // ******************************
+
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name finished writting their book, they are pleased with the final result";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name finished writting their book, since they had to rush it, they feel very disppleased with the final result";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name finished writting their book, they felt insecure about releasing it";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name finished writting their book, they didn't expect to finnish it that quickly";
+        morningEvents.Add(newEvent);
+        // ******************************
+
+        newEvent.stress = new Vector2Int(-5, -2);
+        newEvent.mood = Mood.joy;
+        newEvent.text = "Name bought some items in the market, their beautiful crafting pleases them";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.mood = Mood.disgust;
+        newEvent.text = "Name bought some items in the market, they feel they got scammed";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.mood = Mood.sadness;
+        newEvent.text = "Name bought some items in the market, they would've prefered to be sleeping instead of wandering the streets";
+        morningEvents.Add(newEvent);
+
+        newEvent.stress = new Vector2Int(-3, 0);
+        newEvent.mood = Mood.surprise;
+        newEvent.text = "Name bought some items in the market, a specal offert suprised him";
+        morningEvents.Add(newEvent);
+        // ******************************
+
     }
 }
