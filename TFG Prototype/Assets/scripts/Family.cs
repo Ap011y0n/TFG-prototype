@@ -30,4 +30,11 @@ public class Family
         
         return ret;
     }
+    public void ManageFamilyStress(int stress)
+    {
+        for (int i = 1; i < members.Count; ++i)
+        {
+            members[i].stress += stress;
+        }
+    }
 }

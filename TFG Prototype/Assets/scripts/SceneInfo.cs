@@ -15,6 +15,7 @@ public class SceneInfo
     public List<string> interactionEvents;
 
     public static List<DailyEvent> morningEvents;
+    private bool couped = false;
     public struct DailyEvent
     {
         public Vector2Int stress;
@@ -59,40 +60,42 @@ public class SceneInfo
     }
     public void CheckTantrums()
     {
+        couped = false;
         int politic = 0;
         for(int i = 0; i < families.Count; ++i)
         {
+            if (couped)
+                break;
             int totalStress = 0;
             for(int j = 0; j < families[i].members.Count; ++j)
             {
                 totalStress += families[i].members[j].stress;
             }
             //  if(Random.Range( 0, totalStress / families[i].members.Count) > 1)
-            if ((totalStress / families[i].members.Count) > 1)
+            if ((totalStress / families[i].members.Count) > 20)
             {
                 NpcData instigator;
-              if( GatherSupport(families[i], out politic, out instigator))
+                List<Family> supporters, neutral;
+
+              if ( GatherSupport(families[i], out politic, out instigator, out supporters, out neutral))
                 {
-                    launchCoup(politic, instigator);
+                    launchCoup(politic, instigator, supporters, neutral);
                 }
 
             }
 
         }
     }
-    void launchCoup(int politic, NpcData instigator)
+    void launchCoup(int politic, NpcData instigator, List<Family> supporters, List<Family> neutral)
     {
-        string log = "Coup launched by " + instigator.name  + "of the " 
+        couped = true;
+        string log = "Coup launched by " + instigator.name + "of the "
             + instigator.family.name + " family, with enough popular support, " + sceneName + " politic1 is now politic2";
-        switch(politic)
+        switch (politic)
         {
             case 1:
                 log = log.Replace("politic1", PoliticsGenerator.returnLeadershipView(profile.leadership));
                 log = log.Replace("politic2", PoliticsGenerator.returnLeadershipView(instigator.profile.leadership));
-                if(profile.leadership == instigator.profile.leadership)
-                {
-                    Debug.Log("broo");
-                }
                 profile.leadership = instigator.profile.leadership;
 
                 break;
@@ -134,30 +137,49 @@ public class SceneInfo
 
         }
         Debug.Log(log);
+        instigator.family.ManageFamilyStress(-30);
+        for (int i = 0; i < supporters.Count; ++i)
+        {
+            supporters[i].ManageFamilyStress(-20);
+        }
+        for (int i = 0; i < neutral.Count; ++i)
+        {
+            neutral[i].ManageFamilyStress(10);
+        }
     }
-    bool GatherSupport(Family instigators, out int politic, out NpcData instigator)
+    bool GatherSupport(Family instigators, out int politic, out NpcData instigator, 
+        out List<Family> supporters, out List<Family> neutral)
     {
         instigator = instigators.returnRebelMember(profile, out politic);
         bool succeeded = false;
+        supporters = new List<Family>();
+        neutral = new List<Family>();
 
         if (politic == -1)
         {
             return succeeded;
         }
-        List<Family> supporters = new List<Family>();
 
         for (int i = 0; i < families.Count; ++i)
         {
-            int totalStress = 0;
-            for (int j = 0; j < families[i].members.Count; ++j)
+            if(families[i] != instigators)
             {
-                totalStress += families[i].members[j].stress;
+                int totalStress = 0;
+                for (int j = 0; j < families[i].members.Count; ++j)
+                {
+                    totalStress += families[i].members[j].stress;
+                }
+
+                if ((totalStress / families[i].members.Count) > 10)
+                {
+                    supporters.Add(families[i]);
+                }
+                else
+                {
+                    neutral.Add(families[i]);
+                }
             }
-           
-            if((totalStress / families[i].members.Count) > 1)
-            {
-                supporters.Add(families[i]);
-            }
+          
 
         }
         if(supporters.Count > families.Count/2)
@@ -190,14 +212,14 @@ public class SceneInfo
         interaction.text = interaction.text.Replace("npc2", npc2.name);
 
         if (npc2.stress > 10)
-            stressValue = Random.Range(5, 10);
+            stressValue = Random.Range(10, 20);
         else if(npc2.stress < -15)
         {
             stressValue = Random.Range(-2, -5);
         }
         else
         {
-            stressValue = Random.Range(-5, 5);
+            stressValue = Random.Range(-5, 10);
         }
         if(stressValue <= 0)
         {
@@ -220,7 +242,7 @@ public class SceneInfo
         newEvent.text = "Name prayed after waking up, they were filled with joy";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name prayed after waking up, but no one answered their prayings, they felt disgust";
         morningEvents.Add(newEvent);
@@ -230,17 +252,17 @@ public class SceneInfo
         newEvent.text = "Name prayed after waking up, they got a signal which surprised them";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name prayed after waking up, but no one answered their prayings, they felt sad";
         morningEvents.Add(newEvent);
         // ******************************
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name read a chapter of their favorite book, but their favourite character died, they felt anger against at the autor";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name read a chapter of their favorite book, but after a character died, they saddened";
 
@@ -261,12 +283,12 @@ public class SceneInfo
         newEvent.text = "Name had breakfast with their loved ones, they started the day with a cheerful attitudde";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name had breakfast alone, the quietness made him a bit sad";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name burned his breakfast, the quietness made him a bit sad";
         morningEvents.Add(newEvent);
@@ -282,18 +304,18 @@ public class SceneInfo
         newEvent.text = "Name received a letter from a relative, they remembered happier times";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 5);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name received a letter, remembering of his debt, they immediately got angrier";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name received a letter, a distant relative died, they felt sadness because of the tragic news";
         morningEvents.Add(newEvent);
 
         newEvent.stress = new Vector2Int(-3, 0);
-        newEvent.mood = Mood.sadness;
+        newEvent.mood = Mood.surprise;
         newEvent.text = "Name received a loved letter, its content surprised them";
         morningEvents.Add(newEvent);
         // ******************************
@@ -308,12 +330,12 @@ public class SceneInfo
         newEvent.text = "Name saw a dragon flying in the horizon, even though scared, they felt kinda excited to witness such an event";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name saw a dragon flying in the horizon, they hates this creatures";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name saw a dragon flying in the horizon, that remembered them of last years incident in a near village";
         morningEvents.Add(newEvent);
@@ -329,12 +351,12 @@ public class SceneInfo
         newEvent.text = "Name encountered some friendly forest fairies, they told them some gossips about the townfolks";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name encountered some forest fairies, which robbed their purse. Nedless to say, they didn't like that prank";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name encountered some forest fairies, they started whispering their mistakes and failures, worsening their mood";
         morningEvents.Add(newEvent);
@@ -345,12 +367,12 @@ public class SceneInfo
         newEvent.text = "Name took some time to take a walk on the city centre, the peaceful streets calmed their mind";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name took some time to take a walk on the city centre but suddenly he got mugged by two brigands";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name took some time to take a walk on the city centre, the weather depressed hm a little";
         morningEvents.Add(newEvent);
@@ -366,12 +388,12 @@ public class SceneInfo
         newEvent.text = "Name listened to someone playing a song. It was their favourite which brought a smile to their face";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name listened to someone playing a song which they hate, that worsened their day";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name listened to someone playing a song. It was a sad song which affected their mood";
         morningEvents.Add(newEvent);
@@ -387,12 +409,12 @@ public class SceneInfo
         newEvent.text = "Name finished writting their book, they are pleased with the final result";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name finished writting their book, since they had to rush it, they feel very disppleased with the final result";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name finished writting their book, they felt insecure about releasing it";
         morningEvents.Add(newEvent);
@@ -408,12 +430,12 @@ public class SceneInfo
         newEvent.text = "Name bought some items in the market, their beautiful crafting pleases them";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(3, 6);
+        newEvent.stress = new Vector2Int(9, 15);
         newEvent.mood = Mood.disgust;
         newEvent.text = "Name bought some items in the market, they feel they got scammed";
         morningEvents.Add(newEvent);
 
-        newEvent.stress = new Vector2Int(1, 4);
+        newEvent.stress = new Vector2Int(5, 9);
         newEvent.mood = Mood.sadness;
         newEvent.text = "Name bought some items in the market, they would've prefered to be sleeping instead of wandering the streets";
         morningEvents.Add(newEvent);
