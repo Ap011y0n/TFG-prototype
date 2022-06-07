@@ -5,13 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 
 
-
-public struct Family
-{
-    public string name;
-    public List<NpcData> members;
-    public Dictionary<Family, int> relationships;
-}
 public class Npc : MonoBehaviour
 {
     public string npcName;

@@ -25,4 +25,33 @@ public class NpcData
     public Family family;
     public Vector3 position;
 
+    public int returnConflictivePolitics(PoliticProfile cityProfile)
+    {
+        int complicity =  PoliticsGenerator.checkLeadership(profile.leadership, cityProfile.leadership);
+        if (complicity >= 2)
+            return 1;
+        complicity = PoliticsGenerator.checkForeign(profile.foreign, cityProfile.foreign);
+        if (complicity >= 2)
+            return 2;
+        complicity = PoliticsGenerator.checkReligion(profile.religion, cityProfile.religion);
+        if (complicity >= 2)
+            return 3;
+        complicity = PoliticsGenerator.checkJustice(profile.justice, cityProfile.justice);
+        if (complicity >= 2)
+            return 4;
+        complicity = PoliticsGenerator.checkMilitary(profile.military, cityProfile.military);
+        if (complicity >= 2)
+            return 5;
+        complicity = PoliticsGenerator.checkEconomy(profile.economy, cityProfile.economy);
+        if (complicity >= 2)
+            return 6;
+        complicity = PoliticsGenerator.checkCulture(profile.cultural, cityProfile.cultural);
+        if (complicity >= 2)
+            return 7;
+        complicity = PoliticsGenerator.checkIntellectual(profile.intellectual, cityProfile.intellectual);
+        if (complicity >= 2)
+            return 8;
+
+        return -1;
+    }
 }

@@ -313,16 +313,16 @@ public class ChatManager : MonoBehaviour
         switch (religion)
         {
             case Religion.Atheism:
-                ret = "state atheism";
+                ret = "a state atheism";
                 break;
             case Religion.CollectiveFaith:
-                ret = "participation from everyone in our religion";
+                ret = "a collective faith";
                 break;
             case Religion.OrganizedReligion:
-                ret = "institutional religion";
+                ret = "an institutional religion";
                 break;
             case Religion.Zealotry:
-                ret = "religious fervour";
+                ret = "zealotry";
                 break;
         }
         return ret;

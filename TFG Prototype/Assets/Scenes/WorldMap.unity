@@ -1846,6 +1846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kuufast
       objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
+      objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
       value: 1
@@ -1914,6 +1918,10 @@ PrefabInstance:
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
       value: Zhison
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
@@ -3121,6 +3129,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Qragos
       objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
+      objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
       value: 1
@@ -3449,6 +3461,10 @@ PrefabInstance:
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
       value: Esterwell
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
@@ -5341,6 +5357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plagos
       objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
+      objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
       value: 1
@@ -6149,6 +6169,10 @@ PrefabInstance:
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
       value: Vleennard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
@@ -8747,6 +8771,10 @@ PrefabInstance:
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
       value: Heuburg
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
@@ -12169,6 +12197,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Antagate
       objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
+      objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
       value: 1
@@ -12527,6 +12559,10 @@ PrefabInstance:
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
       value: Zlimouth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
@@ -12977,6 +13013,10 @@ PrefabInstance:
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
       value: Oylose
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: savePos
@@ -15484,6 +15524,10 @@ PrefabInstance:
     - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_Name
       value: Ovoddale
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972958930808225808, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_TagString
+      value: city
       objectReference: {fileID: 0}
     - target: {fileID: 3577139394923303285, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: EnterText

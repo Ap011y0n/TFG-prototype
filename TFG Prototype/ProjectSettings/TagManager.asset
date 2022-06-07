@@ -12,6 +12,7 @@ TagManager:
   - river
   - mission
   - WorldLight
+  - city
   layers:
   - Default
   - TransparentFX

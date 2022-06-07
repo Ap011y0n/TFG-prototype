@@ -130,4 +130,166 @@ public class PoliticsGenerator : MonoBehaviour
     {
         return Mathf.Abs((int)P1 - (int)P2);
     }
+
+    public static string returnLeadershipView(Leadership leadership)
+    {
+        string ret = "";
+        switch (leadership)
+        {
+            case Leadership.Representation:
+                ret = "democratic representation";
+                break;
+            case Leadership.Monarchy:
+                ret = "monarchical rule";
+                break;
+            case Leadership.Theocracy:
+                ret = "religious representation in the government";
+                break;
+            case Leadership.Statocracy:
+                ret = "military representation in the government";
+                break;
+        }
+        return ret;
+    }
+    public static string returnReligiousView(Religion religion)
+    {
+        string ret = "";
+        switch (religion)
+        {
+            case Religion.Atheism:
+                ret = "a state atheism";
+                break;
+            case Religion.CollectiveFaith:
+                ret = "a collective faith";
+                break;
+            case Religion.OrganizedReligion:
+                ret = "an institutional religion";
+                break;
+            case Religion.Zealotry:
+                ret = "zealotry";
+                break;
+        }
+        return ret;
+    }
+    public static string returnForeignView(Foreign foreign)
+    {
+        string ret = "";
+        switch (foreign)
+        {
+            case Foreign.Isolationist:
+                ret = "isolationism";
+                break;
+            case Foreign.Interventionist:
+                ret = "attention to foreign affairs";
+                break;
+            case Foreign.Internationalist:
+                ret = "poilitical interference";
+                break;
+            case Foreign.Imperialist:
+                ret = "military expansionism";
+                break;
+        }
+        return ret;
+    }
+    public static string returnEconomyView(Economy economy)
+    {
+        string ret = "";
+        switch (economy)
+        {
+            case Economy.Protectionism:
+                ret = "economic interventionism";
+                break;
+            case Economy.Mercantilism:
+                ret = "taxes to foreign merchants";
+                break;
+            case Economy.FreeTrade:
+                ret = "market autoregulations";
+                break;
+            case Economy.Slavery:
+                ret = "slave trading";
+                break;
+        }
+        return ret;
+    }
+    public static string returnMilitaryView(Military military)
+    {
+        string ret = "";
+        switch (military)
+        {
+            case Military.StandingArmy:
+                ret = "nation's standing army";
+                break;
+            case Military.Conscription:
+                ret = "conscription laws";
+                break;
+            case Military.Militia:
+                ret = "militias";
+                break;
+            case Military.Pacifism:
+                ret = "nation's disarment";
+                break;
+        }
+        return ret;
+    }
+    public static string returnCulturalView(Cultural culture)
+    {
+        string ret = "";
+        switch (culture)
+        {
+            case Cultural.Aesthetics:
+                ret = "aesthetical values";
+                break;
+            case Cultural.Contemplation:
+                ret = "philosophical contemplation";
+                break;
+            case Cultural.Populism:
+                ret = "hero worshipping";
+                break;
+            case Cultural.Hegemony:
+                ret = "cultural pride";
+                break;
+        }
+        return ret;
+    }
+
+    public static string returnIntellectualView(Intellectual intellectual)
+    {
+        string ret = "";
+        switch (intellectual)
+        {
+            case Intellectual.Antiquarian:
+                ret = "historical events";
+                break;
+            case Intellectual.Literary:
+                ret = "literacy";
+                break;
+            case Intellectual.Scholarly:
+                ret = "natural laws";
+                break;
+            case Intellectual.Mechanical:
+                ret = "engineering";
+                break;
+        }
+        return ret;
+    }
+    public static string returnJudicialView(Justice justice)
+    {
+        string ret = "";
+        switch (justice)
+        {
+            case Justice.Frontier:
+                ret = "survival of the fittest";
+                break;
+            case Justice.Vigilantism:
+                ret = "bounty hunters";
+                break;
+            case Justice.Penitentiary:
+                ret = "penitentiary centers";
+                break;
+            case Justice.Ordeal:
+                ret = "tortures and executions";
+                break;
+        }
+        return ret;
+    }
 }

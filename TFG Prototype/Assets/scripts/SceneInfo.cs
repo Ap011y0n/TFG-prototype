@@ -31,11 +31,120 @@ public class SceneInfo
             dailyEvents.Add(eventText.Replace("Name", sceneNpcs[i].name));
 
         }
-        foreach (string item in dailyEvents)
+        //foreach (string item in dailyEvents)
+        //{
+        //    Debug.Log(item);
+
+        //}
+    }
+    public void CheckTantrums()
+    {
+        int politic = 0;
+        for(int i = 0; i < families.Count; ++i)
         {
-            Debug.Log(item);
+            int totalStress = 0;
+            for(int j = 0; j < families[i].members.Count; ++j)
+            {
+                totalStress += families[i].members[j].stress;
+            }
+            //  if(Random.Range( 0, totalStress / families[i].members.Count) > 1)
+            if ((totalStress / families[i].members.Count) > 1)
+            {
+                NpcData instigator;
+              if( GatherSupport(families[i], out politic, out instigator))
+                {
+                    launchCoup(politic, instigator);
+                }
+
+            }
 
         }
+    }
+    void launchCoup(int politic, NpcData instigator)
+    {
+        string log = "Coup launched by " + instigator.name  + "of the " 
+            + instigator.family.name + " family, with enough popular support, " + sceneName + " politic1 is now politic2";
+        switch(politic)
+        {
+            case 1:
+                log = log.Replace("politic1", PoliticsGenerator.returnLeadershipView(profile.leadership));
+                log = log.Replace("politic2", PoliticsGenerator.returnLeadershipView(instigator.profile.leadership));
+                if(profile.leadership == instigator.profile.leadership)
+                {
+                    Debug.Log("broo");
+                }
+                profile.leadership = instigator.profile.leadership;
+
+                break;
+            case 2:
+                log = log.Replace("politic1", PoliticsGenerator.returnLeadershipView(profile.leadership));
+                log = log.Replace("politic2", PoliticsGenerator.returnLeadershipView(instigator.profile.leadership));
+                profile.foreign = instigator.profile.foreign;
+                break;
+            case 3:
+                log = log.Replace("politic1", PoliticsGenerator.returnReligiousView(profile.religion));
+                log = log.Replace("politic2", PoliticsGenerator.returnReligiousView(instigator.profile.religion));
+                profile.religion = instigator.profile.religion;
+                break;
+            case 4:
+                log = log.Replace("politic1", PoliticsGenerator.returnJudicialView(profile.justice));
+                log = log.Replace("politic2", PoliticsGenerator.returnJudicialView(instigator.profile.justice));
+                profile.justice = instigator.profile.justice;
+                break;
+            case 5:
+                log = log.Replace("politic1", PoliticsGenerator.returnMilitaryView(profile.military));
+                log = log.Replace("politic2", PoliticsGenerator.returnMilitaryView(instigator.profile.military));
+                profile.military = instigator.profile.military;
+                break;
+            case 6:
+                log = log.Replace("politic1", PoliticsGenerator.returnEconomyView(profile.economy));
+                log = log.Replace("politic2", PoliticsGenerator.returnEconomyView(instigator.profile.economy));
+                profile.economy = instigator.profile.economy;
+                break;
+            case 7:
+                log = log.Replace("politic1", PoliticsGenerator.returnCulturalView(profile.cultural));
+                log = log.Replace("politic2", PoliticsGenerator.returnCulturalView(instigator.profile.cultural));
+                profile.cultural = instigator.profile.cultural;
+                break;
+            case 8:
+                log = log.Replace("politic1", PoliticsGenerator.returnIntellectualView(profile.intellectual));
+                log = log.Replace("politic2", PoliticsGenerator.returnIntellectualView(instigator.profile.intellectual));
+                profile.intellectual = instigator.profile.intellectual;
+                break;
+
+        }
+        Debug.Log(log);
+    }
+    bool GatherSupport(Family instigators, out int politic, out NpcData instigator)
+    {
+        instigator = instigators.returnRebelMember(profile, out politic);
+        bool succeeded = false;
+
+        if (politic == -1)
+        {
+            return succeeded;
+        }
+        List<Family> supporters = new List<Family>();
+
+        for (int i = 0; i < families.Count; ++i)
+        {
+            int totalStress = 0;
+            for (int j = 0; j < families[i].members.Count; ++j)
+            {
+                totalStress += families[i].members[j].stress;
+            }
+           
+            if((totalStress / families[i].members.Count) > 1)
+            {
+                supporters.Add(families[i]);
+            }
+
+        }
+        if(supporters.Count > families.Count/2)
+        {
+            succeeded = true;
+        }
+        return succeeded;
     }
 
     public void Work()

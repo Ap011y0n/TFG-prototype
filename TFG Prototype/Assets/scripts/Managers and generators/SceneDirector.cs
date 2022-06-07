@@ -139,6 +139,7 @@ public class SceneDirector : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         LoadedScenes = new Dictionary<string, SceneInfo>();
         currentBattleMaps = new Dictionary<System.Guid, BattleMapInfo>();
+        CreateSceneInfo();
     }
 
     // called first
@@ -148,6 +149,22 @@ public class SceneDirector : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    void CreateSceneInfo()
+    {
+        GameObject[] cities = GameObject.FindGameObjectsWithTag("city");
+        for (int i = 0; i < cities.Length; ++i)
+        {
+            if (!LoadedScenes.ContainsKey(cities[i].name))
+            {
+                SceneInfo newScene = new SceneInfo();
+                newScene.sceneName = cities[i].name;
+                newScene.sceneNpcs = new List<NpcData>();
+                newScene.profile = PoliticsGenerator.createProfile();
+                newScene = createNpcs(newScene);
+                LoadedScenes.Add(cities[i].name, newScene);
+            }
+        }
+    }
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -233,8 +250,9 @@ public class SceneDirector : MonoBehaviour
 
     SceneInfo createNpcs(SceneInfo info)
     {
-        List<GameObject> spawnPositions = new List<GameObject>(GameObject.FindGameObjectsWithTag("SpawnPoint"));
-        int maxNpc = spawnPositions.Count * 2;
+        //List<GameObject> spawnPositions = new List<GameObject>(GameObject.FindGameObjectsWithTag("SpawnPoint"));
+        //int maxNpc = spawnPositions.Count * 2;
+        int maxNpc = 40;
         Family family = CreateFamily();
         info.families = new List<Family>();
         info.families.Add(family);
@@ -394,7 +412,12 @@ public class SceneDirector : MonoBehaviour
                 eventTrigger++;
                 foreach (KeyValuePair<string, SceneInfo> entry in LoadedScenes)
                 {
-                    entry.Value.MorningEvent();
+                    if(entry.Value.sceneName != "WorldMap")
+                    {
+                        entry.Value.MorningEvent();
+                        entry.Value.CheckTantrums();
+                    }
+
                 }
             }
             if (hours >= 15 && eventTrigger < 2)
