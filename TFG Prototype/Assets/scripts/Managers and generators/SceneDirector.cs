@@ -423,6 +423,15 @@ public class SceneDirector : MonoBehaviour
             if (hours >= 15 && eventTrigger < 2)
             {
                 eventTrigger++;
+                foreach (KeyValuePair<string, SceneInfo> entry in LoadedScenes)
+                {
+                    if (entry.Value.sceneName != "WorldMap")
+                    {
+                        entry.Value.InteractionEvent();
+                        entry.Value.CheckTantrums();
+                    }
+
+                }
             }
             if (hours >= 22 && eventTrigger < 3)
             {

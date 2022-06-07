@@ -12,6 +12,8 @@ public class SceneInfo
     public NpcData QuestGiver;
     public PoliticProfile profile;
     public List<string> dailyEvents;
+    public List<string> interactionEvents;
+
     public static List<DailyEvent> morningEvents;
     public struct DailyEvent
     {
@@ -32,6 +34,24 @@ public class SceneInfo
 
         }
         //foreach (string item in dailyEvents)
+        //{
+        //    Debug.Log(item);
+
+        //}
+    }
+    public void InteractionEvent()
+    {
+        List<NpcData> interactableNpcs = new List<NpcData>(sceneNpcs);
+        interactionEvents = new List<string>();
+
+        for (int i = 0; i < sceneNpcs.Count; ++i)
+        {
+            int id = Random.Range(0, interactableNpcs.Count);
+            DailyEvent randomEvent = ReturnInteraction(sceneNpcs[i], interactableNpcs[id]);
+            interactableNpcs.RemoveAt(id);
+            interactionEvents.Add(randomEvent.text);
+        }
+        //foreach (string item in interactionEvents)
         //{
         //    Debug.Log(item);
 
@@ -161,6 +181,36 @@ public class SceneInfo
     {
         return morningEvents[Random.Range(0, morningEvents.Count)]; 
     }
+    DailyEvent ReturnInteraction(NpcData npc1, NpcData npc2)
+    {
+        int stressValue = 0;
+        DailyEvent interaction = new DailyEvent();
+        interaction.text = "npc1 interacted with npc2, mood";
+        interaction.text = interaction.text.Replace("npc1", npc1.name);
+        interaction.text = interaction.text.Replace("npc2", npc2.name);
+
+        if (npc2.stress > 10)
+            stressValue = Random.Range(5, 10);
+        else if(npc2.stress < -15)
+        {
+            stressValue = Random.Range(-2, -5);
+        }
+        else
+        {
+            stressValue = Random.Range(-5, 5);
+        }
+        if(stressValue <= 0)
+        {
+            interaction.text = interaction.text.Replace("mood", "the conversation was relaxing.");
+        }
+        else
+        {
+            interaction.text = interaction.text.Replace("mood", "their bad mood was contagious.");
+        }
+        interaction.stress = new Vector2Int(stressValue, stressValue);
+        return interaction;
+    }
+
     public static void fillMorningEvents()
     {
         morningEvents = new List<DailyEvent>();
