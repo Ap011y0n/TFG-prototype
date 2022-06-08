@@ -31,7 +31,9 @@ public class SceneInfo
             sceneNpcs[i].Stress += Random.Range(randomEvent.stress.x, randomEvent.stress.y);
             string eventText = randomEvent.text;
             sceneNpcs[i].mood = randomEvent.mood;
-            dailyEvents.Add(eventText.Replace("Name", sceneNpcs[i].name));
+            eventText = eventText.Replace("Name", sceneNpcs[i].name);
+            dailyEvents.Add(eventText);
+            sceneNpcs[i].history += eventText + "\n";
 
         }
         //foreach (string item in dailyEvents)
@@ -52,6 +54,9 @@ public class SceneInfo
             interactableNpcs.RemoveAt(id);
             interactionEvents.Add(randomEvent.text);
             sceneNpcs[i].Stress += Random.Range(randomEvent.stress.x, randomEvent.stress.y);
+            sceneNpcs[i].history += randomEvent.text + "\n";
+
+
         }
         //foreach (string item in interactionEvents)
         //{

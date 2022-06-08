@@ -29,7 +29,7 @@ public class NpcData
     public bool hasActiveQuest;
     public Family family;
     public Vector3 position;
-
+    public string history = "";
     public int returnConflictivePolitics(PoliticProfile cityProfile)
     {
         int complicity =  PoliticsGenerator.checkLeadership(profile.leadership, cityProfile.leadership);

@@ -364,12 +364,14 @@ public class SceneDirector : MonoBehaviour
         }
         GameObject stressPanel = GameObject.Find("StressPanel");
         GameObject scroll = GameObject.Find("Scroll");
+        GameObject logHistory = GameObject.Find("Log History");
+        TextMeshProUGUI npcHistory = GameObject.Find("NpcHistory").GetComponent<TextMeshProUGUI>();
         for (int i = 0; i < info.sceneNpcs.Count; i++)
         {
             StressBar bar = Instantiate(stressBarPrefab, scroll.transform);
             bar.transform.position += offset;
             offset.y -= 30;
-            bar.InitStressBarUi(info.sceneNpcs[i].Stress, info.sceneNpcs[i].name);
+            bar.InitStressBarUi(info.sceneNpcs[i].Stress, info.sceneNpcs[i].name, info.sceneNpcs[i].history, logHistory, npcHistory);
         }
     }
 
