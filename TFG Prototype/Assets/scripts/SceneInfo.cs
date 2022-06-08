@@ -28,7 +28,7 @@ public class SceneInfo
         for (int i = 0; i < sceneNpcs.Count; ++i)
         {
             DailyEvent randomEvent = ReturnMorningEvent();
-            sceneNpcs[i].stress += Random.Range(randomEvent.stress.x, randomEvent.stress.y);
+            sceneNpcs[i].Stress += Random.Range(randomEvent.stress.x, randomEvent.stress.y);
             string eventText = randomEvent.text;
             sceneNpcs[i].mood = randomEvent.mood;
             dailyEvents.Add(eventText.Replace("Name", sceneNpcs[i].name));
@@ -51,6 +51,7 @@ public class SceneInfo
             DailyEvent randomEvent = ReturnInteraction(sceneNpcs[i], interactableNpcs[id]);
             interactableNpcs.RemoveAt(id);
             interactionEvents.Add(randomEvent.text);
+            sceneNpcs[i].Stress += Random.Range(randomEvent.stress.x, randomEvent.stress.y);
         }
         //foreach (string item in interactionEvents)
         //{
@@ -69,7 +70,7 @@ public class SceneInfo
             int totalStress = 0;
             for(int j = 0; j < families[i].members.Count; ++j)
             {
-                totalStress += families[i].members[j].stress;
+                totalStress += families[i].members[j].Stress;
             }
             //  if(Random.Range( 0, totalStress / families[i].members.Count) > 1)
             if ((totalStress / families[i].members.Count) > 20)
@@ -167,7 +168,7 @@ public class SceneInfo
                 int totalStress = 0;
                 for (int j = 0; j < families[i].members.Count; ++j)
                 {
-                    totalStress += families[i].members[j].stress;
+                    totalStress += families[i].members[j].Stress;
                 }
 
                 if ((totalStress / families[i].members.Count) > 10)
@@ -211,9 +212,9 @@ public class SceneInfo
         interaction.text = interaction.text.Replace("npc1", npc1.name);
         interaction.text = interaction.text.Replace("npc2", npc2.name);
 
-        if (npc2.stress > 10)
+        if (npc2.Stress > 10)
             stressValue = Random.Range(10, 20);
-        else if(npc2.stress < -15)
+        else if(npc2.Stress < -15)
         {
             stressValue = Random.Range(-2, -5);
         }

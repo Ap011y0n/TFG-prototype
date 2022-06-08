@@ -16,7 +16,7 @@ public class Family
 
         for (int i = 1; i < members.Count; ++i)
         {
-            if (members[i].stress > ret.stress)
+            if (members[i].Stress > ret.Stress)
             {
                 int res = members[i].returnConflictivePolitics(cityProfile);
                 if (res != -1)
@@ -34,7 +34,7 @@ public class Family
     {
         for (int i = 1; i < members.Count; ++i)
         {
-            members[i].stress += stress;
+            members[i].Stress += stress;
         }
     }
 }

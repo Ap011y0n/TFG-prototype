@@ -18,7 +18,12 @@ public class NpcData
 {
     public string name;
     public Mood mood;
-    public int stress = 0;
+    private int stress;
+    public int Stress
+    {
+        get { return stress;  }
+        set { stress = Mathf.Clamp(value, -50, 50); }
+    }
     public PoliticProfile profile;
     public System.Guid guid;
     public bool hasActiveQuest;

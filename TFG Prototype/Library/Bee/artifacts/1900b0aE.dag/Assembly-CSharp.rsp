@@ -354,6 +354,7 @@
 "Assets/scripts/SceneInfo.cs"
 "Assets/scripts/UI/BuyButton.cs"
 "Assets/scripts/UI/ChatButtons.cs"
+"Assets/scripts/UI/StressBar.cs"
 -langversion:8.0
 
 /deterministic

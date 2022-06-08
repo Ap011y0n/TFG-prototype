@@ -124,6 +124,8 @@ public class SceneDirector : MonoBehaviour
     [HideInInspector]
     public BattleMapInfo currentBattleMapInfo;
     bool isInWorld = false;
+
+    public StressBar stressBarPrefab;
     // called zero
     void Awake()
     {
@@ -276,7 +278,7 @@ public class SceneDirector : MonoBehaviour
             newNpc.guid = System.Guid.NewGuid();
             newNpc.hasActiveQuest = false;
             newNpc.position = new Vector3(0, 0, 0);
-            newNpc.stress = 0;
+            newNpc.Stress = Random.Range(-20, 20);
             info.sceneNpcs.Add(newNpc);
             family.members.Add(newNpc);
 
@@ -331,13 +333,14 @@ public class SceneDirector : MonoBehaviour
         List<NpcData> sceneNpcs = new List<NpcData> (info.sceneNpcs);
         int maxSpawns = Random.Range(spawnPositions.Count/2, spawnPositions.Count);
         bool questgiver = false;
+        Vector3 offset = new Vector3(0, 0, 0);
         for (int i = 0; i < maxSpawns; i++)
         {
             int randomPos = Random.Range(0, spawnPositions.Count);
             Vector3 spawnPos = spawnPositions[randomPos].transform.position;
             GameObject temp = GameObject.Instantiate(npcPrefab, spawnPos, Quaternion.identity);
             spawnPositions.RemoveAt(randomPos);
-
+            int stress = 0;
             if (!questgiver)
             {
                 NpcData NewNpc = info.QuestGiver;
@@ -346,6 +349,7 @@ public class SceneDirector : MonoBehaviour
                 temp.name = NewNpc.name;
                 temp.GetComponent<Npc>().setInitParams(info, NewNpc);
                 questgiver = true;
+                stress = NewNpc.Stress;
             }
             else
             {
@@ -354,10 +358,19 @@ public class SceneDirector : MonoBehaviour
                 sceneNpcs.RemoveAt(id);
                 temp.name = NewNpc.name;
                 temp.GetComponent<Npc>().setInitParams(info, NewNpc);
+                stress = NewNpc.Stress;
             }
-       
+           
         }
-
+        GameObject stressPanel = GameObject.Find("StressPanel");
+        GameObject scroll = GameObject.Find("Scroll");
+        for (int i = 0; i < info.sceneNpcs.Count; i++)
+        {
+            StressBar bar = Instantiate(stressBarPrefab, scroll.transform);
+            bar.transform.position += offset;
+            offset.y -= 30;
+            bar.InitStressBarUi(info.sceneNpcs[i].Stress, info.sceneNpcs[i].name);
+        }
     }
 
     public string GenerateName(int genre, string surname)

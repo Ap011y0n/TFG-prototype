@@ -99,7 +99,7 @@ public class Npc : MonoBehaviour
         profile = newNpc.profile;
         NPCGuid = newNpc.guid;
         family = newNpc.family;
-        stress = newNpc.stress;
+        stress = newNpc.Stress;
         HasActiveQuest = newNpc.hasActiveQuest;
     }
 }

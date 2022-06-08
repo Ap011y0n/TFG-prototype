@@ -13687,6 +13687,7 @@ MonoBehaviour:
   light: {fileID: 0}
   npcPrefab: {fileID: 5749385414847991376, guid: 1d93350a33e660d4c8afb6ebcef6718c, type: 3}
   questLoader: {fileID: 8290987917506245173, guid: b4578d04ced052a47878139f32f8bd29, type: 3}
+  stressBarPrefab: {fileID: 8883117422836212764, guid: afe87a1deef91254fa68cf644c25615e, type: 3}
 --- !u!4 &1895446010
 Transform:
   m_ObjectHideFlags: 0
