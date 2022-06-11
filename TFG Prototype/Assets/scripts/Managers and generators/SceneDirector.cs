@@ -54,6 +54,7 @@ public class SceneDirector : MonoBehaviour
     bool isInWorld = false;
 
     public StressBar stressBarPrefab;
+    public List<string> Loadedcities = new List<string>();
     // called zero
     void Awake()
     {
@@ -83,6 +84,9 @@ public class SceneDirector : MonoBehaviour
     {
         GameObject[] cities = GameObject.FindGameObjectsWithTag("city");
         for (int i = 0; i < cities.Length; ++i)
+            Loadedcities.Add(cities[i].name);
+
+        for (int i = 0; i < cities.Length; ++i)
         {
             if (!LoadedScenes.ContainsKey(cities[i].name))
             {
@@ -92,6 +96,7 @@ public class SceneDirector : MonoBehaviour
                 newScene.profile = PoliticsGenerator.createProfile();
                 newScene = createNpcs(newScene);
                 LoadedScenes.Add(cities[i].name, newScene);
+                Characters character = new Characters();
             }
         }
     }
