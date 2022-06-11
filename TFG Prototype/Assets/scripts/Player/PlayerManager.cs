@@ -82,7 +82,7 @@ public class PlayerManager : MonoBehaviour
         if(!canvas)
         canvas = GameObject.Find("Canvas");
 
-        InventoryUI inventory = canvas.GetComponent<InventoryUI>();
+        PlayerUi inventory = canvas.GetComponent<PlayerUi>();
         if(inventory)
         {
            inventory.SetGold(gold.ToString());

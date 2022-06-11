@@ -22,79 +22,7 @@ public enum enemyType
 public class SceneDirector : MonoBehaviour
 {
   
-    string[] maleNames =  new string[] 
-    {
-        "Rhuhmud",
-        "Fishun",
-        "Gronken",
-        "Stalvorn",
-        "Glidrol",
-        "Vif",
-        "Blurbem",
-        "Bror",
-        "Butar-Zeoz",
-        "Tinis",
-        "Golmothet",
-        "Shislar",
-        "Jah",
-        "Fuing",
-        "Martascol",
-        "Padrul",
-    };
-    string[] femaleNames = new string[]
-{
-        "Cohmuroh",
-        "Nuseil",
-        "Relirru",
-        "Josvieh",
-        "Sirles",
-        "Ci",
-        "Herhithro",
-        "Kige",
-        "Viresu",
-        "Rizreth",
-        "Eraldra",
-        "Urse",
-        "Xue",
-        "Pai",
-        "Quir",
-        "Dartm",
-};
-    string[] surnames = new string[]
-{
-        " Bhossod",
-        " Janno",
-        " Flintblaze",
-        " Rumblestrider",
-        " Grusk",
-        " Duzarsk",
-        " Truewound",
-        " Winterbrow",
-        " Bekrizrud",
-        " Luzifk",
-        " Rugobyedye",
-        " Vanunze",
-        " Yung",
-        " Xia",
-        " Bodrese",
-        " Pastuscen",
-        " Nohlar",
-        " Padein",
-        " Greenshot",
-        " Skullcut",
-        " Sitsk",
-        " Kevin",
-        " Ironmaw",
-        " Bloodoak",
-        " Ronskupvot",
-        " Fueltrekt",
-        " Stomolzebe",
-        " Zenungi",
-        " Cein",
-        " Wang",
-        " Margargi",
-        " Gunzurnas",
-};
+    
 
     enum Cycle
     {
@@ -303,7 +231,7 @@ public class SceneDirector : MonoBehaviour
         Family family = new Family();
         family.members = new List<NpcData>();
         family.relationships = new Dictionary<Family, int>();
-        family.name = surnames[Random.Range(0, surnames.Length)];
+        family.name = Names.surnames[Random.Range(0, Names.surnames.Length)];
 
         return family;
     }
@@ -370,9 +298,10 @@ public class SceneDirector : MonoBehaviour
         {
             StressBar bar = Instantiate(stressBarPrefab, scroll.transform);
             bar.transform.position += offset;
-            offset.y -= 30;
+            offset.y -= 60;
             bar.InitStressBarUi(info.sceneNpcs[i].Stress, info.sceneNpcs[i].name, info.sceneNpcs[i].history, logHistory, npcHistory);
         }
+        stressPanel.SetActive(false);
     }
 
     public string GenerateName(int genre, string surname)
@@ -382,12 +311,12 @@ public class SceneDirector : MonoBehaviour
         {
             case 0:
                 {
-                    name = maleNames[Random.Range(0, maleNames.Length)];
+                    name = Names.maleNames[Random.Range(0, Names.maleNames.Length)];
                 }
                 break;
             case 1:
                 {
-                    name = femaleNames[Random.Range(0, femaleNames.Length)];
+                    name = Names.femaleNames[Random.Range(0, Names.femaleNames.Length)];
                 }
                 break;
         }

@@ -13682,7 +13682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637a40461083b5b4eae06415676894fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeSpeed: 300
+  TimeSpeed: 900
   TimerText: {fileID: 0}
   light: {fileID: 0}
   npcPrefab: {fileID: 5749385414847991376, guid: 1d93350a33e660d4c8afb6ebcef6718c, type: 3}

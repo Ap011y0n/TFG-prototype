@@ -320,6 +320,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/VSSettingsProvider.ref.dll"
 "Assets/scripts/ChangeScene.cs"
+"Assets/scripts/Characters.cs"
 "Assets/scripts/CombatCameraMovement.cs"
 "Assets/scripts/CombatController.cs"
 "Assets/scripts/DamageText.cs"
@@ -341,10 +342,10 @@
 "Assets/scripts/Managers and generators/QuestManager.cs"
 "Assets/scripts/Managers and generators/SceneDirector.cs"
 "Assets/scripts/MouseOver.cs"
+"Assets/scripts/Names.cs"
 "Assets/scripts/Npc.cs"
 "Assets/scripts/NpcData.cs"
 "Assets/scripts/ObjectMarker.cs"
-"Assets/scripts/Player/InventoryUI.cs"
 "Assets/scripts/Player/PlayerController.cs"
 "Assets/scripts/Player/PlayerManager.cs"
 "Assets/scripts/QuestGiver.cs"
@@ -354,6 +355,7 @@
 "Assets/scripts/SceneInfo.cs"
 "Assets/scripts/UI/BuyButton.cs"
 "Assets/scripts/UI/ChatButtons.cs"
+"Assets/scripts/UI/PlayerUi.cs"
 "Assets/scripts/UI/StressBar.cs"
 -langversion:8.0
 
