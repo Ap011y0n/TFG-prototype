@@ -96,7 +96,7 @@ public class SceneDirector : MonoBehaviour
                 newScene.profile = PoliticsGenerator.createProfile();
                 newScene = createNpcs(newScene);
                 LoadedScenes.Add(cities[i].name, newScene);
-                Characters character = new Characters();
+                Character character = new Character();
             }
         }
     }

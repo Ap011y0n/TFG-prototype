@@ -15,7 +15,18 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject canvas;
 
+    enum troopType
+    {
+        SPEARMEN,
+    }
+    struct Troop
+    {
+        Character UnitLeader;
+        System.Guid guid;
+        troopType type;
+    }
 
+    Dictionary<System.Guid, Troop> troops;
     void Awake()
     {
         if (_instance != null && _instance != this)

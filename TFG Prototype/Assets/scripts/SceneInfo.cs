@@ -78,7 +78,7 @@ public class SceneInfo
                 totalStress += families[i].members[j].Stress;
             }
             //  if(Random.Range( 0, totalStress / families[i].members.Count) > 1)
-            if ((totalStress / families[i].members.Count) > 20)
+            if ((totalStress / families[i].members.Count) > 40)
             {
                 NpcData instigator;
                 List<Family> supporters, neutral;
@@ -176,7 +176,7 @@ public class SceneInfo
                     totalStress += families[i].members[j].Stress;
                 }
 
-                if ((totalStress / families[i].members.Count) > 10)
+                if ((totalStress / families[i].members.Count) > 30)
                 {
                     supporters.Add(families[i]);
                 }
