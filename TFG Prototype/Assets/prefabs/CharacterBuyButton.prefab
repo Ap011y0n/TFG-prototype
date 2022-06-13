@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: {fileID: 7558915453156656193}
+  heroImage: {fileID: 2029823546543268063}
 --- !u!1 &7258397003551902126
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ using TMPro;
 public class BuyButton : MonoBehaviour
 {
     public TextMeshProUGUI price;
+    public Unit unit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,8 @@ public class BuyButton : MonoBehaviour
         if(PlayerManager.Instance.canBuy(int.Parse(price.text)))
         {
             PlayerManager.Instance.addGold(-int.Parse(price.text));
-            PlayerManager.Instance.addTroops(1);
+            unit = new Unit();
+            PlayerManager.Instance.addTroops(unit);
             PlayerManager.Instance.RefreshUI();
         }
 

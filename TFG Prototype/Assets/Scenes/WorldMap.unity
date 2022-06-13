@@ -279,6 +279,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  MaleHeroesSprites:
+  - {fileID: -58815021711969369, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 2648238486963726774, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -4264047913241456239, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -7481830100529175269, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 3863698612496218735, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 8556446506362495058, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -8911248231980245521, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 4277484394807138283, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -5524536238149586636, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 7445755133787082939, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 8583919995396088694, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 2872623905193915054, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -2578677187583281353, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 5920271978394274496, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -8606548339782005553, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 2281477220082148261, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -6268167599114019925, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 4671324007269339308, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 6550687284983066496, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 4417298740368524470, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -9013186296508267308, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -9069322955614153839, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -5500220093980427971, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -5222694219939530470, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -3348662821152903918, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 8396429399377213504, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -8593402411752303140, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -542672782929215050, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -8825184393316777124, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -1297563345546771364, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 8444819001454244247, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -8894620215317619982, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -7018752533005020763, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: -4343094609494180436, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  - {fileID: 5085354444777829002, guid: 994d7175e1994f14fb4516e5d35152f2, type: 3}
+  FemaleHeroesSprites: []
+  defaultHeroSprite: {fileID: 21300000, guid: 24be91b1d3ee03c43aee0e8f471f46a6, type: 3}
 --- !u!4 &48437451
 Transform:
   m_ObjectHideFlags: 0
@@ -7611,7 +7649,14 @@ MonoBehaviour:
   storeTroops: {fileID: 0}
   inventory: {fileID: 285376717}
   store: {fileID: 0}
+  stressInfo: {fileID: 0}
   menu: {fileID: 1790972003}
+  troopSelectButton: {fileID: 0}
+  troopSelButtonPos: {x: 0, y: 0, z: 0}
+  characterSelectButton: {fileID: 0}
+  charSelButtonPos: {x: 0, y: 0, z: 0}
+  characterBuyButton: {fileID: 0}
+  charBuyButtonPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1091001886
 GameObject:
   m_ObjectHideFlags: 0
@@ -13688,6 +13733,7 @@ MonoBehaviour:
   npcPrefab: {fileID: 5749385414847991376, guid: 1d93350a33e660d4c8afb6ebcef6718c, type: 3}
   questLoader: {fileID: 8290987917506245173, guid: b4578d04ced052a47878139f32f8bd29, type: 3}
   stressBarPrefab: {fileID: 8883117422836212764, guid: afe87a1deef91254fa68cf644c25615e, type: 3}
+  Loadedcities: []
 --- !u!4 &1895446010
 Transform:
   m_ObjectHideFlags: 0

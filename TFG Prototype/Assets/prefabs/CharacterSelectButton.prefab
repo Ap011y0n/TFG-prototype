@@ -123,13 +123,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 668585768239477971}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 7257448966031687541}
+        m_TargetAssemblyTypeName: SelectCharButton, Assembly-CSharp
+        m_MethodName: SelectThisChar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: {fileID: 6598800880924995291}
+  playerUi: {fileID: 0}
+  heroImage: {fileID: 3308655567346120095}
 --- !u!1 &2568010951561858077
 GameObject:
   m_ObjectHideFlags: 0

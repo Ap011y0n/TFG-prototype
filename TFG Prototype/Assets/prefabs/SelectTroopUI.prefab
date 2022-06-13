@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -9173216857798640283, guid: df6f29fde44e52e4e9421fca35d7fb04, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -198,9 +198,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7420538922619521686}
-        m_TargetAssemblyTypeName: BuyButton, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1434250434710096468}
+        m_TargetAssemblyTypeName: SelectTroopUi, Assembly-CSharp
+        m_MethodName: SelectThisUnit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -222,6 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33862f96c4d6db4fbdca13d2439ee23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUi: {fileID: 0}
+  heroImage: {fileID: 3762841973755402821}
 --- !u!1 &8390383250908732209
 GameObject:
   m_ObjectHideFlags: 0

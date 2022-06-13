@@ -26,11 +26,15 @@ public class PlayerManager : MonoBehaviour
     }
 
     public List<Character> recruitedCharacters = new List<Character>();
+    public List<Unit> recruitedUnits = new List<Unit>();
 
     private int gold = 1000;
 
     public GameObject canvas;
 
+    public Sprite[] MaleHeroesSprites;
+    public Sprite[] FemaleHeroesSprites;
+    public Sprite defaultHeroSprite;
     enum troopType
     {
         SPEARMEN,
@@ -93,10 +97,19 @@ public class PlayerManager : MonoBehaviour
     public void setTroops(int value)
     {
         troopCount = value;
+        for(int i = 0; i < value; ++i)
+        {
+            Unit unit = new Unit();
+            unit.character = new Character(defaultHeroSprite);
+            recruitedUnits.Add(unit);
+        }
     }
-    public void addTroops(int value)
+    public void addTroops(Unit unit)
     {
-        troopCount += value;
+        troopCount ++;
+        unit.character = null;
+        recruitedUnits.Add(unit);
+
     }
 
     public void addCharacter(Character newCharacter)
@@ -117,10 +130,9 @@ public class PlayerManager : MonoBehaviour
         if(inventory)
         {
            inventory.SetGold(gold.ToString());
-           inventory.SetTroops(troopCount.ToString());
+         //  inventory.SetTroops(troopCount.ToString());
            inventory.RefreshCharactersAndTroops();
         }
-        
 
     }
 }

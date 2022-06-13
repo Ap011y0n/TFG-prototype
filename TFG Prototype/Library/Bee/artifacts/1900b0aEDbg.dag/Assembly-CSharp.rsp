@@ -360,6 +360,7 @@
 "Assets/scripts/UI/SelectCharButton.cs"
 "Assets/scripts/UI/SelectTroopUi.cs"
 "Assets/scripts/UI/StressBar.cs"
+"Assets/scripts/Unit.cs"
 -langversion:8.0
 
 /deterministic

@@ -10,6 +10,7 @@ public class Character
     public int gender;
     public int age;
     public string description;
+    public Sprite heroCard;
     public Character()
     {
         gender = Random.Range(0, 2);
@@ -22,7 +23,19 @@ public class Character
         stats = GenerateStats();
         stats.GenerateBaseStats(age);
         story = GenerateStory();
+        heroCard = PlayerManager.Instance.MaleHeroesSprites[Random.Range(0, PlayerManager.Instance.MaleHeroesSprites.Length)];
         
+    }
+    public Character(Sprite sprite)
+    {
+        gender = 1;
+        Name = "";
+        age = 0;
+        stats = GenerateStats();
+        stats.setStatsToZero();
+        story = GenerateStory();
+        heroCard = sprite;
+
     }
     public BackStory GenerateStory()
     {
@@ -394,6 +407,14 @@ public class Stats
         }
     }
 
+    public void setStatsToZero()
+    {
+        Strength = 0;
+        Speed = 0;
+        Intelligence = 0;
+        Roguery = 0;
+        Movement = 0;
+    }
     public void AddStat(int stat, int value)
     {
         switch (stat)
