@@ -96,7 +96,6 @@ public class SceneDirector : MonoBehaviour
                 newScene.profile = PoliticsGenerator.createProfile();
                 newScene = createNpcs(newScene);
                 LoadedScenes.Add(cities[i].name, newScene);
-                Character character = new Character();
             }
         }
     }
@@ -138,7 +137,7 @@ public class SceneDirector : MonoBehaviour
                 spawnNpcs(newScene);
                 LoadedScenes.Add(scene.name, newScene);
                 isInWorld = false;
-
+               
             }
 
 
@@ -163,7 +162,9 @@ public class SceneDirector : MonoBehaviour
             {
                 spawnNpcs(LoadedScenes[scene.name]);
                 isInWorld = false;
-
+                PlayerUi canvas = GameObject.Find("Canvas").GetComponent<PlayerUi>();
+                canvas.CreateBuyCharacters();
+                canvas.store.SetActive(false);
             }
         }
 

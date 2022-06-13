@@ -6,10 +6,26 @@ public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager _instance;
     public static PlayerManager Instance { get { return _instance; } }
-
-    private int troopCount;
-
+ 
     private int maxTroopSlots = 10;
+
+    private int troopNum;
+    private int troopCount
+    {
+        set
+        {
+            troopNum = value;
+            if (troopCount > maxTroopSlots)
+                troopNum = maxTroopSlots;
+
+        }
+        get
+        {
+            return troopNum;
+        }
+    }
+
+    public List<Character> recruitedCharacters = new List<Character>();
 
     private int gold = 1000;
 
@@ -46,8 +62,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (!canvas)
             canvas = GameObject.Find("Canvas");
-        setGold(200);
-        setTroops(10);
+        setGold(2000);
+        setTroops(4);
         RefreshUI();
     }
     private void Update()
@@ -83,6 +99,10 @@ public class PlayerManager : MonoBehaviour
         troopCount += value;
     }
 
+    public void addCharacter(Character newCharacter)
+    {
+        recruitedCharacters.Add(newCharacter);
+    }
     public int getTroopCount()
     {
         return troopCount;
@@ -98,7 +118,9 @@ public class PlayerManager : MonoBehaviour
         {
            inventory.SetGold(gold.ToString());
            inventory.SetTroops(troopCount.ToString());
-
+           inventory.RefreshCharactersAndTroops();
         }
+        
+
     }
 }

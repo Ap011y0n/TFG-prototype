@@ -6,14 +6,12 @@ public class SceneInfo
 {
     public string sceneName;
     public List<NpcData> sceneNpcs;
-    public List<SceneInfo> SceneInfos;
 
     public List<Family> families;
     public NpcData QuestGiver;
     public PoliticProfile profile;
     public List<string> dailyEvents;
     public List<string> interactionEvents;
-
     public static List<DailyEvent> morningEvents;
     private bool couped = false;
     public struct DailyEvent

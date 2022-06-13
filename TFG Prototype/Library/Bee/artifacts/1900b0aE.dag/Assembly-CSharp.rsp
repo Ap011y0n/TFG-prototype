@@ -356,6 +356,7 @@
 "Assets/scripts/UI/BuyButton.cs"
 "Assets/scripts/UI/ChatButtons.cs"
 "Assets/scripts/UI/PlayerUi.cs"
+"Assets/scripts/UI/SelectTroopUi.cs"
 "Assets/scripts/UI/StressBar.cs"
 -langversion:8.0
 
