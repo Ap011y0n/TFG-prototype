@@ -355,6 +355,7 @@
 "Assets/scripts/SceneInfo.cs"
 "Assets/scripts/UI/BuyButton.cs"
 "Assets/scripts/UI/BuyCharButton.cs"
+"Assets/scripts/UI/CharacterInfoUI.cs"
 "Assets/scripts/UI/ChatButtons.cs"
 "Assets/scripts/UI/PlayerUi.cs"
 "Assets/scripts/UI/SelectCharButton.cs"

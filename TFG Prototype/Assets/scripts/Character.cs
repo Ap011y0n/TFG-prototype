@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Character 
 {
-    BackStory story;
+    public BackStory story;
     public Stats stats;
     public string Name;
     public int gender;
@@ -23,9 +23,12 @@ public class Character
         stats = GenerateStats();
         stats.GenerateBaseStats(age);
         story = GenerateStory();
-        heroCard = PlayerManager.Instance.MaleHeroesSprites[Random.Range(0, PlayerManager.Instance.MaleHeroesSprites.Length)];
-        
+        if (gender == 0)
+            heroCard = PlayerManager.Instance.MaleHeroesSprites[Random.Range(0, PlayerManager.Instance.MaleHeroesSprites.Length)];
+        else
+            heroCard = PlayerManager.Instance.FemaleHeroesSprites[Random.Range(0, PlayerManager.Instance.FemaleHeroesSprites.Length)];
     }
+
     public Character(Sprite sprite)
     {
         gender = 1;
@@ -60,7 +63,7 @@ public class BackStory
     }
     List<StoryEvent> AllEvents = new List<StoryEvent>();
 
-    List<StoryEvent> addedEvents = new List<StoryEvent>();
+    public List<StoryEvent> addedEvents = new List<StoryEvent>();
     int currentAge;
    
 

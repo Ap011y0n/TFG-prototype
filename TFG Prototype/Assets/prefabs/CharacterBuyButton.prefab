@@ -149,6 +149,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: {fileID: 7558915453156656193}
   heroImage: {fileID: 2029823546543268063}
+  playerUi: {fileID: 0}
+  buyUiPos: {x: 280.5, y: 199, z: 0}
+  BuyUIPrefab: {fileID: 4960325384886243335, guid: b58b4c4de9bdc9c42b1f4deeebeb106e, type: 3}
 --- !u!1 &7258397003551902126
 GameObject:
   m_ObjectHideFlags: 0

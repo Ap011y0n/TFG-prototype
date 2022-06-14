@@ -29,6 +29,7 @@ public class PlayerUi : MonoBehaviour
     private List<GameObject> RecruitedCharacters = new List<GameObject>();
     private List<GameObject> RecruitedTroops = new List<GameObject>();
 
+    public CharacterInfoUI ConfirmBuyUI = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +52,8 @@ public class PlayerUi : MonoBehaviour
                 button.transform.localPosition = pos;
                 button.GetComponent<BuyCharButton>().character = PlayerManager.Instance.availableCharacters[x*2+y];
                 button.GetComponent<BuyCharButton>().heroImage.sprite = PlayerManager.Instance.availableCharacters[x * 2 + y].heroCard;
+                button.GetComponent<BuyCharButton>().playerUi = this;
+
             }
 
         }
