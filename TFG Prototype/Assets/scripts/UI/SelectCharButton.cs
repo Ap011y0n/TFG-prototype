@@ -6,22 +6,10 @@ using UnityEngine.UI;
 public class SelectCharButton : MonoBehaviour
 {
     public TextMeshProUGUI name;
-    private Character privChar;
+    public int character;
     public PlayerUi playerUi;
     public Image heroImage;
 
-    public Character character
-    {
-        set
-        {
-            privChar = value;
-            name.text = privChar.Name;
-        }
-        get
-        {
-            return privChar;
-        }
-    }
     public void SelectThisChar()
     {
         //if (playerUi.selectedUnit != null)
@@ -37,6 +25,8 @@ public class SelectCharButton : MonoBehaviour
         //    playerUi.RefreshCharactersAndTroops();
         //}
         //else
+
+            Debug.Log(character);
         playerUi.selectedCharacter = character;
     }
 }

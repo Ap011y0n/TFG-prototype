@@ -25,7 +25,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public List<Character> availableCharacters = new List<Character>();
+
     public List<Character> recruitedCharacters = new List<Character>();
+
     public List<Unit> recruitedUnits = new List<Unit>();
 
     private int gold = 1000;
@@ -58,7 +61,8 @@ public class PlayerManager : MonoBehaviour
             _instance = this;
 
         DontDestroyOnLoad(this.gameObject);
-
+        recruitedCharacters = new List<Character>();
+        availableCharacters = new List<Character>();
     }
 
 
@@ -100,7 +104,7 @@ public class PlayerManager : MonoBehaviour
         for(int i = 0; i < value; ++i)
         {
             Unit unit = new Unit();
-            unit.character = new Character(defaultHeroSprite);
+            unit.character = null;
             recruitedUnits.Add(unit);
         }
     }
@@ -121,6 +125,17 @@ public class PlayerManager : MonoBehaviour
         return troopCount;
     }
 
+    public void CreateBuyCharacters()
+    {
+        availableCharacters = new List<Character>();
+
+        for (int i =0; i < 4; ++i)
+        {
+            Character character = new Character();
+            availableCharacters.Add(character);
+        }
+
+    }
     public void RefreshUI()
     {
         if(!canvas)
@@ -134,5 +149,15 @@ public class PlayerManager : MonoBehaviour
            inventory.RefreshCharactersAndTroops();
         }
 
+    }
+
+    public void SetCommander(int unit, int character)
+    {
+        for(int i = 0; i < recruitedUnits.Count; ++i)
+        {
+            if (recruitedUnits[i].character == recruitedCharacters[character])
+                recruitedUnits[i].character = null;
+        }
+        recruitedUnits[unit].character = recruitedCharacters[character];
     }
 }

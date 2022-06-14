@@ -21,40 +21,43 @@ public class PlayerUi : MonoBehaviour
     public GameObject characterBuyButton;
     public Vector3 charBuyButtonPos;
 
+    public GameObject buyButton;
+
+    public int selectedUnit = -1;
+    public int selectedCharacter = -1;
+
     private List<GameObject> RecruitedCharacters = new List<GameObject>();
     private List<GameObject> RecruitedTroops = new List<GameObject>();
-
-    public Unit selectedUnit = null;
-    public Character selectedCharacter = null;
 
     // Start is called before the first frame update
     void Start()
     {
-      
+        selectedUnit = -1;
+        selectedCharacter = -1;
     }
 
     public void CreateBuyCharacters()
     {
-        Character character;
+        PlayerManager.Instance.CreateBuyCharacters();
         for (int x = 0; x < 2; ++x)
         {
             for (int y = 0; y < 2; ++y)
             {
-                character = new Character();
+               // character = new Character();
                 GameObject button = Instantiate(characterBuyButton, store.transform);
                 Vector3 pos = charBuyButtonPos;
                 pos.x += x * 130;
                 pos.y -= y * 200;
                 button.transform.localPosition = pos;
-                button.GetComponent<BuyCharButton>().character = character;
-                button.GetComponent<BuyCharButton>().heroImage.sprite = character.heroCard;
+                button.GetComponent<BuyCharButton>().character = PlayerManager.Instance.availableCharacters[x*2+y];
+                button.GetComponent<BuyCharButton>().heroImage.sprite = PlayerManager.Instance.availableCharacters[x * 2 + y].heroCard;
             }
 
         }
     }
     public void CreateSelectCharacters()
     {
-        int characterCount = PlayerManager.Instance.recruitedCharacters.Count;
+     
         Vector3 pos = charSelButtonPos;
 
 
@@ -62,32 +65,28 @@ public class PlayerUi : MonoBehaviour
         {
             pos.y = charSelButtonPos.y;
 
-            for (int y = 0; y < characterCount/2; ++y)
+            for (int y = 0; y < PlayerManager.Instance.recruitedCharacters.Count/2; ++y)
             {
                 GameObject button = Instantiate(characterSelectButton, store.transform);
-                button.transform.localPosition = pos;
-                RecruitedCharacters.Add(button);
-                Character character = PlayerManager.Instance.recruitedCharacters[x * characterCount / 2 + y];
-                button.GetComponent<SelectCharButton>().character = character;
+                button.transform.localPosition = pos;                
+                button.GetComponent<SelectCharButton>().character = x * PlayerManager.Instance.recruitedCharacters.Count / 2 + y;
                 button.GetComponent<SelectCharButton>().playerUi = this;
-                button.GetComponent<SelectCharButton>().heroImage.sprite = character.heroCard;
+                button.GetComponent<SelectCharButton>().heroImage.sprite = PlayerManager.Instance.recruitedCharacters[x * PlayerManager.Instance.recruitedCharacters.Count / 2 + y].heroCard;
                 pos.y -= 200;
+                RecruitedCharacters.Add(button);
 
 
             }
             pos.x += 130;
 
         }
-        if (characterCount%2 != 0)
+        if (PlayerManager.Instance.recruitedCharacters.Count % 2 != 0)
         {
             GameObject button = Instantiate(characterSelectButton, store.transform);
-            pos.x -= 130;
-
             button.transform.localPosition = pos;
-            Character character = PlayerManager.Instance.recruitedCharacters[characterCount - 1];
-            button.GetComponent<SelectCharButton>().character = character;
+            button.GetComponent<SelectCharButton>().character = PlayerManager.Instance.recruitedCharacters.Count - 1;
             button.GetComponent<SelectCharButton>().playerUi = this;
-            button.GetComponent<SelectCharButton>().heroImage.sprite = character.heroCard;
+            button.GetComponent<SelectCharButton>().heroImage.sprite = PlayerManager.Instance.recruitedCharacters[PlayerManager.Instance.recruitedCharacters.Count-1].heroCard;
 
             RecruitedCharacters.Add(button);
         }
@@ -95,11 +94,10 @@ public class PlayerUi : MonoBehaviour
 
     public void CreateSelectTroops()
     {
-        int troopCount = PlayerManager.Instance.recruitedUnits.Count;
         Vector3 pos = troopSelButtonPos;
 
 
-        for (int x = 0; x < troopCount / 2; ++x)
+        for (int x = 0; x < PlayerManager.Instance.recruitedUnits.Count / 2; ++x)
         {
             pos.y = charSelButtonPos.y;
 
@@ -107,21 +105,19 @@ public class PlayerUi : MonoBehaviour
             {
                 GameObject button = Instantiate(troopSelectButton, store.transform);
                 button.transform.localPosition = pos;
-                Unit unit = PlayerManager.Instance.recruitedUnits[x + y * troopCount / 2];
-                button.GetComponent<SelectTroopUi>().unit = unit;
+                button.GetComponent<SelectTroopUi>().unit = x + y * PlayerManager.Instance.recruitedUnits.Count / 2;
+                
                 button.GetComponent<SelectTroopUi>().playerUi = this;
-                if (unit.character != null)
-                    button.GetComponent<SelectTroopUi>().heroImage.sprite = unit.character.heroCard;
+                if (PlayerManager.Instance.recruitedUnits[x + y * PlayerManager.Instance.recruitedUnits.Count / 2].character != null)
+                {
+                    button.GetComponent<SelectTroopUi>().heroImage.sprite = PlayerManager.Instance.recruitedUnits[x + y * PlayerManager.Instance.recruitedUnits.Count / 2].character.heroCard;
+                }
+                else
+                {
+                    button.GetComponent<SelectTroopUi>().heroImage.sprite = PlayerManager.Instance.defaultHeroSprite;
+                }
                 RecruitedTroops.Add(button);
 
-                Character hero = button.GetComponent<SelectTroopUi>().unit.character;
-                if (hero != null)
-                {
-                    troopSelectButton.transform.GetChild(1).GetComponent<Image>().sprite = hero.heroCard;
-
-                    Debug.Log(unit.character.Name);
-
-                }
                 pos.y -= 200;
 
 
@@ -129,21 +125,23 @@ public class PlayerUi : MonoBehaviour
             pos.x += 130;
 
         }
-        if (troopCount % 2 != 0)
+        if (PlayerManager.Instance.recruitedUnits.Count % 2 != 0)
         {
-            GameObject button = Instantiate(troopSelectButton, store.transform);
             pos.y += 200;
 
+            GameObject button = Instantiate(troopSelectButton, store.transform);
             button.transform.localPosition = pos;
-            Unit unit = PlayerManager.Instance.recruitedUnits[troopCount-1];
-            button.GetComponent<SelectTroopUi>().unit = unit;
-            button.GetComponent<SelectTroopUi>().playerUi = this;
-            if (unit.character != null)
-            {
-                button.GetComponent<SelectTroopUi>().heroImage.sprite = unit.character.heroCard;
-                Debug.Log(unit.character.Name);
-            }
+            button.GetComponent<SelectTroopUi>().unit = PlayerManager.Instance.recruitedUnits.Count-1;
 
+            button.GetComponent<SelectTroopUi>().playerUi = this;
+            if (PlayerManager.Instance.recruitedUnits[PlayerManager.Instance.recruitedUnits.Count - 1].character != null)
+            {
+                button.GetComponent<SelectTroopUi>().heroImage.sprite = PlayerManager.Instance.recruitedUnits[PlayerManager.Instance.recruitedUnits.Count - 1].character.heroCard;
+            }
+            else
+            {
+                button.GetComponent<SelectTroopUi>().heroImage.sprite = PlayerManager.Instance.defaultHeroSprite;
+            }
             RecruitedTroops.Add(button);
         }
     }

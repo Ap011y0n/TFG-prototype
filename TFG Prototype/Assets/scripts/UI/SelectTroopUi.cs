@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 public class SelectTroopUi : MonoBehaviour
 {
-    public Unit unit;
+    public int unit;
     public PlayerUi playerUi;
     public Image heroImage;
     public void SelectThisUnit()
     {
-        if (playerUi.selectedCharacter != null)
+        if (playerUi.selectedCharacter != -1)
         {
-            unit.character = playerUi.selectedCharacter;
-            for(int i = 0; i < PlayerManager.Instance.recruitedUnits.Count; ++i)
-            {
-                if (PlayerManager.Instance.recruitedUnits[i] == unit)
-                PlayerManager.Instance.recruitedUnits[i].character = playerUi.selectedCharacter;
-            }
-            playerUi.selectedUnit = null;
-            playerUi.selectedCharacter = null;
+            PlayerManager.Instance.SetCommander(unit, playerUi.selectedCharacter);
+            
+        
+            playerUi.selectedUnit = -1;
+            playerUi.selectedCharacter = -1;
             playerUi.RefreshCharactersAndTroops();
 
         }
