@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.UI;
 
 
 public class HexUnit : MonoBehaviour
@@ -19,6 +19,7 @@ public class HexUnit : MonoBehaviour
 	public TextMeshProUGUI text;
 	public GameObject damageTextPrefab;
 	public GameObject unitCanvas;
+	public Image commander;
 
 	public int meleAttack;
 	public int meleDefense;
@@ -282,5 +283,20 @@ public class HexUnit : MonoBehaviour
     {
 		action = false;
 		movement = false;
+	}
+
+	public void ChangeCommander(Character character )
+    {
+		commander.sprite = character.heroCard;
+
+		meleAttack += character.stats.Strength + character.stats.Speed/2;
+		meleDefense += character.stats.Speed + character.stats.Strength/2;
+
+		//armor pen missing		weaponPen += character.stats.;
+		//roguery
+		//intelligence
+		//morale missing
+
+
 	}
 }

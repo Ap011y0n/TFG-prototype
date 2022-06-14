@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class HexGameUI : MonoBehaviour
 	HexCell currentCell;
 	HexUnit selectedUnit;
 	public bool play = false;
-	private int availableTroops;
+	private List<Unit> availableTroops;
 	public CombatController combatController;
 	public GameObject playbutton;
 	public Text deployedTroopCount;
@@ -42,8 +43,8 @@ public class HexGameUI : MonoBehaviour
 	private void Start()
     {
 		//availableTroops = PlayerManager.Instance.troopCount;
-		availableTroops = PlayerManager.Instance.getTroopCount();
-		deployedTroopCount.text = availableTroops.ToString();
+		availableTroops = new List<Unit>(PlayerManager.Instance.recruitedUnits);
+		deployedTroopCount.text = availableTroops.Count.ToString();
 		//combatController.Load(SceneDirector.Instance.currentBattleMapInfo);
 		//combatController.Load();
 	}
@@ -123,7 +124,7 @@ public class HexGameUI : MonoBehaviour
 	void DoDeploy()
     {
 		UpdateCurrentCell();
-		if(currentCell.TerrainTypeIndex == 2 && availableTroops > 0 && !currentCell.Unit)
+		if(currentCell.TerrainTypeIndex == 2 && availableTroops.Count > 0 && !currentCell.Unit)
         {
 			HexUnit unit = Instantiate(combatController.unitPrefab);
 			unit.Location = currentCell;
@@ -133,14 +134,18 @@ public class HexGameUI : MonoBehaviour
 			combatController.units.Add(unit);
 			combatController.playerUnits.Add(unit);
 			unit.setStats(HexUnit.unitType.Human, 50);
-			availableTroops--;
-			deployedTroopCount.text = availableTroops.ToString();
+
+			if (availableTroops[0].character != null)
+				unit.ChangeCommander(availableTroops[0].character);
+
+			availableTroops.RemoveAt(0);
+			deployedTroopCount.text = availableTroops.Count.ToString();
 		}
 		else if (currentCell.TerrainTypeIndex == 2 && currentCell.Unit)
 		{
-			currentCell.Unit.Destroy();
-			availableTroops++;
-			deployedTroopCount.text = availableTroops.ToString();
+			//currentCell.Unit.Destroy();
+			//availableTroops++;
+			//deployedTroopCount.text = availableTroops.ToString();
 		}
 	}
 
@@ -198,7 +203,7 @@ public class HexGameUI : MonoBehaviour
     {
 		QuestManager.Quest quest = QuestManager.Instance.GetActiveQuest(combatController.guid);
 		QuestManager.Instance.EndQuest(quest);
-		PlayerManager.Instance.setTroops(combatController.playerUnits.Count + availableTroops);
+		PlayerManager.Instance.setTroops(combatController.playerUnits.Count + availableTroops.Count);
 		SceneManager.LoadScene("WorldMap");
 	}
 }
