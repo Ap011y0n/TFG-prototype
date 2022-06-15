@@ -9,7 +9,6 @@ public class PlayerUi : MonoBehaviour
     public TextMeshProUGUI goldUi;
     public TextMeshProUGUI troopsUi;
     public TextMeshProUGUI storeGold;
-    public TextMeshProUGUI storeTroops;
     public GameObject inventory;
     public GameObject store;
     public GameObject stressInfo;
@@ -21,7 +20,6 @@ public class PlayerUi : MonoBehaviour
     public GameObject characterBuyButton;
     public Vector3 charBuyButtonPos;
 
-    public GameObject buyButton;
 
     public int selectedUnit = -1;
     public int selectedCharacter = -1;
@@ -160,7 +158,6 @@ public class PlayerUi : MonoBehaviour
         }
         if (store && Input.GetKeyDown(KeyCode.P))
         {
-            storeTroops.text = troopsUi.text;
             storeGold.text = goldUi.text;
             store.SetActive(!store.activeSelf);
             PlayerController.Instance.UIfocused = store.activeSelf;
@@ -194,10 +191,7 @@ public class PlayerUi : MonoBehaviour
     public void SetTroops(string troops)
     {
         troopsUi.text = troops;
-        if (store)
-        {
-            storeTroops.text = troops.ToString();
-        }
+      
     }
 
     public void RefreshCharactersAndTroops()

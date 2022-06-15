@@ -267,7 +267,7 @@ public class SceneDirector : MonoBehaviour
         List<NpcData> sceneNpcs = new List<NpcData> (info.sceneNpcs);
         int maxSpawns = Random.Range(spawnPositions.Count/2, spawnPositions.Count);
         bool questgiver = false;
-        Vector3 offset = new Vector3(0, 0, 0);
+        Vector3 offset = new Vector3(0, -60, 0);
         for (int i = 0; i < maxSpawns; i++)
         {
             int randomPos = Random.Range(0, spawnPositions.Count);

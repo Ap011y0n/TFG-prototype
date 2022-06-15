@@ -198,6 +198,7 @@ MonoBehaviour:
   npcWork: 
   introducedHimself: 0
   introducedCity: 0
+  HasActiveQuest: 0
   displayName: {fileID: 7910841326168743191}
   canvas: {fileID: 0}
   chatUI: {fileID: 0}
@@ -205,6 +206,7 @@ MonoBehaviour:
   savePos: 0
   npcMood: 0
   job: 
+  stress: 0
 --- !u!1 &6909444022968025653
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +264,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 928714428403879966, guid: aef0728051760c041a744bf2e428e1f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -306,8 +308,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hola
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aef0728051760c041a744bf2e428e1f3, type: 2}
+  m_sharedMaterial: {fileID: 928714428403879966, guid: aef0728051760c041a744bf2e428e1f3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
