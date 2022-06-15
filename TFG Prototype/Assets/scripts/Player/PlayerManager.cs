@@ -7,7 +7,8 @@ public class PlayerManager : MonoBehaviour
     private static PlayerManager _instance;
     public static PlayerManager Instance { get { return _instance; } }
  
-    private int maxTroopSlots = 10;
+    public int maxTroopSlots = 10;
+    public int maxCharacterSlots = 4;
 
     private int troopNum;
     private int troopCount
@@ -90,7 +91,7 @@ public class PlayerManager : MonoBehaviour
 
     public bool canBuy(int price)
     {
-        if ((gold - price) >= 0)
+        if ((gold - price) >= 0 )
             return true;
         return false;
     }

@@ -22,7 +22,7 @@ public class BuyButton : MonoBehaviour
     }
     public void BuyTroop()
     {
-        if(PlayerManager.Instance.canBuy(int.Parse(price.text)))
+        if(PlayerManager.Instance.canBuy(int.Parse(price.text)) && PlayerManager.Instance.recruitedUnits.Count < PlayerManager.Instance.maxTroopSlots)
         {
             PlayerManager.Instance.addGold(-int.Parse(price.text));
             unit = new Unit();

@@ -24,11 +24,18 @@ public class CharacterInfoUI : MonoBehaviour
     }
     public void BuyCharacter()
     {
-        if (PlayerManager.Instance.canBuy(price))
+        if (PlayerManager.Instance.canBuy(price) && PlayerManager.Instance.recruitedCharacters.Count < PlayerManager.Instance.maxCharacterSlots)
         {
-            PlayerManager.Instance.addGold(-price);
-            PlayerManager.Instance.addCharacter(character);
-            PlayerManager.Instance.RefreshUI();
+
+            if (!PlayerManager.Instance.recruitedCharacters.Contains(character))
+            {
+                PlayerManager.Instance.addGold(-price);
+
+                PlayerManager.Instance.addCharacter(character);
+
+                PlayerManager.Instance.RefreshUI();
+            }
+               
         }
 
     }
