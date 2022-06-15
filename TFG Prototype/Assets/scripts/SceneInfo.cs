@@ -140,7 +140,8 @@ public class SceneInfo
                 break;
 
         }
-        Debug.Log(log);
+
+        SceneDirector.Instance.eventsLog.GetComponent<EventsLog>().AddLog(log);
         instigator.family.ManageFamilyStress(-30);
         for (int i = 0; i < supporters.Count; ++i)
         {

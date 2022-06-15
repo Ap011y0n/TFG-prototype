@@ -55,6 +55,8 @@ public class SceneDirector : MonoBehaviour
 
     public StressBar stressBarPrefab;
     public List<string> Loadedcities = new List<string>();
+
+    public GameObject eventsLog;
     // called zero
     void Awake()
     {
@@ -146,6 +148,7 @@ public class SceneDirector : MonoBehaviour
         {
             if (scene.name == "WorldMap")
             {
+                eventsLog = GameObject.Find("eventsLog");
                 playerRef.transform.position = playerPos;
                 PlayerManager.Instance.RefreshUI();
                 GameObject.Find("Intro").SetActive(false);
