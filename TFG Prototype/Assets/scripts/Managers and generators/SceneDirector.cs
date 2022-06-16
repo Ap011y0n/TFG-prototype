@@ -21,8 +21,10 @@ public enum enemyType
 
 public class SceneDirector : MonoBehaviour
 {
-  
-    
+
+    public Sprite[] FemaleNPCSprites;
+    public Sprite[] MaleNPCSprites;
+
 
     enum Cycle
     {
@@ -209,14 +211,24 @@ public class SceneDirector : MonoBehaviour
             }
             NpcData newNpc = new NpcData();
             newNpc.family = family;
-            int genre = Random.Range(0, 2);
-            newNpc.name = GenerateName(genre, family.name);
+            newNpc.gender = Random.Range(0, 2);
+            if (newNpc.gender == 0)
+            {
+                newNpc.imageId = Random.Range(0, MaleNPCSprites.Length);
+            }
+            else
+            {
+                newNpc.imageId = Random.Range(0, FemaleNPCSprites.Length);
+            }
+            newNpc.name = GenerateName(newNpc.gender, family.name);
             newNpc.mood = (Mood)Random.Range(0, (int)Mood.maxMoods);
             newNpc.profile = PoliticsGenerator.createProfile();
             newNpc.guid = System.Guid.NewGuid();
             newNpc.hasActiveQuest = false;
             newNpc.position = new Vector3(0, 0, 0);
             newNpc.Stress = Random.Range(-20, 20);
+           
+                
             info.sceneNpcs.Add(newNpc);
             family.members.Add(newNpc);
 
@@ -299,6 +311,11 @@ public class SceneDirector : MonoBehaviour
                 info.QuestGiver.position = spawnPos;
                 sceneNpcs.Remove(info.QuestGiver);
                 temp.name = NewNpc.name;
+                if(NewNpc.gender == 1)
+                temp.GetComponent<Npc>().image.sprite = MaleNPCSprites[NewNpc.imageId];
+                else
+                    temp.GetComponent<Npc>().image.sprite = FemaleNPCSprites[NewNpc.imageId];
+
                 temp.GetComponent<Npc>().setInitParams(info, NewNpc);
                 questgiver = true;
                 stress = NewNpc.Stress;
@@ -310,6 +327,10 @@ public class SceneDirector : MonoBehaviour
                 sceneNpcs.RemoveAt(id);
                 temp.name = NewNpc.name;
                 temp.GetComponent<Npc>().setInitParams(info, NewNpc);
+                if (NewNpc.gender == 0)
+                    temp.GetComponent<Npc>().image.sprite = MaleNPCSprites[NewNpc.imageId];
+                else
+                    temp.GetComponent<Npc>().image.sprite = FemaleNPCSprites[NewNpc.imageId];
                 stress = NewNpc.Stress;
             }
            

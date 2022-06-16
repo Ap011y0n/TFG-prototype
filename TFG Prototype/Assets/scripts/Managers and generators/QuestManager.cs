@@ -121,7 +121,7 @@ public class QuestManager : MonoBehaviour
 
         text.text = text.text.Replace("place", place.name);
         newquest.questDescription = text.text.Replace("monster", creature.name);
-        creature.name = "Wolpertingers";
+
         switch (creature.name)
         {
             case "Kelpies":

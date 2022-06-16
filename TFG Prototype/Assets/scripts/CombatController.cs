@@ -14,7 +14,7 @@ public class CombatController : MonoBehaviour
 	public HexGrid grid;
 	public HexGameUI UI;
 	public System.Guid guid;
-
+	public Sprite sprite;
     public void ResetTurn()
     {
         turn = 0;
@@ -102,17 +102,17 @@ public class CombatController : MonoBehaviour
 				break;
 			case HexUnit.unitType.Kelpie:
 				{
-					num = 40;
+					num = 10;
 				}
 				break;
 			case HexUnit.unitType.Golem:
 				{
-					num = 40;
+					num = 6;
 				}
 				break;
 			case HexUnit.unitType.Wolpertinger:
 				{
-					num = 40;
+					num = 60;
 				}
 				break;
 			case HexUnit.unitType.Dragon:
@@ -122,17 +122,17 @@ public class CombatController : MonoBehaviour
 				break;
 			case HexUnit.unitType.Manticore:
 				{
-					num = 1;
+					num = 2;
 				}
 				break;
 			case HexUnit.unitType.Ghost:
 				{
-					num = 40;
+					num = 30;
 				}
 				break;
 			case HexUnit.unitType.Troll:
 				{
-					num = 40;
+					num = 12;
 				}
 				break;
 			case HexUnit.unitType.Giant:

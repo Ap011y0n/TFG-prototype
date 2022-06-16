@@ -19,6 +19,8 @@ public class NpcData
     public string name;
     public Mood mood;
     private int stress;
+    public int imageId;
+    public int gender;
     public int Stress
     {
         get { return stress;  }

@@ -14,6 +14,7 @@ public class Npc : MonoBehaviour
     public bool introducedCity = false;
     public bool HasActiveQuest = false;
 
+    public Image image;
     public SceneInfo cityInfo;
     public TextMeshPro displayName;
     public GameObject canvas;
@@ -54,7 +55,7 @@ public class Npc : MonoBehaviour
             if (startChatting.activeSelf)
             {
                 Debug.Log("Open by " + npcName);
-                PlayerController.Instance.goToPos(transform.position);
+                PlayerController.Instance.goToPos(PlayerController.Instance.gameObject.transform.position);
                 chatUI.SetActive(true);
                 chatUI.GetComponentInChildren<Text>().text = npcName;
                 ChatManager.Instance.focusedNPC = this;

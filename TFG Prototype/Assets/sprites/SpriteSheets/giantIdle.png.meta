@@ -73,7 +73,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 60
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,8 +123,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,10 +142,10 @@ TextureImporter:
       name: giantIdle_1
       rect:
         serializedVersion: 2
-        x: 119
+        x: 87
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: giantIdle_2
       rect:
         serializedVersion: 2
-        x: 238
+        x: 182
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: giantIdle_3
       rect:
         serializedVersion: 2
-        x: 357
+        x: 277
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: giantIdle_4
       rect:
         serializedVersion: 2
-        x: 476
+        x: 373
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: giantIdle_5
       rect:
         serializedVersion: 2
-        x: 595
+        x: 468
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +247,10 @@ TextureImporter:
       name: giantIdle_6
       rect:
         serializedVersion: 2
-        x: 714
+        x: 563
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,10 +268,10 @@ TextureImporter:
       name: giantIdle_7
       rect:
         serializedVersion: 2
-        x: 833
+        x: 658
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +289,10 @@ TextureImporter:
       name: giantIdle_8
       rect:
         serializedVersion: 2
-        x: 952
+        x: 754
         y: 0
-        width: 119.111115
-        height: 152
+        width: 85
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

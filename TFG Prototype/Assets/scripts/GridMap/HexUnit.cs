@@ -83,34 +83,34 @@ public class HexUnit : MonoBehaviour
 				break;
 			case unitType.Kelpie:
                 {
-					meleAttack = 50;
-					meleDefense = 40;
+					meleAttack = 80;
+					meleDefense = 70;
 					weaponPen = 0;
 					armor = 5;
-					weaponDamage = 1;
-					entityHp = 1;
+					weaponDamage = 5;
+					entityHp = 3;
 					totalHP = entityNum * entityHp;
 				}
 				break;
 			case unitType.Golem:
 				{
-					meleAttack = 50;
-					meleDefense = 40;
-					weaponPen = 0;
-					armor = 5;
-					weaponDamage = 1;
-					entityHp = 1;
+					meleAttack = 60;
+					meleDefense = 60;
+					weaponPen = 2;
+					armor = 3;
+					weaponDamage = 5;
+					entityHp = 7;
 					totalHP = entityNum * entityHp;
 				}
 				break;
 			case unitType.Wolpertinger:
 				{
-					meleAttack = 50;
-					meleDefense = 40;
+					meleAttack = 20;
+					meleDefense = 10;
 					weaponPen = 0;
-					armor = 5;
-					weaponDamage = 200;
-					entityHp = 100;
+					armor = 6;
+					weaponDamage = 1;
+					entityHp = 1;
 					totalHP = entityNum * entityHp;
 				}
 				break;
@@ -127,20 +127,20 @@ public class HexUnit : MonoBehaviour
 				break;
 			case unitType.Manticore:
 				{
-					meleAttack = 90;
-					meleDefense = 80;
+					meleAttack = 100;
+					meleDefense = 100;
 					weaponPen = 3;
-					armor = 3;
-					weaponDamage = 20;
-					entityHp = 20;
+					armor = 4;
+					weaponDamage = 10;
+					entityHp = 10;
 					totalHP = entityNum * entityHp;
 				}
 				break;
 			case unitType.Ghost:
 				{
-					meleAttack = 50;
-					meleDefense = 40;
-					weaponPen = 0;
+					meleAttack = 40;
+					meleDefense = 75;
+					weaponPen = 1;
 					armor = 5;
 					weaponDamage = 1;
 					entityHp = 1;
@@ -149,23 +149,23 @@ public class HexUnit : MonoBehaviour
 				break;
 			case unitType.Troll:
 				{
-					meleAttack = 50;
-					meleDefense = 40;
-					weaponPen = 0;
-					armor = 5;
-					weaponDamage = 1;
-					entityHp = 1;
+					meleAttack = 30;
+					meleDefense = 60;
+					weaponPen = 2;
+					armor = 4;
+					weaponDamage = 2;
+					entityHp = 3;
 					totalHP = entityNum * entityHp;
 				}
 				break;
 			case unitType.Giant:
 				{
-					meleAttack = 90;
-					meleDefense = 80;
+					meleAttack = 80;
+					meleDefense = 50;
 					weaponPen = 3;
-					armor = 3;
-					weaponDamage = 20;
-					entityHp = 20;
+					armor = 5;
+					weaponDamage = 40;
+					entityHp = 80;
 					totalHP = entityNum * entityHp;
 				}
 				break;
