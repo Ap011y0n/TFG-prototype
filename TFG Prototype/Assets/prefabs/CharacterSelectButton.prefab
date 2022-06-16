@@ -151,6 +151,9 @@ MonoBehaviour:
   character: 0
   playerUi: {fileID: 0}
   heroImage: {fileID: 3308655567346120095}
+  characterInfoUI: {fileID: 4960325384886243335, guid: b58b4c4de9bdc9c42b1f4deeebeb106e, type: 3}
+  characterInfoUIInventory: {fileID: 3627434030169808060, guid: cba7590a6b20e0a45b560fc90cfcb7f6, type: 3}
+  store: 0
 --- !u!1 &2568010951561858077
 GameObject:
   m_ObjectHideFlags: 0

@@ -121,7 +121,7 @@ public class QuestManager : MonoBehaviour
 
         text.text = text.text.Replace("place", place.name);
         newquest.questDescription = text.text.Replace("monster", creature.name);
-
+        creature.name = "Wolpertingers";
         switch (creature.name)
         {
             case "Kelpies":
@@ -188,12 +188,15 @@ public class QuestManager : MonoBehaviour
     {
         activeQuests.Add(newquest, giver.NPCGuid);
     }
-    public void EndQuest(Quest endedQuest)
+    public void EndQuest(Quest endedQuest, bool victory)
     {
         completedQuests.Add(endedQuest, activeQuests[endedQuest]);
         activeQuests.Remove(endedQuest);
         SceneDirector.Instance.currentBattleMaps.Remove(endedQuest.guid);
+        if(victory)
         PlayerManager.Instance.addGold(endedQuest.reward);
+
+        SceneDirector.Instance.changeQuestGiver(endedQuest.questGiver);
     }
     public void AbortQuest(Quest endedQuest)
     {

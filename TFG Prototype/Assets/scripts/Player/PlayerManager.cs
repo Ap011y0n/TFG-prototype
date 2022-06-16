@@ -9,23 +9,7 @@ public class PlayerManager : MonoBehaviour
  
     public int maxTroopSlots = 10;
     public int maxCharacterSlots = 4;
-
-    private int troopNum;
-    private int troopCount
-    {
-        set
-        {
-            troopNum = value;
-            if (troopCount > maxTroopSlots)
-                troopNum = maxTroopSlots;
-
-        }
-        get
-        {
-            return troopNum;
-        }
-    }
-
+    
     public List<Character> availableCharacters = new List<Character>();
 
     public List<Character> recruitedCharacters = new List<Character>();
@@ -101,17 +85,32 @@ public class PlayerManager : MonoBehaviour
     }
     public void setTroops(int value)
     {
-        troopCount = value;
-        for(int i = 0; i < value; ++i)
+        if(value <= 0)
         {
-            Unit unit = new Unit();
-            unit.character = null;
-            recruitedUnits.Add(unit);
+            int currentUnits = recruitedUnits.Count;
+            recruitedUnits.Clear();
+
+            for (int i = 0; i < Mathf.Max(currentUnits/2, 1); ++i)
+            {
+                Unit unit = new Unit();
+                unit.character = null;
+                recruitedUnits.Add(unit);
+            }
         }
+        else
+        {
+            recruitedUnits.Clear();
+            for (int i = 0; i < value; ++i)
+            {
+                Unit unit = new Unit();
+                unit.character = null;
+                recruitedUnits.Add(unit);
+            }
+        }
+
     }
     public void addTroops(Unit unit)
     {
-        troopCount ++;
         unit.character = null;
         recruitedUnits.Add(unit);
 
@@ -121,10 +120,7 @@ public class PlayerManager : MonoBehaviour
     {
         recruitedCharacters.Add(newCharacter);
     }
-    public int getTroopCount()
-    {
-        return troopCount;
-    }
+
 
     public void CreateBuyCharacters()
     {
@@ -146,7 +142,7 @@ public class PlayerManager : MonoBehaviour
         if(inventory)
         {
            inventory.SetGold(gold.ToString());
-         //  inventory.SetTroops(troopCount.ToString());
+           inventory.SetTroops(recruitedUnits.Count.ToString());
            inventory.RefreshCharactersAndTroops();
         }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class HexGameUI : MonoBehaviour
 {
 	public HexGrid grid;
@@ -24,6 +24,7 @@ public class HexGameUI : MonoBehaviour
 	public GameObject endingPanel;
 	public GameObject menu;
 
+	private bool victory = false;
 	public void SetPlayMode()
 	{
 		grid.editMode = false;
@@ -193,16 +194,17 @@ public class HexGameUI : MonoBehaviour
 		turnCount.text = combatController.getCurrentTurn().ToString();
 	}
 
-	public void ActivateEndUi()
+	public void ActivateEndUi(bool result)
     {
+		victory = result;
+		endingPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = (result ? "Victory" : "Defeat");
 		endingPanel.SetActive(true);
 		turnButton.SetActive(false);
-
 	}
 	public void EndBattle()
     {
 		QuestManager.Quest quest = QuestManager.Instance.GetActiveQuest(combatController.guid);
-		QuestManager.Instance.EndQuest(quest);
+		QuestManager.Instance.EndQuest(quest, victory);
 		PlayerManager.Instance.setTroops(combatController.playerUnits.Count + availableTroops.Count);
 		SceneManager.LoadScene("WorldMap");
 	}

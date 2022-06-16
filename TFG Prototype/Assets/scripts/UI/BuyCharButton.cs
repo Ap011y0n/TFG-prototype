@@ -33,7 +33,8 @@ public class BuyCharButton : MonoBehaviour
         //}
         if (playerUi.ConfirmBuyUI != null)
             Destroy(playerUi.ConfirmBuyUI.gameObject);
-        playerUi.ConfirmBuyUI = null;
+        if(playerUi.InfoUI != null)
+            Destroy(playerUi.InfoUI.gameObject);
 
         playerUi.ConfirmBuyUI = Instantiate(BuyUIPrefab, transform.parent.transform).GetComponent<CharacterInfoUI>();
         playerUi.ConfirmBuyUI.character = character;

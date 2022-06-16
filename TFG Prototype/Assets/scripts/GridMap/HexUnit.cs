@@ -109,8 +109,8 @@ public class HexUnit : MonoBehaviour
 					meleDefense = 40;
 					weaponPen = 0;
 					armor = 5;
-					weaponDamage = 1;
-					entityHp = 1;
+					weaponDamage = 200;
+					entityHp = 100;
 					totalHP = entityNum * entityHp;
 				}
 				break;

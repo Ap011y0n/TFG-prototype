@@ -7444,7 +7444,7 @@ RectTransform:
   - {fileID: 176452516}
   - {fileID: 2135880971}
   m_Father: {fileID: 1076952412}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7543,10 +7543,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1841431965}
   - {fileID: 1690815327}
   - {fileID: 1321790312}
   - {fileID: 1069705390}
-  - {fileID: 1841431965}
   - {fileID: 2036983927}
   - {fileID: 1790972004}
   - {fileID: 1158623357}
@@ -7574,19 +7574,25 @@ MonoBehaviour:
   goldUi: {fileID: 784077358}
   troopsUi: {fileID: 209016146}
   storeGold: {fileID: 0}
+  storeTroops: {fileID: 0}
   inventory: {fileID: 1321790311}
   store: {fileID: 0}
   stressInfo: {fileID: 0}
   menu: {fileID: 1790972003}
   troopSelectButton: {fileID: 7420538922619521686, guid: aabd28b25a0e2ba45bc78c6779650367, type: 3}
-  troopSelButtonPos: {x: -729.8, y: 218, z: 0}
+  troopSelButtonPos: {x: -729.8, y: -202.7, z: 0}
+  troopSelButtonPosInventory: {x: -729.8, y: -202.7, z: 0}
   characterSelectButton: {fileID: 668585768239477971, guid: 86459dbb67581de439cb96cb1c2ad296, type: 3}
-  charSelButtonPos: {x: 545.14, y: 218, z: 0}
+  charSelButtonPos: {x: -729.8, y: 300, z: 0}
+  charSelButtonPosInventory: {x: -729.8, y: 300, z: 0}
   characterBuyButton: {fileID: 0}
   charBuyButtonPos: {x: 0, y: 0, z: 0}
   selectedUnit: -1
   selectedCharacter: -1
   ConfirmBuyUI: {fileID: 0}
+  InfoUI: {fileID: 0}
+  isInStore: 0
+  isInInventory: 0
 --- !u!1 &1091001886
 GameObject:
   m_ObjectHideFlags: 0
@@ -9017,7 +9023,7 @@ RectTransform:
   - {fileID: 784077357}
   - {fileID: 209016145}
   m_Father: {fileID: 1076952412}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12147,7 +12153,7 @@ RectTransform:
   m_Children:
   - {fileID: 793335625}
   m_Father: {fileID: 1076952412}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -13343,7 +13349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1841431965
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13360,7 +13366,7 @@ RectTransform:
   - {fileID: 900642548}
   - {fileID: 1059527199}
   m_Father: {fileID: 1076952412}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13730,6 +13736,7 @@ MonoBehaviour:
   stressBarPrefab: {fileID: 8883117422836212764, guid: afe87a1deef91254fa68cf644c25615e, type: 3}
   Loadedcities: []
   eventsLog: {fileID: 2023731342}
+  Intro: {fileID: 1841431964}
 --- !u!4 &1895446010
 Transform:
   m_ObjectHideFlags: 0
@@ -14960,7 +14967,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 176.13}
-  m_SizeDelta: {x: 235.2, y: 37.899994}
+  m_SizeDelta: {x: 247.6, y: 37.899994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036983928
 MonoBehaviour:
@@ -15704,6 +15711,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2114795405, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
+      propertyPath: m_text
+      value: 'Ovoddale
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 369115471532400276, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_RootOrder
       value: 4

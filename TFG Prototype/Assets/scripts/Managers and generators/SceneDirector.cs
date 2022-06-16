@@ -57,6 +57,7 @@ public class SceneDirector : MonoBehaviour
     public List<string> Loadedcities = new List<string>();
 
     public GameObject eventsLog;
+    public GameObject Intro;
     // called zero
     void Awake()
     {
@@ -117,6 +118,7 @@ public class SceneDirector : MonoBehaviour
             {
                 LoadedScenes.Add(scene.name, newScene);
                 PlayerManager.Instance.RefreshUI();
+                Intro.SetActive(true);
                 playerRef.GetComponent<PlayerController>().UIFocused();
                 isInWorld = true;
                 TimerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
@@ -151,7 +153,6 @@ public class SceneDirector : MonoBehaviour
                 eventsLog = GameObject.Find("eventsLog");
                 playerRef.transform.position = playerPos;
                 PlayerManager.Instance.RefreshUI();
-                GameObject.Find("Intro").SetActive(false);
                 RefreshMapQuests();
                 isInWorld = true;
                 TimerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
@@ -235,6 +236,20 @@ public class SceneDirector : MonoBehaviour
         return info;
     }
 
+    public void changeQuestGiver(string questGiver)
+    {
+        foreach (KeyValuePair<string, SceneInfo> entry in LoadedScenes)
+        {
+            if(entry.Value.sceneName != "WorldMap")
+            if(entry.Value.QuestGiver.name == questGiver)
+            {
+                    int quest = Random.Range(0, 40);
+                    LoadedScenes[entry.Key].QuestGiver = entry.Value.sceneNpcs[quest];
+
+            }
+        }
+
+    }
     Family CreateFamily()
     {
         Family family = new Family();

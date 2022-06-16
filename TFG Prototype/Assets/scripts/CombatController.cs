@@ -14,7 +14,8 @@ public class CombatController : MonoBehaviour
 	public HexGrid grid;
 	public HexGameUI UI;
 	public System.Guid guid;
-	public void ResetTurn()
+
+    public void ResetTurn()
     {
         turn = 0;
     }
@@ -44,7 +45,12 @@ public class CombatController : MonoBehaviour
     {
 		if (enemyUnits.Count <= 0)
         {
-			UI.ActivateEndUi();
+			UI.ActivateEndUi(true);
+		}
+		else if(playerUnits.Count <= 0)
+        {
+			UI.ActivateEndUi(false);
+
 		}
 		else
 			for (int i = 0; i < enemyUnits.Count; i++)
@@ -146,7 +152,7 @@ public class CombatController : MonoBehaviour
 	public void Load()
 	{
 		Debug.LogError("Warning, this load is only intended for debug purposes");
-		string path = Path.Combine(Application.dataPath + "/maps", "SingleEntityMap.map");
+		string path = Path.Combine(Application.dataPath + "/maps", "MultiEntityMap.map");
 
 		if (System.IO.File.Exists(path))
 		{
