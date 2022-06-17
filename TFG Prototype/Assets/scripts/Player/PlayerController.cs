@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    NavMeshAgent agent;
-    public bool UIfocused = false;
+    public NavMeshAgent agent;
+    public bool UIfocusedBool = false;
 
     private static PlayerController _instance;
     public static PlayerController Instance { get { return _instance; } }
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !UIfocused) {
+        if (Input.GetMouseButtonDown(0) && !UIfocusedBool) {
             RaycastHit hit;
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     }
         public void UIFocused()
     {
-        UIfocused = !UIfocused;
+        UIfocusedBool = !UIfocusedBool;
     }
     public void goToPos(Vector3 pos)
     {

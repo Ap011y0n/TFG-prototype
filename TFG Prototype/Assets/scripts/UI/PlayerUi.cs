@@ -46,6 +46,8 @@ public class PlayerUi : MonoBehaviour
     {
         selectedUnit = -1;
         selectedCharacter = -1;
+        if (goldUi.text == "New Text" || troopsUi.text == "New Text")
+            PlayerManager.Instance.RefreshUI();
     }
 
     public void CreateBuyCharacters()
@@ -249,30 +251,29 @@ public class PlayerUi : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I) && !isInStore)
         {
             inventory.SetActive(!inventory.activeSelf);
-            if (goldUi.text == "New Text" || troopsUi.text == "New Text")
-                PlayerManager.Instance.RefreshUI();
-            PlayerController.Instance.UIfocused = inventory.activeSelf;
+     
+            PlayerController.Instance.UIfocusedBool = inventory.activeSelf;
             isInInventory = inventory.activeSelf;
         }
         if (store && Input.GetKeyDown(KeyCode.P) && !isInInventory)
         {
             storeGold.text = goldUi.text;
             store.SetActive(!store.activeSelf);
-            PlayerController.Instance.UIfocused = store.activeSelf;
+            PlayerController.Instance.UIfocusedBool = store.activeSelf;
             isInStore = store.activeSelf;
         }
         if (store && Input.GetKeyDown(KeyCode.S))
         {
 
             stressInfo.SetActive(!stressInfo.activeSelf);
-            PlayerController.Instance.UIfocused = stressInfo.activeSelf;
+            PlayerController.Instance.UIfocusedBool = stressInfo.activeSelf;
 
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
 
             menu.SetActive(!menu.activeSelf);
-            PlayerController.Instance.UIfocused = menu.activeSelf;
+            PlayerController.Instance.UIfocusedBool = menu.activeSelf;
 
         }
     }

@@ -60,7 +60,7 @@ public class Npc : MonoBehaviour
                 chatUI.GetComponentInChildren<Text>().text = npcName;
                 ChatManager.Instance.focusedNPC = this;
                 startChatting.SetActive(false);
-                PlayerController.Instance.UIfocused = true;
+                PlayerController.Instance.UIfocusedBool = true;
             }
             else
             {
@@ -68,7 +68,7 @@ public class Npc : MonoBehaviour
                 chatUI.GetComponent<ChatButtons>().ResetAnswers();
                 chatUI.SetActive(false);
                 startChatting.SetActive(true);
-                PlayerController.Instance.UIfocused = false;
+                PlayerController.Instance.UIfocusedBool = false;
 
             }
         }

@@ -45,7 +45,7 @@ public class GameDirector : MonoBehaviour
         Debug.Log("Quest Added");
         uiPanel.SetActive(true);
         eventLaunched = true;
-        player.UIfocused = true;
+        player.UIfocusedBool = true;
         player.goToPos(player.transform.position);
         currentQuest = QuestManager.Instance.GenerateQuest("world");
         uiText.text = questText;
@@ -80,7 +80,7 @@ public class GameDirector : MonoBehaviour
         PlayerManager.Instance.RefreshUI();
         QuestManager.Instance.AbortQuest(currentQuest);
         eventLaunched = false;
-        player.UIfocused = false;
+        player.UIfocusedBool = false;
 
     }
 }
