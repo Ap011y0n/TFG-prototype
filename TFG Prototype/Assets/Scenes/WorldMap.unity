@@ -14050,7 +14050,7 @@ MonoBehaviour:
   tooltip2: {fileID: 0}
   questText: A monster appeared nearby. You don't have much time to think, will you
     fight or will you flee leaving some inventory behind?
-  eventProbability: 60
+  eventProbability: 80
 --- !u!4 &1960352966
 Transform:
   m_ObjectHideFlags: 0
