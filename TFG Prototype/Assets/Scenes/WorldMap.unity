@@ -13865,7 +13865,7 @@ MonoBehaviour:
   - {fileID: -8601471885786103981, guid: 98f7193509ebf59468786fbd605f3595, type: 3}
   - {fileID: 6385348514183693373, guid: 98f7193509ebf59468786fbd605f3595, type: 3}
   - {fileID: -6882147971818104571, guid: 98f7193509ebf59468786fbd605f3595, type: 3}
-  TimeSpeed: 24
+  TimeSpeed: 1000
   TimerText: {fileID: 0}
   light: {fileID: 0}
   npcPrefab: {fileID: 5749385414847991376, guid: 1d93350a33e660d4c8afb6ebcef6718c, type: 3}

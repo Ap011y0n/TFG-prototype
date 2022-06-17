@@ -184,7 +184,7 @@ public class QuestManager : MonoBehaviour
         SceneDirector.Instance.currentBattleMaps.Add(guid, info);
       
 
-        newquest.reward = 100;
+        newquest.reward = 500;
         return newquest;
     }
     public void AddQuest(Quest newquest, Npc giver)
