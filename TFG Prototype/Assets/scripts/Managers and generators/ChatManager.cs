@@ -81,6 +81,30 @@ public class ChatManager : MonoBehaviour
                 }
             }
         }
+        else if (QuestManager.Instance.failedQuests.ContainsValue(focusedNPC.NPCGuid) &&
+            (focusedNPC.HasActiveQuest || Random.value > 0.5f))
+        {
+            focusedNPC.HasActiveQuest = false;
+            for (int i = 0; i < focusedNPC.cityInfo.sceneNpcs.Count; ++i)
+                if (focusedNPC.cityInfo.sceneNpcs[i].guid == focusedNPC.NPCGuid)
+                {
+                    NpcData temp = focusedNPC.cityInfo.sceneNpcs[i];
+                    temp.hasActiveQuest = false;
+                    focusedNPC.cityInfo.sceneNpcs[i] = temp;
+                }
+            ret = "I'm sorry to hear that the monsters almost kill you all, I'm glad to see some of you could escape.";
+
+            foreach (KeyValuePair<QuestManager.Quest, System.Guid> entry in QuestManager.Instance.failedQuests)
+            {
+                if (entry.Value == focusedNPC.NPCGuid)
+                {
+                    string temp = entry.Key.questName;
+                    temp = temp.Replace("Hunt a ", "");
+                    ret = ret.Replace("monsters", temp);
+
+                }
+            }
+        }
         else if (focusedNPC.job != "" )
         {
             ret = focusedNPC.job;
@@ -240,13 +264,24 @@ public class ChatManager : MonoBehaviour
         }
         else
         {
-            if(QuestManager.Instance.completedQuests.Count > 0 && Random.value > 0.5f)
+            int rand = Random.Range(0, 3);
+            if(QuestManager.Instance.completedQuests.Count > 0 && rand == 0)
             {
                 List<QuestManager.Quest> keyList = new List<QuestManager.Quest>(QuestManager.Instance.completedQuests.Keys);
-                System.Random rand = new System.Random();
-                QuestManager.Quest randomKey = keyList[rand.Next(keyList.Count)];
+                System.Random id = new System.Random();
+                QuestManager.Quest randomKey = keyList[id.Next(keyList.Count)];
 
-                ret = "I heard that you helped name with his problem, it's good to have you around";
+                ret = "I heard that you helped name with their problem, it's good to have you around";
+                ret = ret.Replace("name", randomKey.questGiver);
+            }
+           
+            else if(QuestManager.Instance.failedQuests.Count > 0 && rand == 1)
+            {
+                List<QuestManager.Quest> keyList = new List<QuestManager.Quest>(QuestManager.Instance.failedQuests.Keys);
+                System.Random id = new System.Random();
+                QuestManager.Quest randomKey = keyList[id.Next(keyList.Count)];
+
+                ret = "I heard that you almost get yourself killed helping name with their problem, be careful with which jobs you take.";
                 ret = ret.Replace("name", randomKey.questGiver);
             }
             else

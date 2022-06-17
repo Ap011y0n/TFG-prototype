@@ -37,7 +37,6 @@ public class EventsLog : MonoBehaviour
         for(int i = 0; i < logs.Count; i++)
         {
             logs[i].time += Time.deltaTime;
-            Debug.Log(logs[i].time);
             if(logs[i].time > 8.0f)
             {
                 Destroy(logs[i].obj);

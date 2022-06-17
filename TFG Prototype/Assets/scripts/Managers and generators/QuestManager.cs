@@ -56,6 +56,7 @@ public class QuestManager : MonoBehaviour
 
     public Dictionary<Quest, System.Guid> activeQuests;
     public Dictionary<Quest, System.Guid> completedQuests;
+    public Dictionary<Quest, System.Guid> failedQuests;
 
     private static QuestManager _instance;
     public static QuestManager Instance { get { return _instance; } }
@@ -81,6 +82,8 @@ public class QuestManager : MonoBehaviour
     {
         activeQuests = new Dictionary<Quest, System.Guid>();
         completedQuests = new Dictionary<Quest, System.Guid>();
+        failedQuests = new Dictionary<Quest, System.Guid>();
+
         questTexts = new List<QuestText>();
         creatureNames = new List<CreatureName>();
         placeNames = new List<PlaceName>();
@@ -190,12 +193,19 @@ public class QuestManager : MonoBehaviour
     }
     public void EndQuest(Quest endedQuest, bool victory)
     {
-        completedQuests.Add(endedQuest, activeQuests[endedQuest]);
-        activeQuests.Remove(endedQuest);
+      
         SceneDirector.Instance.currentBattleMaps.Remove(endedQuest.guid);
         if(victory)
-        PlayerManager.Instance.addGold(endedQuest.reward);
-
+        {
+            PlayerManager.Instance.addGold(endedQuest.reward);
+            completedQuests.Add(endedQuest, activeQuests[endedQuest]);
+        }
+        else
+        {
+            failedQuests.Add(endedQuest, activeQuests[endedQuest]);
+        }
+     
+        activeQuests.Remove(endedQuest);
         SceneDirector.Instance.changeQuestGiver(endedQuest.questGiver);
     }
     public void AbortQuest(Quest endedQuest)

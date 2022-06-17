@@ -17,7 +17,7 @@ public class GameDirector : MonoBehaviour
     public GameObject tooltip1;
     public GameObject tooltip2;
     public string questText;
-
+    public int eventProbability = 60;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +31,7 @@ public class GameDirector : MonoBehaviour
         {
             timer = 0;
             progressBar++;
-            int res = Random.Range(0, 10);
+            int res = Random.Range(0, eventProbability);
             if(res < progressBar)
             {
                 progressBar = 0;

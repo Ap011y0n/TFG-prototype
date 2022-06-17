@@ -48,10 +48,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -1814,7 +1812,7 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: 2298c79af1a296cab6abd568b09fa701
+      Hash: f702a25654ea3f0081f5dd435ea8f589
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CombatController
@@ -2228,7 +2226,7 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: d661d4d29b3da6ca77a9ef7bd85d4b44
+      Hash: 59f2dca9b2aec8eb6305c4eabb681642
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Npc
@@ -2270,7 +2268,7 @@ ScriptsOnlyBuild:
     className: UnityOnCollisionExitMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 7f422c6bf16f5514146a717ee079f270
+      Hash: 43d0057f9f13416770292aa7273ac5d7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SceneDirector
