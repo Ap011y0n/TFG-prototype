@@ -341,6 +341,7 @@
 "Assets/scripts/Managers and generators/PoliticsGenerator.cs"
 "Assets/scripts/Managers and generators/QuestManager.cs"
 "Assets/scripts/Managers and generators/SceneDirector.cs"
+"Assets/scripts/mantainRotation.cs"
 "Assets/scripts/MouseOver.cs"
 "Assets/scripts/Names.cs"
 "Assets/scripts/Npc.cs"

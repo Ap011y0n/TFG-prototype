@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: {fileID: 7558915453156656193}
+  name: {fileID: 6639482443219515072}
   heroImage: {fileID: 2029823546543268063}
   playerUi: {fileID: 0}
   buyUiPos: {x: 280.5, y: 199, z: 0}
@@ -262,7 +263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -118.4}
+  m_AnchoredPosition: {x: 0, y: -125.6}
   m_SizeDelta: {x: 152, y: -36.690002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7654103180847738927
@@ -396,8 +397,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -91.9}
-  m_SizeDelta: {x: 152, y: -36.690002}
+  m_AnchoredPosition: {x: 0, y: -94.7}
+  m_SizeDelta: {x: 186.53, y: -36.690002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1886132609909156228
 CanvasRenderer:
@@ -454,8 +455,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

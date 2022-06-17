@@ -120,7 +120,17 @@ public class PlayerManager : MonoBehaviour
     {
         recruitedCharacters.Add(newCharacter);
     }
-
+    public void removeCharacter(Character character)
+    {
+        for(int i = 0; i < recruitedCharacters.Count; i++)
+        {
+            if (recruitedCharacters[i] == character)
+            {
+                removeCommander(i);
+                recruitedCharacters.RemoveAt(i);
+            }
+        }
+    }
 
     public void CreateBuyCharacters()
     {
@@ -150,11 +160,15 @@ public class PlayerManager : MonoBehaviour
 
     public void SetCommander(int unit, int character)
     {
-        for(int i = 0; i < recruitedUnits.Count; ++i)
+        removeCommander(character);
+        recruitedUnits[unit].character = recruitedCharacters[character];
+    }
+    public void removeCommander(int character)
+    {
+        for (int i = 0; i < recruitedUnits.Count; ++i)
         {
             if (recruitedUnits[i].character == recruitedCharacters[character])
                 recruitedUnits[i].character = null;
         }
-        recruitedUnits[unit].character = recruitedCharacters[character];
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BuyCharButton : MonoBehaviour
 {
     public TextMeshProUGUI price;
+    public TextMeshProUGUI name;
     public Character character;
     public Image heroImage;
     public PlayerUi playerUi;

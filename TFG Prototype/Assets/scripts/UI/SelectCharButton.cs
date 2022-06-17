@@ -11,6 +11,7 @@ public class SelectCharButton : MonoBehaviour
     public Image heroImage;
     public GameObject characterInfoUI;
     public GameObject characterInfoUIInventory;
+    public int price;
     public void SelectThisChar()
     {
         //if (playerUi.selectedUnit != null)
@@ -34,12 +35,15 @@ public class SelectCharButton : MonoBehaviour
         if (playerUi.InfoUI != null)
             Destroy(playerUi.InfoUI.gameObject);
         if(playerUi.isInStore)
-        playerUi.InfoUI = Instantiate(characterInfoUI, transform.parent.transform).GetComponent<CharacterInfoUI>();
+        {
+            playerUi.InfoUI = Instantiate(characterInfoUI, transform.parent.transform).GetComponent<CharacterInfoUI>();
+            playerUi.InfoUI.sellButton.SetActive(true);
+        }
         else
             playerUi.InfoUI = Instantiate(characterInfoUIInventory, transform.parent.transform).GetComponent<CharacterInfoUI>();
 
         playerUi.InfoUI.character = PlayerManager.Instance.recruitedCharacters[character];
-      //  playerUi.InfoUI.price = int.Parse(price.text);
+        playerUi.InfoUI.price = price;
         playerUi.InfoUI.SetDesAndBackstory();
     }
 }

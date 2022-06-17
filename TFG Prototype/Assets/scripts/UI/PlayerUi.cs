@@ -62,6 +62,8 @@ public class PlayerUi : MonoBehaviour
                 pos.y -= y * 200;
                 button.transform.localPosition = pos;
                 button.GetComponent<BuyCharButton>().character = PlayerManager.Instance.availableCharacters[x*2+y];
+                button.GetComponent<BuyCharButton>().price.text = PlayerManager.Instance.availableCharacters[x * 2 + y].price.ToString();
+                button.GetComponent<BuyCharButton>().name.text = PlayerManager.Instance.availableCharacters[x * 2 + y].Name;
                 button.GetComponent<BuyCharButton>().heroImage.sprite = PlayerManager.Instance.availableCharacters[x * 2 + y].heroCard;
                 button.GetComponent<BuyCharButton>().playerUi = this;
 
@@ -89,11 +91,14 @@ public class PlayerUi : MonoBehaviour
                     storeButton.GetComponent<SelectCharButton>().playerUi = this;
                     storeButton.GetComponent<SelectCharButton>().name.text = PlayerManager.Instance.recruitedCharacters[x * PlayerManager.Instance.recruitedCharacters.Count / 2 + y].Name;
                     storeButton.GetComponent<SelectCharButton>().heroImage.sprite = PlayerManager.Instance.recruitedCharacters[x * PlayerManager.Instance.recruitedCharacters.Count / 2 + y].heroCard;
+                    storeButton.GetComponent<SelectCharButton>().price = PlayerManager.Instance.recruitedCharacters[x * PlayerManager.Instance.recruitedCharacters.Count / 2 + y].price;
+
                     RecruitedStoreCharacters.Add(storeButton);
                 }
             
                 if(inventory)
                 {
+
                     GameObject inventoryButton = Instantiate(characterSelectButton, inventory.transform);
                     inventoryButton.transform.localPosition = inventoryPos;
                     inventoryButton.GetComponent<SelectCharButton>().character = x * PlayerManager.Instance.recruitedCharacters.Count / 2 + y;
@@ -121,6 +126,7 @@ public class PlayerUi : MonoBehaviour
                 storeButton.GetComponent<SelectCharButton>().playerUi = this;
                 storeButton.GetComponent<SelectCharButton>().name.text = PlayerManager.Instance.recruitedCharacters[PlayerManager.Instance.recruitedCharacters.Count - 1].Name;
                 storeButton.GetComponent<SelectCharButton>().heroImage.sprite = PlayerManager.Instance.recruitedCharacters[PlayerManager.Instance.recruitedCharacters.Count - 1].heroCard;
+                storeButton.GetComponent<SelectCharButton>().price = PlayerManager.Instance.recruitedCharacters[PlayerManager.Instance.recruitedCharacters.Count - 1].price;
                 RecruitedStoreCharacters.Add(storeButton);
             }
            
