@@ -24,7 +24,7 @@ public class Character
         stats = GenerateStats();
         stats.GenerateBaseStats(age);
         story = GenerateStory();
-        price = age * 10;
+        price = age * 50;
         if (gender == 0)
             heroCard = PlayerManager.Instance.MaleHeroesSprites[Random.Range(0, PlayerManager.Instance.MaleHeroesSprites.Length)];
         else
