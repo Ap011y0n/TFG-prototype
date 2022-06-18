@@ -23,8 +23,9 @@ public class QuestLoader : MonoBehaviour
         {
             canEnter = false;
             SceneDirector.Instance.currentBattleMapInfo = SceneDirector.Instance.currentBattleMaps[guid];
-            SceneManager.LoadScene("BattleMap");
             SceneDirector.Instance.SetPlayerPos(transform.position);
+
+            SceneManager.LoadScene("BattleMap");
         }
     }
 

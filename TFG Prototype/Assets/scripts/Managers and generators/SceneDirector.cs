@@ -61,6 +61,33 @@ public class SceneDirector : MonoBehaviour
 
     public GameObject eventsLog;
     public GameObject Intro;
+
+    private float combatProb = 1;
+    private float goldProb = 1;
+    public float CombatProbModifier
+    {
+        get
+        {
+            return combatProb;
+        }
+        set
+        {
+            combatProb = value;
+            if (combatProb < 0.1) combatProb = 0.1f;
+        }
+    }
+    public float GoldProbModifier
+    {
+        get
+        {
+            return goldProb;
+        }
+        set
+        {
+            goldProb = value;
+            if (goldProb < 0.1) goldProb = 0.1f;
+        }
+    }
     // called zero
     void Awake()
     {

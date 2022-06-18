@@ -8,14 +8,14 @@ public class GameDirector : MonoBehaviour
 {
     private float timer = 0.0f;
     private int second = 1;
-    int progressBar = 0;
-    public GameObject uiPanel;
+    float progressBar = 0f;
+    public GameObject combatEventPanel;
+    public GameObject goldEventPanel;
+
     public TextMeshProUGUI uiText;
     bool eventLaunched = false;
     public PlayerController player;
     QuestManager.Quest currentQuest;
-    public GameObject tooltip1;
-    public GameObject tooltip2;
     public string questText;
     public int eventProbability = 60;
     // Start is called before the first frame update
@@ -31,19 +31,26 @@ public class GameDirector : MonoBehaviour
         {
             timer = 0;
             progressBar++;
+            
             int res = Random.Range(0, eventProbability);
-            if(res < progressBar)
+            if(res < progressBar*SceneDirector.Instance.CombatProbModifier)
             {
                 progressBar = 0;
-                LaunchEvent();
+                LaunchCombatEvent();
+            }
+            int res2 = Random.Range(0, eventProbability);
+            if (res < progressBar * SceneDirector.Instance.GoldProbModifier)
+            {
+                progressBar = 0;
+                LaunchgoldEvent();
             }
         }
     }
 
-    void LaunchEvent()
+    void LaunchCombatEvent()
     {
         Debug.Log("Quest Added");
-        uiPanel.SetActive(true);
+        combatEventPanel.SetActive(true);
         eventLaunched = true;
         player.UIfocusedBool = true;
         player.goToPos(player.transform.position);
@@ -55,6 +62,15 @@ public class GameDirector : MonoBehaviour
         QuestManager.Instance.AddQuest(currentQuest, dummy);
 
         SceneDirector.Instance.currentBattleMapInfo = SceneDirector.Instance.currentBattleMaps[currentQuest.guid];
+    }
+    
+    void LaunchgoldEvent()
+    {
+        goldEventPanel.SetActive(true);
+        eventLaunched = true;
+        player.UIfocusedBool = true;
+        player.goToPos(player.transform.position);
+
     }
 
     public void AdvanceProgressBar()
@@ -70,17 +86,32 @@ public class GameDirector : MonoBehaviour
 
     public void LaunchMission()
     {
-        
-        SceneManager.LoadScene("BattleMap");
         SceneDirector.Instance.SetPlayerPos(transform.position);
+
+        SceneManager.LoadScene("BattleMap");
     }
     public void EvadeMission()
     {
         PlayerManager.Instance.addGold(-50);
         PlayerManager.Instance.RefreshUI();
         QuestManager.Instance.AbortQuest(currentQuest);
+        SceneDirector.Instance.GoldProbModifier += 0.1f;
+        SceneDirector.Instance.CombatProbModifier -= 0.1f;
+
+        Debug.Log(SceneDirector.Instance.GoldProbModifier);
         eventLaunched = false;
         player.UIfocusedBool = false;
+
+    }
+
+    public void TakeGold()
+    {
+        SceneDirector.Instance.GoldProbModifier -= 0.1f;
+        Debug.Log(SceneDirector.Instance.GoldProbModifier);
+        PlayerManager.Instance.addGold(100);
+        PlayerManager.Instance.RefreshUI();
+        player.UIfocusedBool = false;
+        eventLaunched = false;
 
     }
 }

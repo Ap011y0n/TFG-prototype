@@ -197,6 +197,11 @@ public class HexGameUI : MonoBehaviour
 	public void ActivateEndUi(bool result)
     {
 		victory = result;
+		if (victory)
+			SceneDirector.Instance.CombatProbModifier+= 0.1f;
+		else
+			SceneDirector.Instance.CombatProbModifier-= 0.1f;
+
 		endingPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = (result ? "Victory" : "Defeat");
 		endingPanel.SetActive(true);
 		turnButton.SetActive(false);

@@ -21,9 +21,10 @@ public class ChangeScene : MonoBehaviour
         {
             canEnter = false;
             //   SceneManager.LoadScene(gameObject.name);
-            SceneDirector.Instance.loadScene(this.gameObject);
             if (savePos)
                 SceneDirector.Instance.SetPlayerPos(transform.position);
+            SceneDirector.Instance.loadScene(this.gameObject);
+            
         }
     }
 

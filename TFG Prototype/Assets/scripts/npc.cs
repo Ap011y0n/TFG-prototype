@@ -62,6 +62,11 @@ public class Npc : MonoBehaviour
                 startChatting.SetActive(false);
                 PlayerController.Instance.UIfocusedBool = true;
                 wanderScript.Stop();
+                chatUI.GetComponent<ChatButtons>().text.text = npcName + "\n"  + "Family:";
+                for(int i = 0; i < family.members.Count; ++i)
+                {
+                    chatUI.GetComponent<ChatButtons>().text.text += "\n" + family.members[i].name;
+                }
             }
             else
             {
