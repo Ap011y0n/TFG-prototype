@@ -9019,7 +9019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 369115471532400276, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 369115471532400276, guid: 4b798bcc167b89146a8ff64f5374ddf5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11225,7 +11225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1519231100
 MonoBehaviour:
@@ -14657,7 +14657,7 @@ MonoBehaviour:
   tooltip2: {fileID: 0}
   questText: A monster appeared nearby. You don't have much time to think, will you
     fight or will you flee leaving some inventory behind?
-  eventProbability: 80
+  eventProbability: 100
 --- !u!4 &1960352966
 Transform:
   m_ObjectHideFlags: 0

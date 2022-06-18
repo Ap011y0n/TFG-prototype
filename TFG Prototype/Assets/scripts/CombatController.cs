@@ -14,7 +14,8 @@ public class CombatController : MonoBehaviour
 	public HexGrid grid;
 	public HexGameUI UI;
 	public System.Guid guid;
-	public Sprite sprite;
+	public Sprite[] mapSprites;
+	public SpriteRenderer board;
     public void ResetTurn()
     {
         turn = 0;
@@ -76,7 +77,7 @@ public class CombatController : MonoBehaviour
 	{
 		guid = mapInfo.guid;
 		string path = Path.Combine(Application.dataPath + "/Resources", mapInfo.mapName + ".map");
-
+		board.sprite = mapSprites[mapInfo.image];
 
 		//if (System.IO.File.Exists(path))
 		//{

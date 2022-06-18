@@ -240,7 +240,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7268431202518894945}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -317,7 +317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c944e31c8a45ca847b6b534a16389823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIfocused: 0
+  agent: {fileID: 0}
+  UIfocusedBool: 0
   director: {fileID: 0}
 --- !u!195 &731770230
 NavMeshAgent:

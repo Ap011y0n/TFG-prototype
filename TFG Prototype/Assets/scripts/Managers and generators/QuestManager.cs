@@ -154,6 +154,24 @@ public class QuestManager : MonoBehaviour
         }
 
         info.place = place.name;
+        switch(place.tag)
+        {
+            case Tag.PLAIN:
+                info.image = 0;
+                break;
+            case Tag.FOREST:
+                info.image = 1;
+                break;
+            case Tag.RIVER:
+                info.image = 2;
+                break;
+            case Tag.CAVE:
+                info.image = 3;
+                break;
+            case Tag.MOUNTAINS:
+                info.image = 4;
+                break;
+        }
         info.enemiesToSpawn = creature.number;
 
         switch (newquest.type)

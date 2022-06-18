@@ -28,7 +28,7 @@ public class Npc : MonoBehaviour
     public System.Guid NPCGuid;
     public Family family;
     public float stress;
-
+    public wander wanderScript;
     string[] jobs = new string[]
     {
         "smith",
@@ -61,6 +61,7 @@ public class Npc : MonoBehaviour
                 ChatManager.Instance.focusedNPC = this;
                 startChatting.SetActive(false);
                 PlayerController.Instance.UIfocusedBool = true;
+                wanderScript.Stop();
             }
             else
             {
@@ -69,6 +70,7 @@ public class Npc : MonoBehaviour
                 chatUI.SetActive(false);
                 startChatting.SetActive(true);
                 PlayerController.Instance.UIfocusedBool = false;
+                wanderScript.Move();
 
             }
         }

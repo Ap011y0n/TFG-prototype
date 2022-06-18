@@ -289,7 +289,17 @@ public class ChatManager : MonoBehaviour
                 ret = "I heard that npc was in need of help to solve a problem";
                 ret = ret.Replace("npc", focusedNPC.cityInfo.QuestGiver.name);
                 if (!npcQuestMarker)
-                    npcQuestMarker = Instantiate(markerPrefab, focusedNPC.cityInfo.QuestGiver.position, Quaternion.identity);
+                {
+                    GameObject[] npcs = GameObject.FindGameObjectsWithTag("npc");
+                    for (int i = 0; i < npcs.Length; ++i)
+                    {
+                        if(npcs[i].GetComponent<Npc>().NPCGuid == focusedNPC.cityInfo.QuestGiver.guid)
+                        npcQuestMarker = Instantiate(markerPrefab, npcs[i].transform);
+
+                    }
+
+                }
+                    
 
             }
         }

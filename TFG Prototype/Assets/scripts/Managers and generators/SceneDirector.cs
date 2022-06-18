@@ -10,6 +10,7 @@ public struct BattleMapInfo
     public string place;
     public int enemiesToSpawn;
     public System.Guid guid;
+    public int image;
 }
 
 public enum enemyType

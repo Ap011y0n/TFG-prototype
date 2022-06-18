@@ -13,6 +13,7 @@ TagManager:
   - mission
   - WorldLight
   - city
+  - npc
   layers:
   - Default
   - TransparentFX

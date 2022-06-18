@@ -366,6 +366,7 @@
 "Assets/scripts/UI/showUi.cs"
 "Assets/scripts/UI/StressBar.cs"
 "Assets/scripts/Unit.cs"
+"Assets/scripts/wander.cs"
 -langversion:8.0
 
 /deterministic

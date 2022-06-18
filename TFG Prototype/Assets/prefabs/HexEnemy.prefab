@@ -361,7 +361,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5956046048112309370}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -430,6 +430,7 @@ MonoBehaviour:
   text: {fileID: 7484492384129621703}
   damageTextPrefab: {fileID: 7955483398033010882, guid: 81e4b505df4312a49950b984c217941e, type: 3}
   unitCanvas: {fileID: 3730593966712345123}
+  commander: {fileID: 0}
   meleAttack: 0
   meleDefense: 0
   weaponPen: 0

@@ -1293,6 +1293,13 @@ MonoBehaviour:
   enemyUnits: []
   grid: {fileID: 762467067}
   UI: {fileID: 1583331832}
+  mapSprites:
+  - {fileID: 21300000, guid: db9f2ed6ee616174a8a6ae5036344aab, type: 3}
+  - {fileID: 21300000, guid: cd9974115ec4d7340b4c8269ef47e2b4, type: 3}
+  - {fileID: 21300000, guid: 00717dcc80097f74d9ec9756baeb695d, type: 3}
+  - {fileID: 21300000, guid: 5a7b8444a49015441afa182f190fb95f, type: 3}
+  - {fileID: 21300000, guid: 469946e69054d1c448fe6a3101fe6893, type: 3}
+  board: {fileID: 92876848}
 --- !u!4 &781987978
 Transform:
   m_ObjectHideFlags: 0
