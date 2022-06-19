@@ -21,6 +21,7 @@ public class NpcData
     private int stress;
     public int imageId;
     public int gender;
+    public string job = "";
     public int Stress
     {
         get { return stress;  }

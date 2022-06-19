@@ -175,7 +175,7 @@ public class SceneInfo
                     totalStress += families[i].members[j].Stress;
                 }
 
-                if ((totalStress / families[i].members.Count) > 40)
+                if ((totalStress / families[i].members.Count) > 20)
                 {
                     supporters.Add(families[i]);
                 }

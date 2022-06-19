@@ -15,8 +15,12 @@ public class showUi : MonoBehaviour
     public void showWindow()
     {
         UI.SetActive(!UI.activeSelf);
-        playerRef.GetComponent<PlayerController>().UIfocusedBool = UI.activeSelf;
-        playerRef.GetComponent<PlayerController>().agent.destination = playerRef.transform.position;
+        if(playerRef)
+        {
+            playerRef.GetComponent<PlayerController>().UIfocusedBool = UI.activeSelf;
+            playerRef.GetComponent<PlayerController>().agent.destination = playerRef.transform.position;
+        }
+
 
     }
     public void showWindowShop()

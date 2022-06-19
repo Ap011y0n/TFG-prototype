@@ -180,6 +180,10 @@ public class SceneDirector : MonoBehaviour
         {
             if (scene.name == "WorldMap")
             {
+                GameObject lightObject = GameObject.FindGameObjectWithTag("WorldLight");
+                if (lightObject)
+                    light = lightObject.GetComponent<DayNightCycle>();
+
                 eventsLog = GameObject.Find("eventsLog");
                 playerRef.transform.position = playerPos;
                 PlayerManager.Instance.RefreshUI();
@@ -209,6 +213,7 @@ public class SceneDirector : MonoBehaviour
     {
         Debug.Log("Start");
         SceneInfo.fillMorningEvents();
+        eventsLog.GetComponent<EventsLog>().AddLog("hola pablo");
     }
 
     // called when the game is terminated
@@ -339,10 +344,18 @@ public class SceneDirector : MonoBehaviour
                 info.QuestGiver.position = spawnPos;
                 sceneNpcs.Remove(info.QuestGiver);
                 temp.name = NewNpc.name;
-                if(NewNpc.gender == 1)
-                temp.GetComponent<Npc>().image.sprite = MaleNPCSprites[NewNpc.imageId];
-                else
-                    temp.GetComponent<Npc>().image.sprite = FemaleNPCSprites[NewNpc.imageId];
+                try
+                {
+                    if (NewNpc.gender == 1)
+                        temp.GetComponent<Npc>().image.sprite = MaleNPCSprites[NewNpc.imageId];
+                    else
+                        temp.GetComponent<Npc>().image.sprite = FemaleNPCSprites[NewNpc.imageId];
+                }
+                catch
+                {
+                    Debug.LogError("Something went wrong here");
+                }
+                
 
                 temp.GetComponent<Npc>().setInitParams(info, NewNpc);
                 questgiver = true;
@@ -424,6 +437,10 @@ public class SceneDirector : MonoBehaviour
             TimerText.text = string.Format("{0:00}:{1:00}", hours, minutes);
             if(light)
             light.SetLight(currentTime);
+            else
+            {
+
+            }
             if(hours >= 5 &&  eventTrigger < 1)
             {
                 eventTrigger++;

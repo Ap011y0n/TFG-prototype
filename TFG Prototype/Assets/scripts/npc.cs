@@ -25,16 +25,11 @@ public class Npc : MonoBehaviour
     public Mood npcMood;
     public PoliticProfile profile;
     public string job = "";
+    public string jobName = "";
     public System.Guid NPCGuid;
     public Family family;
     public float stress;
     public wander wanderScript;
-    string[] jobs = new string[]
-    {
-        "smith",
-        "merchant",
-        "book seller"
-    };
     private void Awake()
     {
         canvas = GameObject.Find("Canvas");
@@ -67,6 +62,27 @@ public class Npc : MonoBehaviour
                 {
                     chatUI.GetComponent<ChatButtons>().text.text += "\n" + family.members[i].name;
                 }
+                chatUI.GetComponent<ChatButtons>().text.text += "\n\nMood:";
+                switch(npcMood)
+                {
+                    case Mood.joy:
+                        chatUI.GetComponent<ChatButtons>().text.text += " Joyful.";
+                        break;
+                    case Mood.sadness:
+                        chatUI.GetComponent<ChatButtons>().text.text += " Sad.";
+                        break;
+                    case Mood.disgust:
+                        chatUI.GetComponent<ChatButtons>().text.text += " Disgusted.";
+                        break;
+                    case Mood.surprise:
+                        chatUI.GetComponent<ChatButtons>().text.text += " Astonished.";
+                        break;
+
+                }
+                chatUI.GetComponent<ChatButtons>().text.text += "\n\nStress:";
+                chatUI.GetComponent<ChatButtons>().text.text += " " + stress.ToString();
+                //chatUI.GetComponent<ChatButtons>().text.text += "\n\nWork:";
+                //chatUI.GetComponent<ChatButtons>().text.text += " " + jobName.ToString();
             }
             else
             {

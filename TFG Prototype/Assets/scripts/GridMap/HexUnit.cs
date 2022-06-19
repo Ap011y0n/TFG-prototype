@@ -160,11 +160,11 @@ public class HexUnit : MonoBehaviour
 				break;
 			case unitType.Giant:
 				{
-					meleAttack = 80;
-					meleDefense = 50;
+					meleAttack = 50;
+					meleDefense = 40;
 					weaponPen = 3;
 					armor = 5;
-					weaponDamage = 40;
+					weaponDamage = 30;
 					entityHp = 80;
 					totalHP = entityNum * entityHp;
 				}

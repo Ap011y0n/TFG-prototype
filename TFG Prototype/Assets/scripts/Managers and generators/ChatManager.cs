@@ -24,6 +24,7 @@ public class ChatManager : MonoBehaviour
         public Mood tag;
         public string text;
         public ChatType type;
+        public string work;
     }
 
     List<PersonalInfo> personalInfoList;
@@ -116,6 +117,7 @@ public class ChatManager : MonoBehaviour
             ret = infoList[randomPos].text;
             ret = ret.Replace("myname", focusedNPC.npcName);
             focusedNPC.job = ret;
+            focusedNPC.jobName = infoList[randomPos].work;
 
         }
         else
@@ -324,12 +326,13 @@ public class ChatManager : MonoBehaviour
         return temp;
     }
 
-    private PersonalInfo createPersonalInfo(string sentence, ChatType type, Mood tag)
+    private PersonalInfo createPersonalInfo(string sentence, ChatType type, Mood tag, string work = "")
     {
         PersonalInfo newInfo;
         newInfo.tag = tag;
         newInfo.text = sentence;
         newInfo.type = type;
+        newInfo.work = work;
         return newInfo;
     }
     private string returnLeadershipView(Leadership leadership)
@@ -523,7 +526,7 @@ public class ChatManager : MonoBehaviour
                 work = work.Replace("work", jobInfoList[i].name);
                 work = work.Replace("ido", jobInfoList[i].activity[j]);
 
-                temp.Add(createPersonalInfo(work, ChatType.work, Mood.maxMoods));
+                temp.Add(createPersonalInfo(work, ChatType.work, Mood.maxMoods, jobInfoList[i].name));
             }
         }
         
