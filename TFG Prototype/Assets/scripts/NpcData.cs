@@ -16,12 +16,22 @@ public enum Mood
 
 public class NpcData
 {
+    public static string[] Jobs = new string[] {
+    "smith",
+    "book seller",
+    "merchant",
+    "guard",
+    "tailor",
+    "inkeeper",
+    };
+
+
     public string name;
     public Mood mood;
     private int stress;
     public int imageId;
     public int gender;
-    public string job = "";
+    public string job;
     public int Stress
     {
         get { return stress;  }
@@ -33,6 +43,7 @@ public class NpcData
     public Family family;
     public Vector3 position;
     public string history = "";
+    public int age;
     public int returnConflictivePolitics(PoliticProfile cityProfile)
     {
         int complicity =  PoliticsGenerator.checkLeadership(profile.leadership, cityProfile.leadership);

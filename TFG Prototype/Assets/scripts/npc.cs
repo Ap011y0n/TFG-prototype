@@ -26,6 +26,7 @@ public class Npc : MonoBehaviour
     public PoliticProfile profile;
     public string job = "";
     public string jobName = "";
+    public int age;
     public System.Guid NPCGuid;
     public Family family;
     public float stress;
@@ -57,9 +58,13 @@ public class Npc : MonoBehaviour
                 startChatting.SetActive(false);
                 PlayerController.Instance.UIfocusedBool = true;
                 wanderScript.Stop();
-                chatUI.GetComponent<ChatButtons>().text.text = npcName + "\n"  + "Family:";
+                chatUI.GetComponent<ChatButtons>().text.text = npcName 
+                    + "\nJob: " + jobName
+                    + "\nAge: " + age.ToString()
+                    + "\n"  + "Family:";
                 for(int i = 0; i < family.members.Count; ++i)
                 {
+                    if(family.members[i].name != name)
                     chatUI.GetComponent<ChatButtons>().text.text += "\n" + family.members[i].name;
                 }
                 chatUI.GetComponent<ChatButtons>().text.text += "\n\nMood:";
@@ -81,6 +86,7 @@ public class Npc : MonoBehaviour
                 }
                 chatUI.GetComponent<ChatButtons>().text.text += "\n\nStress:";
                 chatUI.GetComponent<ChatButtons>().text.text += " " + stress.ToString();
+
                 //chatUI.GetComponent<ChatButtons>().text.text += "\n\nWork:";
                 //chatUI.GetComponent<ChatButtons>().text.text += " " + jobName.ToString();
             }
@@ -125,5 +131,7 @@ public class Npc : MonoBehaviour
         family = newNpc.family;
         stress = newNpc.Stress;
         HasActiveQuest = newNpc.hasActiveQuest;
+        jobName = newNpc.job;
+        age = newNpc.age;
     }
 }

@@ -1489,6 +1489,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4836}
     - Class: 114
+      Script: {instanceID: 5020}
+    - Class: 114
       Script: {instanceID: 5188}
     - Class: 114
       Script: {instanceID: 5382}
@@ -2325,7 +2327,7 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: ddc31bbd2988f7db94780e1a2a77fcbd
+      Hash: 35635d515110b3870ce01246b2dda312
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Npc

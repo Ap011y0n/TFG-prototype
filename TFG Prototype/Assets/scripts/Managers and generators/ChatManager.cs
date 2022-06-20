@@ -112,12 +112,11 @@ public class ChatManager : MonoBehaviour
         }
         else if(focusedNPC.introducedHimself)
         {
-            infoList = ReturnPersonalInfoList(ChatType.work, Mood.maxMoods);
+            infoList = ReturnPersonalInfoList(ChatType.work, Mood.maxMoods, focusedNPC.jobName);
             int randomPos = Random.Range(0, infoList.Count);
             ret = infoList[randomPos].text;
             ret = ret.Replace("myname", focusedNPC.npcName);
             focusedNPC.job = ret;
-            focusedNPC.jobName = infoList[randomPos].work;
 
         }
         else
@@ -311,14 +310,18 @@ public class ChatManager : MonoBehaviour
 
     
 
-    private List<PersonalInfo> ReturnPersonalInfoList(ChatType type, Mood tag)
+    private List<PersonalInfo> ReturnPersonalInfoList(ChatType type, Mood tag, string work = "")
     {
         List<PersonalInfo> temp = new List<PersonalInfo>();
 
         for(int i = 0; i < personalInfoList.Count; ++i)
         {
             if (personalInfoList[i].type == type && (personalInfoList[i].tag == tag || personalInfoList[i].tag == Mood.maxMoods))
-                temp.Add(personalInfoList[i]);
+                if(work == "")
+                    temp.Add(personalInfoList[i]);
+            else
+                    if(personalInfoList[i].text.Contains(work))
+                    temp.Add(personalInfoList[i]);
         }
         if (temp.Count == 0)
             temp.Add(personalInfoList[0]);

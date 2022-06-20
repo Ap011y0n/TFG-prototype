@@ -260,8 +260,8 @@ public class SceneDirector : MonoBehaviour
             newNpc.hasActiveQuest = false;
             newNpc.position = new Vector3(0, 0, 0);
             newNpc.Stress = Random.Range(-20, 20);
-           
-                
+            newNpc.job = NpcData.Jobs[Random.Range(0, NpcData.Jobs.Length)];
+            newNpc.age = Random.Range(16, 70);
             info.sceneNpcs.Add(newNpc);
             family.members.Add(newNpc);
 
