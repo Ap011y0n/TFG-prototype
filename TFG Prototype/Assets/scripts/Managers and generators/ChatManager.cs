@@ -237,7 +237,9 @@ public class ChatManager : MonoBehaviour
             {
                 QuestManager.Quest newQuest = QuestManager.Instance.GenerateQuest(focusedNPC.name);
                 QuestManager.Instance.AddQuest(newQuest, focusedNPC);
-
+                GameObject obj = GameObject.FindGameObjectWithTag("city");
+                GameObject marker = Instantiate(markerPrefab, obj.transform);
+                marker.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                 ret = "Are you willing to help me? Please, go and doquest";
                 ret = ret.Replace("doquest", newQuest.questDescription);
                 focusedNPC.HasActiveQuest = true;
@@ -252,12 +254,12 @@ public class ChatManager : MonoBehaviour
             else
             {
                 ret = "Are you willing to help me? Please, go and doquest";
-
+               
                 foreach (KeyValuePair<QuestManager.Quest, System.Guid> entry in QuestManager.Instance.activeQuests)
                 {
                     if(entry.Value == focusedNPC.NPCGuid)
                     ret = ret.Replace("doquest", entry.Key.questDescription);
-
+                 
 
                 }
             }

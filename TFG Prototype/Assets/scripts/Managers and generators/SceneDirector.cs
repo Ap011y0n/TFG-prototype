@@ -33,7 +33,7 @@ public class SceneDirector : MonoBehaviour
         MIDDAY,
         NIGHT,
     }
-    float currentTime;
+    float currentTime = 480;
     public float TimeSpeed = 0.1f;
     public TextMeshProUGUI TimerText;
     public DayNightCycle light;
@@ -213,7 +213,6 @@ public class SceneDirector : MonoBehaviour
     {
         Debug.Log("Start");
         SceneInfo.fillMorningEvents();
-        eventsLog.GetComponent<EventsLog>().AddLog("hola pablo");
     }
 
     // called when the game is terminated
@@ -437,10 +436,7 @@ public class SceneDirector : MonoBehaviour
             TimerText.text = string.Format("{0:00}:{1:00}", hours, minutes);
             if(light)
             light.SetLight(currentTime);
-            else
-            {
 
-            }
             if(hours >= 5 &&  eventTrigger < 1)
             {
                 eventTrigger++;
